@@ -10,13 +10,13 @@ import UIKit
 import MultipeerConnectivity
 
 
-class ViewController: UIViewController, MCBrowserViewControllerDelegate,
+class ViewController: UIViewController, MCNearbyServiceBrowserDelegate,
 MCSessionDelegate {
     
     let serviceType = "LCOC-Chat"
     
-    var browser : MCBrowserViewController!
-    var assistant : MCAdvertiserAssistant!
+    var browser : MCNearbyServiceBrowser!
+    var advisor : MCNearbyServiceAdvertiser!
     var session : MCSession!
     var peerID: MCPeerID!
     
@@ -31,16 +31,14 @@ MCSessionDelegate {
         self.session.delegate = self
         
         // create the browser viewcontroller with a unique service name
-        self.browser = MCBrowserViewController(serviceType:serviceType,
-            session:self.session)
+        self.browser = MCNearbyServiceBrowser(peer:self.peerID, serviceType:serviceType)
         
         self.browser.delegate = self;
         
-        self.assistant = MCAdvertiserAssistant(serviceType:serviceType,
-            discoveryInfo:nil, session:self.session)
+        self.advisor = MCNearbyServiceAdvertiser(peer:self.peerID, discoveryInfo:nil, serviceType:serviceType)
         
         // tell the assistant to start advertising our fabulous chat
-        self.assistant.start()
+        self.advisor.startAdvertisingPeer()
     }
     
     @IBAction func sendChat(sender: UIButton) {
@@ -86,9 +84,11 @@ MCSessionDelegate {
     
     @IBAction func showBrowser(sender: UIButton) {
         // Show the browser view controller
-        self.presentViewController(self.browser, animated: true, completion: nil)
+        //self.presentViewController(self.browser, animated: true, completion: nil)
+        self.browser.startBrowsingForPeers()
     }
     
+    /*
     func browserViewControllerDidFinish(
         browserViewController: MCBrowserViewController!)  {
             // Called when the browser view controller is dismissed (ie the Done
@@ -103,6 +103,19 @@ MCSessionDelegate {
             
             self.dismissViewControllerAnimated(true, completion: nil)
     }
+    */
+    
+    func browser(browser: MCNearbyServiceBrowser!,
+        foundPeer peerID: MCPeerID!,
+        withDiscoveryInfo info: [NSObject : AnyObject]!) {
+            println("found a peer");
+    }
+    
+    func browser(browser: MCNearbyServiceBrowser!,
+        lostPeer peerID: MCPeerID!) {
+            println("lost a peer");
+    }
+    
     
     func session(session: MCSession!, didReceiveData data: NSData!,
         fromPeer peerID: MCPeerID!)  {
