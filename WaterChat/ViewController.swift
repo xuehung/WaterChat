@@ -106,9 +106,10 @@ MCSessionDelegate {
     */
     
     func browser(browser: MCNearbyServiceBrowser!,
-        foundPeer peerID: MCPeerID!,
+        foundPeer: MCPeerID!,
         withDiscoveryInfo info: [NSObject : AnyObject]!) {
             println("found a peer");
+            self.session.connectPeer(foundPeer, withNearbyConnectionData: nil)
     }
     
     func browser(browser: MCNearbyServiceBrowser!,
