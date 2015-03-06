@@ -13,7 +13,7 @@ import MultipeerConnectivity
 class ViewController: UIViewController, MCNearbyServiceBrowserDelegate,
 MCSessionDelegate {
     
-    let serviceType = "LCOC-Chat"
+    let serviceType = "WaterChat"
     
     var browser : MCNearbyServiceBrowser!
     var advisor : MCNearbyServiceAdvertiser!
@@ -24,7 +24,9 @@ MCSessionDelegate {
     @IBOutlet var messageField: UITextField!
     
     override func viewDidLoad() {
+                
         super.viewDidLoad()
+        
         
         self.peerID = MCPeerID(displayName: UIDevice.currentDevice().name)
         self.session = MCSession(peer: peerID)
@@ -85,6 +87,8 @@ MCSessionDelegate {
     @IBAction func showBrowser(sender: UIButton) {
         // Show the browser view controller
         //self.presentViewController(self.browser, animated: true, completion: nil)
+        
+        
         self.browser.startBrowsingForPeers()
     }
     
@@ -110,6 +114,7 @@ MCSessionDelegate {
         withDiscoveryInfo info: [NSObject : AnyObject]!) {
             println("found a peer");
             self.session.connectPeer(foundPeer, withNearbyConnectionData: nil)
+            println(foundPeer.displayName);
     }
     
     func browser(browser: MCNearbyServiceBrowser!,
