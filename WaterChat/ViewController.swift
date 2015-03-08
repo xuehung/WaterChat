@@ -17,7 +17,8 @@ MCSessionDelegate {
     
     var browser : MCNearbyServiceBrowser!
     var advisor : MCNearbyServiceAdvertiser!
-    var session : MCSession!
+    var session
+    : MCSession!
     var peerID: MCPeerID!
     
     @IBOutlet var chatView: UITextView!
@@ -125,6 +126,7 @@ MCSessionDelegate {
     
     func session(session: MCSession!, didReceiveData data: NSData!,
         fromPeer peerID: MCPeerID!)  {
+            var m = Message.messageFactory(data)
             // Called when a peer sends an NSData to us
             
             // This needs to run on the main queue

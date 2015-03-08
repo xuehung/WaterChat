@@ -14,11 +14,15 @@
 		DC689E571AA0174800FD78FE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC689E551AA0174800FD78FE /* LaunchScreen.xib */; };
 		DC689E631AA0174900FD78FE /* WaterChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC689E621AA0174900FD78FE /* WaterChatTests.swift */; };
 		DC689E6D1AA01B8C00FD78FE /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC689E6C1AA01B8C00FD78FE /* MultipeerConnectivity.framework */; };
+		DCC032D31AACC24300CE28FF /* MessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC032D21AACC24300CE28FF /* MessageType.swift */; };
+		DCC032D51AACC2A000CE28FF /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC032D41AACC2A000CE28FF /* Message.swift */; };
+		DCC032D71AACC37C00CE28FF /* RouteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC032D61AACC37C00CE28FF /* RouteRequest.swift */; };
+		DCC032DA1AACD72A00CE28FF /* TableEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC032D91AACD72A00CE28FF /* TableEntry.swift */; };
 		DCC3E6101AA96A68008901DB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC3E60F1AA96A68008901DB /* User.swift */; };
 		DCC3E6121AA96DA3008901DB /* MIME.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC3E6111AA96DA3008901DB /* MIME.swift */; };
 		DCC3E6161AAA11B7008901DB /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC3E6151AAA11B7008901DB /* Config.swift */; };
 		DCC3E6191AAA1874008901DB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC3E6181AAA1874008901DB /* Logger.swift */; };
-		DCC3E61C1AAA1E24008901DB /* RoutingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC3E61B1AAA1E24008901DB /* RoutingManager.swift */; };
+		DCC3E61C1AAA1E24008901DB /* RouteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC3E61B1AAA1E24008901DB /* RouteManager.swift */; };
 		DCC3E61F1AAA2491008901DB /* MessagePasser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC3E61E1AAA2491008901DB /* MessagePasser.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,11 +48,15 @@
 		DC689E611AA0174900FD78FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC689E621AA0174900FD78FE /* WaterChatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterChatTests.swift; sourceTree = "<group>"; };
 		DC689E6C1AA01B8C00FD78FE /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
+		DCC032D21AACC24300CE28FF /* MessageType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageType.swift; sourceTree = "<group>"; };
+		DCC032D41AACC2A000CE28FF /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		DCC032D61AACC37C00CE28FF /* RouteRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteRequest.swift; sourceTree = "<group>"; };
+		DCC032D91AACD72A00CE28FF /* TableEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableEntry.swift; sourceTree = "<group>"; };
 		DCC3E60F1AA96A68008901DB /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		DCC3E6111AA96DA3008901DB /* MIME.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIME.swift; sourceTree = "<group>"; };
 		DCC3E6151AAA11B7008901DB /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		DCC3E6181AAA1874008901DB /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		DCC3E61B1AAA1E24008901DB /* RoutingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingManager.swift; sourceTree = "<group>"; };
+		DCC3E61B1AAA1E24008901DB /* RouteManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteManager.swift; sourceTree = "<group>"; };
 		DCC3E61E1AAA2491008901DB /* MessagePasser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagePasser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,6 +101,7 @@
 		DC689E491AA0174800FD78FE /* WaterChat */ = {
 			isa = PBXGroup;
 			children = (
+				DCC032D81AACCFEE00CE28FF /* AODV */,
 				DCC3E61A1AAA1E09008901DB /* Core */,
 				DCC3E6171AAA1861008901DB /* Utility */,
 				DCC3E60E1AA96A4B008901DB /* DataType */,
@@ -132,11 +141,23 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		DCC032D81AACCFEE00CE28FF /* AODV */ = {
+			isa = PBXGroup;
+			children = (
+				DCC3E61B1AAA1E24008901DB /* RouteManager.swift */,
+				DCC032D61AACC37C00CE28FF /* RouteRequest.swift */,
+				DCC032D91AACD72A00CE28FF /* TableEntry.swift */,
+			);
+			name = AODV;
+			sourceTree = "<group>";
+		};
 		DCC3E60E1AA96A4B008901DB /* DataType */ = {
 			isa = PBXGroup;
 			children = (
 				DCC3E60F1AA96A68008901DB /* User.swift */,
 				DCC3E6111AA96DA3008901DB /* MIME.swift */,
+				DCC032D21AACC24300CE28FF /* MessageType.swift */,
+				DCC032D41AACC2A000CE28FF /* Message.swift */,
 			);
 			name = DataType;
 			sourceTree = "<group>";
@@ -152,7 +173,6 @@
 		DCC3E61A1AAA1E09008901DB /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				DCC3E61B1AAA1E24008901DB /* RoutingManager.swift */,
 				DCC3E61E1AAA2491008901DB /* MessagePasser.swift */,
 			);
 			name = Core;
@@ -259,11 +279,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC689E4F1AA0174800FD78FE /* ViewController.swift in Sources */,
+				DCC032D71AACC37C00CE28FF /* RouteRequest.swift in Sources */,
 				DCC3E6121AA96DA3008901DB /* MIME.swift in Sources */,
 				DCC3E61F1AAA2491008901DB /* MessagePasser.swift in Sources */,
-				DCC3E61C1AAA1E24008901DB /* RoutingManager.swift in Sources */,
+				DCC3E61C1AAA1E24008901DB /* RouteManager.swift in Sources */,
+				DCC032DA1AACD72A00CE28FF /* TableEntry.swift in Sources */,
 				DC689E4D1AA0174800FD78FE /* AppDelegate.swift in Sources */,
 				DCC3E6191AAA1874008901DB /* Logger.swift in Sources */,
+				DCC032D31AACC24300CE28FF /* MessageType.swift in Sources */,
+				DCC032D51AACC2A000CE28FF /* Message.swift in Sources */,
 				DCC3E6101AA96A68008901DB /* User.swift in Sources */,
 				DCC3E6161AAA11B7008901DB /* Config.swift in Sources */,
 			);
@@ -393,7 +417,7 @@
 				INFOPLIST_FILE = WaterChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -404,7 +428,7 @@
 				INFOPLIST_FILE = WaterChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
