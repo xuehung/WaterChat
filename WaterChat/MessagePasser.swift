@@ -17,9 +17,6 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCSessionDelegate
     var session : MCSession!
     var peerID: MCPeerID!
     
-    var neighbors = NSMutableSet()
-    
-    
     // Singlton Pattern
     class var getInstance: MessagePasser {
         struct Static {
@@ -59,16 +56,6 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCSessionDelegate
         
         Logger.log("Started advertising and browsing")
     }
-    
-    private func addNeighbor(peer: MCPeerID) {
-        neighbors.addObject(peer);
-    }
-    
-    private func removeNeighbor(peer: MCPeerID) {
-        neighbors.removeObject(peer);
-    }
-    
-    
     
     // The following two methods are required for MCNearbyServiceBrowserDelegate
     
@@ -123,6 +110,12 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCSessionDelegate
     func session(session: MCSession!, peer peerID: MCPeerID!,
         didChangeState state: MCSessionState)  {
             // Called when a connected peer changes state (for example, goes offline)
+    }
+    
+    func broadcast(data: NSData) {
+        for peer in self.session.connectedPeers {
+            
+        }
     }
     
     

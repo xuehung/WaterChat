@@ -8,9 +8,9 @@
 
 import Foundation
 
-enum MessageType {
-    case RREQ // Route Request
-    case RERR // Route Response
-    case RREP // Route Reply
-    case UNKNOWN
+enum MessageType: UInt8 {
+    case UNKNOWN = 0
+    case RREQ = 1 // Route Request
+    case RERR = 2 // Route Response
+    case RREP = 3 // Route Reply
 }

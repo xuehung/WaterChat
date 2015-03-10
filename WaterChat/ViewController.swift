@@ -8,6 +8,7 @@
 
 import UIKit
 import MultipeerConnectivity
+import ExternalAccessory
 
 
 class ViewController: UIViewController, MCNearbyServiceBrowserDelegate,
@@ -25,9 +26,12 @@ MCSessionDelegate {
     @IBOutlet var messageField: UITextField!
     
     override func viewDidLoad() {
-                
         super.viewDidLoad()
         
+        var cof = EAWiFiUnconfiguredAccessory()
+        println(cof.macAddress)
+        println(cof.manufacturer)
+        println(cof.ssid)
         
         self.peerID = MCPeerID(displayName: UIDevice.currentDevice().name)
         self.session = MCSession(peer: peerID)
@@ -42,6 +46,8 @@ MCSessionDelegate {
         
         // tell the assistant to start advertising our fabulous chat
         self.advisor.startAdvertisingPeer()
+        
+        test()
     }
     
     @IBAction func sendChat(sender: UIButton) {
@@ -163,6 +169,20 @@ MCSessionDelegate {
         didChangeState state: MCSessionState)  {
             // Called when a connected peer changes state (for example, goes offline)
             
+    }
+    
+    func test() {
+        var rr = RouteRequest()
+        rr.hopCount = 10
+        rr.destMacAddr = 9999
+        rr.origMacAddr = 1234
+        rr.PREQID = 5
+        var data = rr.serialize()
+        
+        var a = Message.messageFactory(data)
+        println((a as RouteRequest).hopCount)
+        println((a as RouteRequest).destMacAddr)
+        println((a as RouteRequest).PREQID)
     }
     
 }

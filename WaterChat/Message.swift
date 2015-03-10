@@ -32,4 +32,9 @@ class Message {
             return nil;
         }
     }
+    
+    
+    func serialize() -> NSData {
+        fatalError("This method must be overridden")
+    }
 }
