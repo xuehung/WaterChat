@@ -10,8 +10,11 @@ import Foundation
 
 class Message {
     
+    var type = MessageType.UNKNOWN
+    var data: NSData!
+    
     // Singlton Pattern
-    class func messageFactory(data: NSData) -> Message? {
+    class func messageFactory(data: NSData) -> Message {
         /*
         // the number of elements:
         let count = data.length
@@ -26,11 +29,22 @@ class Message {
         data.getBytes(&type, range: NSMakeRange(0, 1))
         
         switch type {
-        case 1:
-            return RouteRequest(bytes: data)
+        case MessageType.RREQ.rawValue:
+            var msg = RouteRequest(bytes: data)
+            msg.type = MessageType.RREQ
+            return msg
         default:
-            return nil;
+            var msg = Message(bytes: data)
+            return msg;
         }
+    }
+    
+    init() {
+    
+    }
+    
+    init(bytes data: NSData) {
+        self.data = data
     }
     
     

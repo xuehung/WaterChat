@@ -8,11 +8,12 @@
 
 import Foundation
 
-struct TableEntry {
-    var destAddr: UInt64
-    var destSeqNum: UInt32
-    var isDestSeqNumValid: UInt8
-    var hopCount: UInt8
-    var nextHop: UInt64
-    var lifeTime: UInt32
+class TableEntry {
+    var destAddr: MacAddr = 0
+    var destSeqNum: UInt32 = 0
+    var status: RouteStatus = RouteStatus.invalid
+    var isDestSeqNumValid: Bool = false
+    var hopCount: UInt8 = 0
+    var nextHop: MacAddr = 0
+    var lifeTime: Time = 0
 }

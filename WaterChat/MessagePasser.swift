@@ -9,13 +9,17 @@
 import Foundation
 import MultipeerConnectivity
 
-class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCSessionDelegate {
+class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate {
     
     // for multipeer conectivity
     var browser : MCNearbyServiceBrowser!
     var advisor : MCNearbyServiceAdvertiser!
     var session : MCSession!
     var peerID: MCPeerID!
+    var cb: CommunicationBuffer!
+    var rm: RouteManager!
+    var macPeerMapping = Dictionary<MacAddr, MCPeerID>()
+
     
     // Singlton Pattern
     class var getInstance: MessagePasser {
@@ -34,10 +38,12 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCSessionDelegate
         // I don't know what is super
         super.init();
         
-        
+        // display name is the mac addr in UInt64
         self.peerID = MCPeerID(displayName: UIDevice.currentDevice().name)
         self.session = MCSession(peer: peerID)
         self.session.delegate = self
+        self.cb = CommunicationBuffer(mp: self)
+        self.rm = RouteManager(addr: 1, mp: self)
         
         // create the browser viewcontroller with a unique service name
         self.browser = MCNearbyServiceBrowser(peer: self.peerID, serviceType: Config.serviceType)
@@ -45,6 +51,7 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCSessionDelegate
         self.browser.delegate = self;
         
         self.advisor = MCNearbyServiceAdvertiser(peer: self.peerID, discoveryInfo:nil, serviceType: Config.serviceType)
+        self.advisor.delegate = self
         
         Logger.log("Initialize MessagePasser with name = \(UIDevice.currentDevice().name)")
         
@@ -63,7 +70,10 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCSessionDelegate
         foundPeer: MCPeerID!,
         withDiscoveryInfo info: [NSObject : AnyObject]!) {
             Logger.log("found a new peer \(foundPeer.displayName)")
-            self.session.connectPeer(foundPeer, withNearbyConnectionData: nil)
+            // send the invitation
+            self.session.connectPeer(foundPeer,
+                withNearbyConnectionData: nil)
+            self.browser.invitePeer(foundPeer, toSession: self.session, withContext: nil, timeout: NSTimeInterval(300))
     }
     
     func browser(browser: MCNearbyServiceBrowser!,
@@ -71,18 +81,44 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCSessionDelegate
             Logger.log("lost a new peer \(lostPeer.displayName)")
     }
     
+    func advertiser(advertiser: MCNearbyServiceAdvertiser!,
+        didReceiveInvitationFromPeer peerID: MCPeerID!,
+        withContext context: NSData!,
+        invitationHandler: ((Bool,
+        MCSession!) -> Void)!) {
+            
+            Logger.log("Received an invitation from \(peerID.displayName)")
+            invitationHandler(true, self.session)
+    }
+
     
     
     // Called when a peer sends an NSData to us
     func session(session: MCSession!, didReceiveData data: NSData!,
         fromPeer peerID: MCPeerID!)  {
+            Logger.log("Got data from \(peerID)")
             
             // This needs to run on the main queue
             dispatch_async(dispatch_get_main_queue()) {
                 
-                var msg = NSString(data: data, encoding: NSUTF8StringEncoding)
+                var message = Message.messageFactory(data)
+                var fromAddr = Util.convertDisplayNameToMacAddr(peerID.displayName)
                 
-                //self.updateChat(msg!, fromPeer: peerID)
+                
+                switch message.type {
+                case MessageType.RREQ:
+                    self.rm.reveiveRouteRequest(fromAddr, message: message as RouteRequest)
+                    break
+                case MessageType.RREP:
+                    break
+                case MessageType.RERR:
+                    break
+                case MessageType.UNKNOWN:
+                    self.cb.addToIncomingBuffer(message)
+                    break
+                default:
+                    Logger.error("Unknown message")
+                }
             }
     }
     
@@ -112,11 +148,23 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCSessionDelegate
             // Called when a connected peer changes state (for example, goes offline)
     }
     
-    func broadcast(data: NSData) {
-        for peer in self.session.connectedPeers {
-            
+    func send(dest: MacAddr, message: Message) {
+        //self.cb.send(dest, data: message.serialize())
+    }
+    
+    func send(dest: MCPeerID, message: Message) {
+        var rawMessage = RawMessage(dest: dest, data: message.serialize())
+        self.cb.addToOutgoingBuffer(rawMessage)
+    }
+    
+    func broadcast(message: Message) {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.cb.broadcast(message.serialize())
         }
     }
     
+    // called by the application
+    //func receive() -> Message {
+    //}
     
 }

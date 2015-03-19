@@ -17,6 +17,9 @@
 		DCA748521AADF71C00A7430C /* AODVConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA748511AADF71C00A7430C /* AODVConfig.swift */; };
 		DCA748541AAF6EB600A7430C /* CommunicationBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA748531AAF6EB600A7430C /* CommunicationBuffer.swift */; };
 		DCA748561AAF728100A7430C /* RawMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA748551AAF728100A7430C /* RawMessage.swift */; };
+		DCA748581AAFF56900A7430C /* RouteStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA748571AAFF56900A7430C /* RouteStatus.swift */; };
+		DCA7485A1AB4B88A00A7430C /* RouteReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA748591AB4B88A00A7430C /* RouteReply.swift */; };
+		DCA7485C1AB6A2CB00A7430C /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA7485B1AB6A2CB00A7430C /* Util.swift */; };
 		DCC032D31AACC24300CE28FF /* MessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC032D21AACC24300CE28FF /* MessageType.swift */; };
 		DCC032D51AACC2A000CE28FF /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC032D41AACC2A000CE28FF /* Message.swift */; };
 		DCC032D71AACC37C00CE28FF /* RouteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC032D61AACC37C00CE28FF /* RouteRequest.swift */; };
@@ -73,6 +76,9 @@
 		DCA748511AADF71C00A7430C /* AODVConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AODVConfig.swift; sourceTree = "<group>"; };
 		DCA748531AAF6EB600A7430C /* CommunicationBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunicationBuffer.swift; sourceTree = "<group>"; };
 		DCA748551AAF728100A7430C /* RawMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawMessage.swift; sourceTree = "<group>"; };
+		DCA748571AAFF56900A7430C /* RouteStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteStatus.swift; sourceTree = "<group>"; };
+		DCA748591AB4B88A00A7430C /* RouteReply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteReply.swift; sourceTree = "<group>"; };
+		DCA7485B1AB6A2CB00A7430C /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		DCC032D21AACC24300CE28FF /* MessageType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageType.swift; sourceTree = "<group>"; };
 		DCC032D41AACC2A000CE28FF /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		DCC032D61AACC37C00CE28FF /* RouteRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteRequest.swift; sourceTree = "<group>"; };
@@ -170,9 +176,11 @@
 			isa = PBXGroup;
 			children = (
 				DCC3E61B1AAA1E24008901DB /* RouteManager.swift */,
-				DCC032D61AACC37C00CE28FF /* RouteRequest.swift */,
 				DCC032D91AACD72A00CE28FF /* TableEntry.swift */,
 				DCA748511AADF71C00A7430C /* AODVConfig.swift */,
+				DCA748571AAFF56900A7430C /* RouteStatus.swift */,
+				DCC032D61AACC37C00CE28FF /* RouteRequest.swift */,
+				DCA748591AB4B88A00A7430C /* RouteReply.swift */,
 			);
 			name = AODV;
 			sourceTree = "<group>";
@@ -192,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				DCC3E6181AAA1874008901DB /* Logger.swift */,
+				DCA7485B1AB6A2CB00A7430C /* Util.swift */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -309,6 +318,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC689E4F1AA0174800FD78FE /* ViewController.swift in Sources */,
+				DCA7485C1AB6A2CB00A7430C /* Util.swift in Sources */,
 				DCC032D71AACC37C00CE28FF /* RouteRequest.swift in Sources */,
 				DCC3E6121AA96DA3008901DB /* MIME.swift in Sources */,
 				DCC3E61F1AAA2491008901DB /* MessagePasser.swift in Sources */,
@@ -320,9 +330,11 @@
 				DCA748541AAF6EB600A7430C /* CommunicationBuffer.swift in Sources */,
 				DCC3E6191AAA1874008901DB /* Logger.swift in Sources */,
 				DCC032D31AACC24300CE28FF /* MessageType.swift in Sources */,
+				DCA7485A1AB4B88A00A7430C /* RouteReply.swift in Sources */,
 				DCC032D51AACC2A000CE28FF /* Message.swift in Sources */,
 				DCC3E6101AA96A68008901DB /* User.swift in Sources */,
 				DCC3E6161AAA11B7008901DB /* Config.swift in Sources */,
+				DCA748581AAFF56900A7430C /* RouteStatus.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

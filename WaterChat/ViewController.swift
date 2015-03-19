@@ -12,26 +12,21 @@ import ExternalAccessory
 
 
 class ViewController: UIViewController, MCNearbyServiceBrowserDelegate,
-MCSessionDelegate {
+MCNearbyServiceAdvertiserDelegate, MCSessionDelegate {
     
     let serviceType = "WaterChat"
     
     var browser : MCNearbyServiceBrowser!
     var advisor : MCNearbyServiceAdvertiser!
-    var session
-    : MCSession!
+    var session: MCSession!
     var peerID: MCPeerID!
+    var mp: MessagePasser!
     
     @IBOutlet var chatView: UITextView!
     @IBOutlet var messageField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        var cof = EAWiFiUnconfiguredAccessory()
-        println(cof.macAddress)
-        println(cof.manufacturer)
-        println(cof.ssid)
         
         self.peerID = MCPeerID(displayName: UIDevice.currentDevice().name)
         self.session = MCSession(peer: peerID)
@@ -40,14 +35,15 @@ MCSessionDelegate {
         // create the browser viewcontroller with a unique service name
         self.browser = MCNearbyServiceBrowser(peer:self.peerID, serviceType:serviceType)
         
-        self.browser.delegate = self;
+        self.browser.delegate = self
+        
         
         self.advisor = MCNearbyServiceAdvertiser(peer:self.peerID, discoveryInfo:nil, serviceType:serviceType)
-        
+        self.advisor.delegate = self
         // tell the assistant to start advertising our fabulous chat
         self.advisor.startAdvertisingPeer()
-        
-        test()
+        self.browser.startBrowsingForPeers()
+        //test()
     }
     
     @IBAction func sendChat(sender: UIButton) {
@@ -95,8 +91,11 @@ MCSessionDelegate {
         // Show the browser view controller
         //self.presentViewController(self.browser, animated: true, completion: nil)
         
+        //mp.rm.sendRouteRequest(2)
+        println("take")
+        mp.cb.takeOneFromIncomingBuffer()
+        println("finish")
         
-        self.browser.startBrowsingForPeers()
     }
     
     /*
@@ -122,6 +121,7 @@ MCSessionDelegate {
             println("found a peer");
             self.session.connectPeer(foundPeer, withNearbyConnectionData: nil)
             println(foundPeer.displayName);
+            self.browser.invitePeer(foundPeer, toSession: self.session, withContext: nil, timeout: NSTimeInterval(300))
     }
     
     func browser(browser: MCNearbyServiceBrowser!,
@@ -171,18 +171,26 @@ MCSessionDelegate {
             
     }
     
-    func test() {
-        var rr = RouteRequest()
-        rr.hopCount = 10
-        rr.destMacAddr = 9999
-        rr.origMacAddr = 1234
-        rr.PREQID = 5
-        var data = rr.serialize()
-        
-        var a = Message.messageFactory(data)
-        println((a as RouteRequest).hopCount)
-        println((a as RouteRequest).destMacAddr)
-        println((a as RouteRequest).PREQID)
+    func advertiser(advertiser: MCNearbyServiceAdvertiser!,
+        didReceiveInvitationFromPeer peerID: MCPeerID!,
+        withContext context: NSData!,
+        invitationHandler: ((Bool,
+        MCSession!) -> Void)!) {
+            
+            println("Received an invitation from \(peerID.displayName)")
+            invitationHandler(true, self.session)
     }
     
+    func test() {
+        
+        
+        var cof = EAWiFiUnconfiguredAccessory()
+        println("macaddr = \(cof.macAddress)")
+        println("manufacturer = \(cof.manufacturer)")
+        println("ssid = \(cof.ssid)")
+        
+        self.mp = MessagePasser.getInstance
+        
+        //mp.send(<#nextHop: MacAddr#>, message: <#Message#>)
+    }
 }
