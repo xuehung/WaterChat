@@ -47,7 +47,7 @@ MCNearbyServiceAdvertiserDelegate, MCSessionDelegate {
         
         
         
-        test()
+        //test()
     }
     
     @IBAction func sendChat(sender: UIButton) {
@@ -193,7 +193,7 @@ MCNearbyServiceAdvertiserDelegate, MCSessionDelegate {
         println("manufacturer = \(cof.manufacturer)")
         println("ssid = \(cof.ssid)")
         
-        self.mp = MessagePasser.getInstance
+        //self.mp = MessagePasser.getInstance
         
         //mp.send(<#nextHop: MacAddr#>, message: <#Message#>)
     }
