@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC59B8AC1AD5ABAB001CB2DF /* welcome.png in Resources */ = {isa = PBXBuildFile; fileRef = DC59B8AB1AD5ABAB001CB2DF /* welcome.png */; };
 		DC689E4D1AA0174800FD78FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC689E4C1AA0174800FD78FE /* AppDelegate.swift */; };
 		DC689E4F1AA0174800FD78FE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC689E4E1AA0174800FD78FE /* ViewController.swift */; };
 		DC689E521AA0174800FD78FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC689E501AA0174800FD78FE /* Main.storyboard */; };
@@ -30,7 +31,6 @@
 		DCC3E6191AAA1874008901DB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC3E6181AAA1874008901DB /* Logger.swift */; };
 		DCC3E61C1AAA1E24008901DB /* RouteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC3E61B1AAA1E24008901DB /* RouteManager.swift */; };
 		DCC3E61F1AAA2491008901DB /* MessagePasser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC3E61E1AAA2491008901DB /* MessagePasser.swift */; };
-		F40540831AD5A62000C90893 /* welcome.png in Resources */ = {isa = PBXBuildFile; fileRef = F40540821AD5A62000C90893 /* welcome.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -63,6 +63,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DC59B8AB1AD5ABAB001CB2DF /* welcome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = welcome.png; path = Asset/welcome.png; sourceTree = SOURCE_ROOT; };
 		DC689E471AA0174800FD78FE /* WaterChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaterChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC689E4B1AA0174800FD78FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC689E4C1AA0174800FD78FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -90,7 +91,6 @@
 		DCC3E6181AAA1874008901DB /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		DCC3E61B1AAA1E24008901DB /* RouteManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteManager.swift; sourceTree = "<group>"; };
 		DCC3E61E1AAA2491008901DB /* MessagePasser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagePasser.swift; sourceTree = "<group>"; };
-		F40540821AD5A62000C90893 /* welcome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = welcome.png; path = ../../UI/Asset/welcome.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,7 +152,7 @@
 		DC689E4A1AA0174800FD78FE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				F40540821AD5A62000C90893 /* welcome.png */,
+				DC59B8AB1AD5ABAB001CB2DF /* welcome.png */,
 				DC689E4B1AA0174800FD78FE /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -302,8 +302,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC689E521AA0174800FD78FE /* Main.storyboard in Resources */,
+				DC59B8AC1AD5ABAB001CB2DF /* welcome.png in Resources */,
 				DC689E571AA0174800FD78FE /* LaunchScreen.xib in Resources */,
-				F40540831AD5A62000C90893 /* welcome.png in Resources */,
 				DC689E541AA0174800FD78FE /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

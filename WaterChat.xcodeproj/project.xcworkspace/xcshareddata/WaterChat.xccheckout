@@ -5,13 +5,13 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>48D6D2C6-1EFC-4591-8E74-3D9C93473FC2</string>
+	<string>482BDF88-47CB-4E1E-A6CE-9A072044599D</string>
 	<key>IDESourceControlProjectName</key>
 	<string>WaterChat</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>9777537F3CCBE9877F8478CD9C0B9DCF40B91252</key>
-		<string>https://github.com/xuehung/WaterChat</string>
+		<string>https://github.com/xuehung/WaterChat.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>WaterChat.xcodeproj</string>
@@ -21,7 +21,7 @@
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/xuehung/WaterChat</string>
+	<string>https://github.com/xuehung/WaterChat.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
