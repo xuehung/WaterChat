@@ -14,7 +14,7 @@ import ExternalAccessory
 class ViewController: UIViewController, MCNearbyServiceBrowserDelegate,
 MCNearbyServiceAdvertiserDelegate, MCSessionDelegate {
     
-    let serviceType = "WaterChat"
+    let serviceType = "WaterChat11"
     
     var browser : MCNearbyServiceBrowser!
     var advisor : MCNearbyServiceAdvertiser!
@@ -193,7 +193,11 @@ MCNearbyServiceAdvertiserDelegate, MCSessionDelegate {
         println("manufacturer = \(cof.manufacturer)")
         println("ssid = \(cof.ssid)")
         
-        //self.mp = MessagePasser.getInstance
+        var mp = MessagePasser.getInstance(1)
+        var msg = RouteRequest()
+        msg.PREQID = 2
+        msg.origSeqNum = 99
+        mp.broadcast(msg)
         
         //mp.send(<#nextHop: MacAddr#>, message: <#Message#>)
     }
