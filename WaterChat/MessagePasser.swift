@@ -44,7 +44,7 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
         self.addr = addr
         
         // display name is the mac addr in UInt64
-        self.peerID = MCPeerID(displayName: UIDevice.currentDevice().name)
+        self.peerID = MCPeerID(displayName: addr.description)
         self.session = MCSession(peer: peerID)
         self.session.delegate = self
         self.cb = CommunicationBuffer(mp: self)
@@ -93,7 +93,13 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
         MCSession!) -> Void)!) {
             
             Logger.log("Received an invitation from \(peerID.displayName)")
-            invitationHandler(true, self.session)
+            if (peerID.displayName > self.peerID.displayName) {
+                Logger.log("accept")
+                invitationHandler(true, self.session)
+            } else {
+                Logger.log("reject")
+                invitationHandler(true, self.session)
+            }
     }
 
     

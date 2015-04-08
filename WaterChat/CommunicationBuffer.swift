@@ -60,11 +60,15 @@ class CommunicationBuffer {
         
         Logger.log("connectedPeers = \(self.mp.session.connectedPeers)")
         
-        // broadcast directly
-        var error : NSError?
-        self.mp.session.sendData(data, toPeers: self.mp.session.connectedPeers, withMode: MCSessionSendDataMode.Unreliable, error: &error)
-        if error != nil {
-            Logger.log("Error broadcasting data: \(error?.localizedDescription)")
+        var toPeers = self.mp.session.connectedPeers
+        
+        if (toPeers.count > 0) {
+            // broadcast directly
+            var error : NSError?
+            self.mp.session.sendData(data, toPeers: toPeers, withMode: MCSessionSendDataMode.Unreliable, error: &error)
+            if error != nil {
+                Logger.log("Error broadcasting data: \(error?.localizedDescription)")
+            }
         }
     }
     
