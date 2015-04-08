@@ -19,31 +19,36 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
     var cb: CommunicationBuffer!
     var rm: RouteManager!
     var macPeerMapping = Dictionary<MacAddr, MCPeerID>()
+    var broadcastSeqNum: UInt32 = 0
+    var addr: MacAddr!
+    var broadcastSeqDict = Dictionary<MacAddr, UInt32>()
 
     
     // Singlton Pattern
-    class var getInstance: MessagePasser {
+    class func getInstance(addr: MacAddr) -> MessagePasser {
         struct Static {
             static var instance: MessagePasser?
         }
         
         if Static.instance == nil {
-            Static.instance = MessagePasser()
+            Static.instance = MessagePasser(addr: addr)
         }
         return Static.instance!
     }
     
     // constructor is private so outsider has to call getInstance()
-    private override init() {
+    private init(addr: MacAddr) {
         // I don't know what is super
         super.init();
+        
+        self.addr = addr
         
         // display name is the mac addr in UInt64
         self.peerID = MCPeerID(displayName: UIDevice.currentDevice().name)
         self.session = MCSession(peer: peerID)
         self.session.delegate = self
         self.cb = CommunicationBuffer(mp: self)
-        self.rm = RouteManager(addr: 1, mp: self)
+        self.rm = RouteManager(addr: addr, mp: self)
         
         // create the browser viewcontroller with a unique service name
         self.browser = MCNearbyServiceBrowser(peer: self.peerID, serviceType: Config.serviceType)
@@ -94,6 +99,7 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
     
     
     // Called when a peer sends an NSData to us
+    // reveive
     func session(session: MCSession!, didReceiveData data: NSData!,
         fromPeer peerID: MCPeerID!)  {
             Logger.log("Got data from \(peerID)")
@@ -106,15 +112,28 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
                 
                 
                 switch message.type {
-                case MessageType.RREQ:
+                case MessageType.RERR:
                     self.rm.reveiveRouteRequest(fromAddr, message: message as RouteRequest)
                     break
                 case MessageType.RREP:
                     break
                 case MessageType.RERR:
                     break
-                case MessageType.UNKNOWN:
-                    self.cb.addToIncomingBuffer(message)
+                case MessageType.BROADCAST:
+                    var bmsg = message as BroadcastMessage
+                    if let seqNum = self.broadcastSeqDict[bmsg.srcMacAddr] {
+                        // the second condition is designed for smaller
+                        // broadcast seqNum when device restarts
+                        if (bmsg.broadcastSeqNum <= self.broadcastSeqNum &&
+                            bmsg.broadcastSeqNum > self.broadcastSeqNum - 10) {
+                                break
+                        }
+                    }
+                    self.broadcastSeqDict[bmsg.srcMacAddr] = bmsg.broadcastSeqNum
+                    self.cb.addToIncomingBuffer(bmsg.getInnerMessage())
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.cb.broadcast(bmsg.serialize())
+                    }
                     break
                 default:
                     Logger.error("Unknown message")
@@ -159,12 +178,15 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
     
     func broadcast(message: Message) {
         dispatch_async(dispatch_get_main_queue()) {
-            self.cb.broadcast(message.serialize())
+            self.broadcastSeqNum++
+            var bmsg = BroadcastMessage(message: message, seqNum: self.broadcastSeqNum, srcMacAddr: self.addr)
+            self.cb.broadcast(bmsg.serialize())
         }
     }
     
     // called by the application
-    //func receive() -> Message {
-    //}
+    func receive() -> Message {
+        return self.cb.takeOneFromIncomingBuffer()
+    }
     
 }

@@ -43,7 +43,11 @@ MCNearbyServiceAdvertiserDelegate, MCSessionDelegate {
         // tell the assistant to start advertising our fabulous chat
         self.advisor.startAdvertisingPeer()
         self.browser.startBrowsingForPeers()
-        //test()
+        
+        
+        
+        
+        test()
     }
     
     @IBAction func sendChat(sender: UIButton) {

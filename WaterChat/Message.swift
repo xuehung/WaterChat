@@ -51,4 +51,16 @@ class Message {
     func serialize() -> NSData {
         fatalError("This method must be overridden")
     }
+    
+    func fromByteArray<T>(value: [Byte], _: T.Type) -> T {
+        return value.withUnsafeBufferPointer {
+            return UnsafePointer<T>($0.baseAddress).memory
+        }
+    }
+    
+    func toByteArray<T>(var value: T) -> [Byte] {
+        return withUnsafePointer(&value) {
+            Array(UnsafeBufferPointer(start: UnsafePointer<Byte>($0), count: sizeof(T)))
+        }
+    }
 }

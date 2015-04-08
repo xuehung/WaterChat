@@ -17,4 +17,16 @@ class Util {
             return MacAddr(0)
         }
     }
+    
+    class func fromByteArray<T>(value: [Byte], _: T.Type) -> T {
+        return value.withUnsafeBufferPointer {
+            return UnsafePointer<T>($0.baseAddress).memory
+        }
+    }
+    
+    class func toByteArray<T>(var value: T) -> [Byte] {
+        return withUnsafePointer(&value) {
+            Array(UnsafeBufferPointer(start: UnsafePointer<Byte>($0), count: sizeof(T)))
+        }
+    }
 }

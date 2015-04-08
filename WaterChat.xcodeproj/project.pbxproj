@@ -31,6 +31,7 @@
 		DCC3E6191AAA1874008901DB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC3E6181AAA1874008901DB /* Logger.swift */; };
 		DCC3E61C1AAA1E24008901DB /* RouteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC3E61B1AAA1E24008901DB /* RouteManager.swift */; };
 		DCC3E61F1AAA2491008901DB /* MessagePasser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC3E61E1AAA2491008901DB /* MessagePasser.swift */; };
+		DCC4342B1AD4F6CB00583928 /* BroadcastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC4342A1AD4F6CB00583928 /* BroadcastMessage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -91,6 +92,7 @@
 		DCC3E6181AAA1874008901DB /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		DCC3E61B1AAA1E24008901DB /* RouteManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteManager.swift; sourceTree = "<group>"; };
 		DCC3E61E1AAA2491008901DB /* MessagePasser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagePasser.swift; sourceTree = "<group>"; };
+		DCC4342A1AD4F6CB00583928 /* BroadcastMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcastMessage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +197,7 @@
 				DCC3E6111AA96DA3008901DB /* MIME.swift */,
 				DCC032D21AACC24300CE28FF /* MessageType.swift */,
 				DCC032D41AACC2A000CE28FF /* Message.swift */,
+				DCC4342A1AD4F6CB00583928 /* BroadcastMessage.swift */,
 			);
 			name = DataType;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 				DC689E4F1AA0174800FD78FE /* ViewController.swift in Sources */,
 				DCA7485C1AB6A2CB00A7430C /* Util.swift in Sources */,
 				DCC032D71AACC37C00CE28FF /* RouteRequest.swift in Sources */,
+				DCC4342B1AD4F6CB00583928 /* BroadcastMessage.swift in Sources */,
 				DCC3E6121AA96DA3008901DB /* MIME.swift in Sources */,
 				DCC3E61F1AAA2491008901DB /* MessagePasser.swift in Sources */,
 				DCC3E61C1AAA1E24008901DB /* RouteManager.swift in Sources */,
