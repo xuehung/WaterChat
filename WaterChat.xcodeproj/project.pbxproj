@@ -30,6 +30,7 @@
 		DCC3E6191AAA1874008901DB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC3E6181AAA1874008901DB /* Logger.swift */; };
 		DCC3E61C1AAA1E24008901DB /* RouteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC3E61B1AAA1E24008901DB /* RouteManager.swift */; };
 		DCC3E61F1AAA2491008901DB /* MessagePasser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC3E61E1AAA2491008901DB /* MessagePasser.swift */; };
+		F40540831AD5A62000C90893 /* welcome.png in Resources */ = {isa = PBXBuildFile; fileRef = F40540821AD5A62000C90893 /* welcome.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -89,6 +90,7 @@
 		DCC3E6181AAA1874008901DB /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		DCC3E61B1AAA1E24008901DB /* RouteManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteManager.swift; sourceTree = "<group>"; };
 		DCC3E61E1AAA2491008901DB /* MessagePasser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagePasser.swift; sourceTree = "<group>"; };
+		F40540821AD5A62000C90893 /* welcome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = welcome.png; path = ../../UI/Asset/welcome.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 		DC689E4A1AA0174800FD78FE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F40540821AD5A62000C90893 /* welcome.png */,
 				DC689E4B1AA0174800FD78FE /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -266,6 +269,7 @@
 				TargetAttributes = {
 					DC689E461AA0174800FD78FE = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 9VUC3R8D65;
 					};
 					DC689E5B1AA0174800FD78FE = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -299,6 +303,7 @@
 			files = (
 				DC689E521AA0174800FD78FE /* Main.storyboard in Resources */,
 				DC689E571AA0174800FD78FE /* LaunchScreen.xib in Resources */,
+				F40540831AD5A62000C90893 /* welcome.png in Resources */,
 				DC689E541AA0174800FD78FE /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
