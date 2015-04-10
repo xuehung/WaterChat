@@ -130,14 +130,18 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="xnD-XG-dex">
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="Faw-fM-YCp"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="w80-fG-Evc"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="w80-fG-Evc">
+                            <connections>
+                                <segue destination="gWb-d3-Bew" kind="show" id="3qC-rH-Paa"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <keyCommands/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wuj-u1-TpF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5535" y="1483"/>
+            <point key="canvasLocation" x="3771" y="1385"/>
         </scene>
         <!--Create New Group-->
         <scene sceneID="mf9-Ak-DuZ">
@@ -150,15 +154,37 @@
                     <view key="view" contentMode="scaleToFill" id="VJ8-vd-xRu">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Group Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uhZ-xu-znz">
+                                <rect key="frame" x="85" y="159" width="103" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qD9-k0-bSX">
+                                <rect key="frame" x="85" y="193" width="185" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="People You Want To Invite:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GT4-fy-MlH">
+                                <rect key="frame" x="85" y="239" width="204" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m75-mt-wcK">
+                                <rect key="frame" x="85" y="278" width="240" height="128"/>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Create New Group" id="2TZ-c8-j9K">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="SKG-cC-qGU"/>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="SKG-cC-qGU"/>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WmO-fU-cpN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6542" y="1906"/>
+            <point key="canvasLocation" x="5736" y="1682"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="mhe-sx-5Ha">
@@ -191,7 +217,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b1U-mJ-saf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5901" y="806"/>
+            <point key="canvasLocation" x="3833" y="662"/>
         </scene>
         <!--User Group View Controller-->
         <scene sceneID="4Ir-uV-lwa">
@@ -302,7 +328,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aoS-35-9rY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4642" y="2061"/>
+            <point key="canvasLocation" x="4452" y="1385"/>
         </scene>
         <!--Users-->
         <scene sceneID="4ct-om-3c7">
@@ -321,7 +347,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l8h-nm-APB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3949" y="512"/>
+            <point key="canvasLocation" x="3555" y="42"/>
         </scene>
         <!--Groups-->
         <scene sceneID="RFK-vA-AfC">
@@ -340,7 +366,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eWN-qd-4Hi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4723" y="1483"/>
+            <point key="canvasLocation" x="3091" y="1239"/>
         </scene>
     </scenes>
     <resources>
