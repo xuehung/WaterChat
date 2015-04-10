@@ -126,12 +126,18 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
                 case MessageType.RERR:
                     break
                 case MessageType.BROADCAST:
+                    
                     var bmsg = message as BroadcastMessage
+                    if( bmsg.srcMacAddr == Config.address) {
+                        break
+                    }
                     if let seqNum = self.broadcastSeqDict[bmsg.srcMacAddr] {
+                        println("seqNum = \(seqNum)")
                         // the second condition is designed for smaller
                         // broadcast seqNum when device restarts
                         if ((bmsg.broadcastSeqNum <= self.broadcastSeqNum &&
-                            bmsg.broadcastSeqNum > self.broadcastSeqNum - 10) || fromAddr == self.addr) {
+                            bmsg.broadcastSeqNum > self.broadcastSeqNum - 10)) {
+                                println("stop")
                                 break
                         }
                     }

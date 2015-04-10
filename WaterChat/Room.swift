@@ -13,7 +13,7 @@ class Room {
     var groupID: UInt32
     var name: String
     var nameLen: Int32
-    var groupHolder: MCPeerID!
+    var groupHolder: MCPeerID = MCPeerID()
     var maximumNumber: UInt8
     // The room is empty when initialization
     // yourself is in this public group
@@ -25,7 +25,7 @@ class Room {
         self.groupID = 0;
         self.name = "unknown"
         self.nameLen = Int32(countElements(self.name))
-        self.maximumNumber = 0;
+        self.maximumNumber = 10;
         // Add the yourself(the group holder into this group's member list)
         self.groupMemberList.append(groupHolder)
     }

@@ -22,5 +22,10 @@ class ViewController: UIViewController {
     @IBAction func test(sender: UIButton) {
         // run this code when user presses test button
         println("hello it is test")
+        var mp = MessagePasser.getInstance(Config.address)
+        var rr = RoomRequest()
+        rr.groupName = "hi"
+        mp.broadcast(rr)
+        
     }
 }

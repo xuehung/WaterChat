@@ -37,6 +37,10 @@ class Message {
             var msg = RouteRequest(bytes: data)
             msg.type = MessageType.RREQ
             return msg
+        case MessageType.ROOMREQ.rawValue:
+            var msg = RoomRequest(bytes: data)
+            msg.type = MessageType.ROOMREQ
+            return msg
         default:
             var msg = Message(bytes: data)
             return msg;
