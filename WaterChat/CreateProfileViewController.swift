@@ -21,12 +21,23 @@ class CreateProfileViewController: UIViewController {
     
     @IBOutlet weak var joinBtn: UIBarButtonItem!
     
+    
     var profile = UserProfile()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        println("create profile view controller")
         // Do any additional setup after loading the view.
+        println("create profile view controller")
+        self.profile = UserProfile()
+        //readData()
+        
+    }
+    
+    func readData(){
+        self.profile.userName = self.userName.text
+        self.profile.isFemale = self.isFemale.isEnabledForSegmentAtIndex(0)
+        self.profile.birthDate = self.birthMM.text+self.birthDD.text
+        self.profile.moreInfo = self.moreInfo.text
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,14 +46,16 @@ class CreateProfileViewController: UIViewController {
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if (sender != self.joinBtn) return;
+        readData()
     }
-    */
+    
 
 }
