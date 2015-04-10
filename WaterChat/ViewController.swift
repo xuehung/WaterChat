@@ -95,10 +95,13 @@ MCNearbyServiceAdvertiserDelegate, MCSessionDelegate {
         // Show the browser view controller
         //self.presentViewController(self.browser, animated: true, completion: nil)
         
-        //mp.rm.sendRouteRequest(2)
-        println("take")
-        mp.cb.takeOneFromIncomingBuffer()
-        println("finish")
+        var mp = MessagePasser.getInstance(Config.address)
+        var msg = RouteRequest()
+        msg.PREQID = 2
+        msg.origSeqNum = 99
+        println("send")
+        mp.broadcast(msg)
+        println("after send")
         
     }
     
@@ -194,11 +197,6 @@ MCNearbyServiceAdvertiserDelegate, MCSessionDelegate {
         println("ssid = \(cof.ssid)")
         
         var mp = MessagePasser.getInstance(Config.address)
-        var msg = RouteRequest()
-        msg.PREQID = 2
-        msg.origSeqNum = 99
-        //mp.broadcast(msg)
         
-        //mp.send(<#nextHop: MacAddr#>, message: <#Message#>)
     }
 }

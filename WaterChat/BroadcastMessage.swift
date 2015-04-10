@@ -9,7 +9,7 @@
 import Foundation
 
 
-// type(1 Byte), broadcastSeqNum(1 Byte), src(8 Bytes)
+// type(1 Byte), broadcastSeqNum(4 Byte), src(8 Bytes)
 
 
 class BroadcastMessage: Message {
@@ -17,6 +17,7 @@ class BroadcastMessage: Message {
     var broadcastSeqNum: UInt32 = 0
     var srcMacAddr: UInt64 = 0
     var message: Message!
+    
     
     override init() {
         super.init()
@@ -39,6 +40,9 @@ class BroadcastMessage: Message {
     override init(bytes data: NSData) {
         data.getBytes(&self.broadcastSeqNum, range: NSMakeRange(1, 4))
         data.getBytes(&self.srcMacAddr, range: NSMakeRange(5, 8))
+        var messageBody = data.subdataWithRange(NSMakeRange(13, data.length - 13))
+        self.message = Message.messageFactory(messageBody)
+        
         super.init(bytes: data)
     }
     

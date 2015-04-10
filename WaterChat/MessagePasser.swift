@@ -118,7 +118,7 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
                 
                 
                 switch message.type {
-                case MessageType.RERR:
+                case MessageType.RREQ:
                     self.rm.reveiveRouteRequest(fromAddr, message: message as RouteRequest)
                     break
                 case MessageType.RREP:
@@ -130,8 +130,8 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
                     if let seqNum = self.broadcastSeqDict[bmsg.srcMacAddr] {
                         // the second condition is designed for smaller
                         // broadcast seqNum when device restarts
-                        if (bmsg.broadcastSeqNum <= self.broadcastSeqNum &&
-                            bmsg.broadcastSeqNum > self.broadcastSeqNum - 10) {
+                        if ((bmsg.broadcastSeqNum <= self.broadcastSeqNum &&
+                            bmsg.broadcastSeqNum > self.broadcastSeqNum - 10) || fromAddr == self.addr) {
                                 break
                         }
                     }
@@ -142,7 +142,8 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
                     }
                     break
                 default:
-                    Logger.error("Unknown message")
+                    self.cb.addToIncomingBuffer(message)
+                    break
                 }
             }
     }

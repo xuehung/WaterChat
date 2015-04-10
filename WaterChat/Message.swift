@@ -29,6 +29,10 @@ class Message {
         data.getBytes(&type, range: NSMakeRange(0, 1))
         
         switch type {
+        case MessageType.BROADCAST.rawValue:
+            var msg = BroadcastMessage(bytes: data)
+            msg.type = MessageType.BROADCAST
+            return msg
         case MessageType.RREQ.rawValue:
             var msg = RouteRequest(bytes: data)
             msg.type = MessageType.RREQ
