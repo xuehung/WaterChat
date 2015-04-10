@@ -7,7 +7,7 @@
         <!--Profile-->
         <scene sceneID="LqB-qN-KMB">
             <objects>
-                <viewController id="HjS-vk-iqB" sceneMemberID="viewController">
+                <viewController id="HjS-vk-iqB" customClass="CreateProfileViewController" customModule="WaterChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cY8-nT-wAc"/>
                         <viewControllerLayoutGuide type="bottom" id="dWU-mX-aO0"/>
@@ -80,17 +80,21 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Profile" id="0oE-zr-hJ9">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="UNw-Pc-JTw">
-                            <connections>
-                                <segue destination="NvW-Nk-lgo" kind="presentation" modalTransitionStyle="partialCurl" id="izC-Ug-7OT"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Join" style="done" id="UNw-Pc-JTw"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="birthDD" destination="tsp-GI-bzt" id="KNc-xr-0fu"/>
+                        <outlet property="birthMM" destination="WnE-yM-sjh" id="E5O-1P-uwu"/>
+                        <outlet property="isFemale" destination="s4f-IT-re2" id="EBa-VB-05O"/>
+                        <outlet property="joinBtn" destination="UNw-Pc-JTw" id="mIY-Xl-nPE"/>
+                        <outlet property="moreInfo" destination="eXJ-oR-oQd" id="eVc-WT-isF"/>
+                        <outlet property="userName" destination="IyL-Zm-eFY" id="aJ2-sr-P6S"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="49B-0R-jV0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1980" y="138"/>
+            <point key="canvasLocation" x="2212" y="542"/>
         </scene>
         <!--Groups-->
         <scene sceneID="Wgz-eZ-eFt">
@@ -137,7 +141,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wuj-u1-TpF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2453" y="1527"/>
+            <point key="canvasLocation" x="3099" y="1483"/>
         </scene>
         <!--Create New Group-->
         <scene sceneID="mf9-Ak-DuZ">
@@ -160,7 +164,7 @@
             </objects>
             <point key="canvasLocation" x="3890" y="1908"/>
         </scene>
-        <!--Users-->
+        <!--View Controller-->
         <scene sceneID="mhe-sx-5Ha">
             <objects>
                 <viewController id="8UT-LV-nIf" sceneMemberID="viewController">
@@ -176,26 +180,22 @@
                                 <rect key="frame" x="16" y="72" width="568" height="420"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LGn-Ts-i6l">
-                                <rect key="frame" x="16" y="500" width="106" height="30"/>
-                                <state key="normal" title="Invite A Friend">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="x8b-Jh-uJP" secondAttribute="centerX" id="8ry-gz-fQ6"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Users" id="sBF-eA-O4z"/>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="V68-x8-05P">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="ckg-eG-Vr3"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="cTR-Tu-BQO"/>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b1U-mJ-saf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2815" y="845"/>
+            <point key="canvasLocation" x="4277" y="806"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="4Ir-uV-lwa">
@@ -208,13 +208,13 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="8UT-LV-nIf" kind="relationship" relationship="viewControllers" id="f6q-Wr-4qW"/>
+                        <segue destination="BGL-rl-4OU" kind="relationship" relationship="viewControllers" id="f6q-Wr-4qW"/>
                         <segue destination="Mth-2C-syv" kind="relationship" relationship="viewControllers" id="OHS-y8-PoU"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rMr-rM-KrG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1540" y="1014"/>
+            <point key="canvasLocation" x="2837" y="363"/>
         </scene>
         <!--Home-->
         <scene sceneID="tne-QT-ifu">
@@ -229,38 +229,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="welcome.png" translatesAutoresizingMaskIntoConstraints="NO" id="PL0-n8-UX0">
-                                <rect key="frame" x="-6" y="-8" width="600" height="600"/>
+                                <rect key="frame" x="16" y="-8" width="600" height="600"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Cv-86-qEf">
-                                <rect key="frame" x="260" y="471" width="69" height="65"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <state key="normal" title="Join">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d1M-eb-kTt">
+                                <rect key="frame" x="255" y="379" width="91" height="38"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <state key="normal" title="Sign In">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="AHI-30-QSZ" kind="show" id="Xax-lD-vbH"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xIV-qM-AHa">
-                                <rect key="frame" x="219" y="345" width="151" height="48"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="Create New Profile">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="v71-KY-rmW" kind="show" id="E81-0N-7ca"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IcI-Ak-0rY">
-                                <rect key="frame" x="205" y="407" width="191" height="46"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="Update Existing Profile">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="v71-KY-rmW" kind="show" id="fJZ-dR-7o6"/>
+                                    <segue destination="v71-KY-rmW" kind="show" id="Msk-I4-Frp"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H7E-md-DBo">
@@ -275,10 +253,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="IcI-Ak-0rY" secondAttribute="centerX" id="B3J-To-WF1"/>
-                            <constraint firstAttribute="centerX" secondItem="PL0-n8-UX0" secondAttribute="centerX" id="Lkm-JH-jJY"/>
-                            <constraint firstAttribute="centerX" secondItem="xIV-qM-AHa" secondAttribute="centerX" id="Vuc-ii-9fx"/>
-                            <constraint firstAttribute="centerX" secondItem="1Cv-86-qEf" secondAttribute="centerX" id="YSL-aA-3WY"/>
+                            <constraint firstAttribute="centerX" secondItem="PL0-n8-UX0" secondAttribute="centerX" id="3dP-Dw-cWd"/>
+                            <constraint firstAttribute="centerX" secondItem="d1M-eb-kTt" secondAttribute="centerX" id="GeF-kF-OLf"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="Dqj-cK-Vgp"/>
@@ -321,7 +297,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6TA-rx-cnq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1944" y="-253"/>
+            <point key="canvasLocation" x="1843" y="-115"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ivP-5M-guF">
@@ -341,11 +317,27 @@
             </objects>
             <point key="canvasLocation" x="3078" y="1908"/>
         </scene>
+        <!--Users-->
+        <scene sceneID="4ct-om-3c7">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BGL-rl-4OU" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Users" id="sBF-eA-O4z"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AEO-UK-vBt">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8UT-LV-nIf" kind="relationship" relationship="rootViewController" id="dcS-0a-kZq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l8h-nm-APB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3627" y="615"/>
+        </scene>
     </scenes>
     <resources>
         <image name="welcome.png" width="640" height="960"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="E81-0N-7ca"/>
-    </inferredMetricsTieBreakers>
 </document>
