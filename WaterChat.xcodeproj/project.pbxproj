@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC1374521AD85C43000BBBBA /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1374501AD85C43000BBBBA /* CreateProfileViewController.swift */; };
+		DC1374531AD85C43000BBBBA /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1374511AD85C43000BBBBA /* UserProfile.swift */; };
 		DC59B8AC1AD5ABAB001CB2DF /* welcome.png in Resources */ = {isa = PBXBuildFile; fileRef = DC59B8AB1AD5ABAB001CB2DF /* welcome.png */; };
 		DC689E4D1AA0174800FD78FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC689E4C1AA0174800FD78FE /* AppDelegate.swift */; };
 		DC689E4F1AA0174800FD78FE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC689E4E1AA0174800FD78FE /* ViewController.swift */; };
+		DC689E521AA0174800FD78FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC689E501AA0174800FD78FE /* Main.storyboard */; };
 		DC689E541AA0174800FD78FE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC689E531AA0174800FD78FE /* Images.xcassets */; };
 		DC689E571AA0174800FD78FE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC689E551AA0174800FD78FE /* LaunchScreen.xib */; };
 		DC689E631AA0174900FD78FE /* WaterChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC689E621AA0174900FD78FE /* WaterChatTests.swift */; };
@@ -30,17 +33,7 @@
 		DCC3E6191AAA1874008901DB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC3E6181AAA1874008901DB /* Logger.swift */; };
 		DCC3E61C1AAA1E24008901DB /* RouteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC3E61B1AAA1E24008901DB /* RouteManager.swift */; };
 		DCC3E61F1AAA2491008901DB /* MessagePasser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC3E61E1AAA2491008901DB /* MessagePasser.swift */; };
-<<<<<<< HEAD
 		DCC4342B1AD4F6CB00583928 /* BroadcastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC4342A1AD4F6CB00583928 /* BroadcastMessage.swift */; };
-=======
-<<<<<<< HEAD
-=======
-		F40540831AD5A62000C90893 /* welcome.png in Resources */ = {isa = PBXBuildFile; fileRef = F40540821AD5A62000C90893 /* welcome.png */; };
-		F40540851AD5B3A700C90893 /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40540841AD5B3A700C90893 /* CreateProfileViewController.swift */; };
-		F40540871AD5CCB700C90893 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40540861AD5CCB700C90893 /* UserProfile.swift */; };
-		F405408A1AD5E31400C90893 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F40540881AD5E31400C90893 /* Main.storyboard */; };
->>>>>>> b28f167af96333264d6302fb62291a7d0c8fca3e
->>>>>>> ui
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -73,11 +66,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DC1374501AD85C43000BBBBA /* CreateProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateProfileViewController.swift; path = WaterChat/CreateProfileViewController.swift; sourceTree = "<group>"; };
+		DC1374511AD85C43000BBBBA /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserProfile.swift; path = WaterChat/UserProfile.swift; sourceTree = "<group>"; };
 		DC59B8AB1AD5ABAB001CB2DF /* welcome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = welcome.png; path = Asset/welcome.png; sourceTree = SOURCE_ROOT; };
 		DC689E471AA0174800FD78FE /* WaterChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaterChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC689E4B1AA0174800FD78FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC689E4C1AA0174800FD78FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC689E4E1AA0174800FD78FE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DC689E511AA0174800FD78FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DC689E531AA0174800FD78FE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		DC689E561AA0174800FD78FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		DC689E5C1AA0174800FD78FE /* WaterChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WaterChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,17 +96,7 @@
 		DCC3E6181AAA1874008901DB /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		DCC3E61B1AAA1E24008901DB /* RouteManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteManager.swift; sourceTree = "<group>"; };
 		DCC3E61E1AAA2491008901DB /* MessagePasser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagePasser.swift; sourceTree = "<group>"; };
-<<<<<<< HEAD
 		DCC4342A1AD4F6CB00583928 /* BroadcastMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcastMessage.swift; sourceTree = "<group>"; };
-=======
-<<<<<<< HEAD
-=======
-		F40540821AD5A62000C90893 /* welcome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = welcome.png; path = ../../UI/Asset/welcome.png; sourceTree = "<group>"; };
-		F40540841AD5B3A700C90893 /* CreateProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
-		F40540861AD5CCB700C90893 /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
-		F40540891AD5E31400C90893 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
->>>>>>> b28f167af96333264d6302fb62291a7d0c8fca3e
->>>>>>> ui
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +121,8 @@
 		DC689E3E1AA0174800FD78FE = {
 			isa = PBXGroup;
 			children = (
+				DC1374501AD85C43000BBBBA /* CreateProfileViewController.swift */,
+				DC1374511AD85C43000BBBBA /* UserProfile.swift */,
 				DC689E6C1AA01B8C00FD78FE /* MultipeerConnectivity.framework */,
 				DC689E491AA0174800FD78FE /* WaterChat */,
 				DC689E5F1AA0174900FD78FE /* WaterChatTests */,
@@ -159,11 +147,9 @@
 				DCC3E6171AAA1861008901DB /* Utility */,
 				DCC3E60E1AA96A4B008901DB /* DataType */,
 				DC689E4C1AA0174800FD78FE /* AppDelegate.swift */,
-				F40540881AD5E31400C90893 /* Main.storyboard */,
 				DCC3E6151AAA11B7008901DB /* Config.swift */,
 				DC689E4E1AA0174800FD78FE /* ViewController.swift */,
-				F40540861AD5CCB700C90893 /* UserProfile.swift */,
-				F40540841AD5B3A700C90893 /* CreateProfileViewController.swift */,
+				DC689E501AA0174800FD78FE /* Main.storyboard */,
 				DC689E531AA0174800FD78FE /* Images.xcassets */,
 				DC689E551AA0174800FD78FE /* LaunchScreen.xib */,
 				DC689E4A1AA0174800FD78FE /* Supporting Files */,
@@ -324,14 +310,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-<<<<<<< HEAD
 				DC689E521AA0174800FD78FE /* Main.storyboard in Resources */,
 				DC59B8AC1AD5ABAB001CB2DF /* welcome.png in Resources */,
-=======
->>>>>>> b28f167af96333264d6302fb62291a7d0c8fca3e
 				DC689E571AA0174800FD78FE /* LaunchScreen.xib in Resources */,
 				DC689E541AA0174800FD78FE /* Images.xcassets in Resources */,
-				F405408A1AD5E31400C90893 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,21 +333,21 @@
 			files = (
 				DC689E4F1AA0174800FD78FE /* ViewController.swift in Sources */,
 				DCA7485C1AB6A2CB00A7430C /* Util.swift in Sources */,
+				DC1374531AD85C43000BBBBA /* UserProfile.swift in Sources */,
 				DCC032D71AACC37C00CE28FF /* RouteRequest.swift in Sources */,
 				DCC4342B1AD4F6CB00583928 /* BroadcastMessage.swift in Sources */,
 				DCC3E6121AA96DA3008901DB /* MIME.swift in Sources */,
 				DCC3E61F1AAA2491008901DB /* MessagePasser.swift in Sources */,
 				DCC3E61C1AAA1E24008901DB /* RouteManager.swift in Sources */,
 				DCC032DA1AACD72A00CE28FF /* TableEntry.swift in Sources */,
+				DC1374521AD85C43000BBBBA /* CreateProfileViewController.swift in Sources */,
 				DCA748521AADF71C00A7430C /* AODVConfig.swift in Sources */,
 				DCA748561AAF728100A7430C /* RawMessage.swift in Sources */,
 				DC689E4D1AA0174800FD78FE /* AppDelegate.swift in Sources */,
 				DCA748541AAF6EB600A7430C /* CommunicationBuffer.swift in Sources */,
 				DCC3E6191AAA1874008901DB /* Logger.swift in Sources */,
-				F40540871AD5CCB700C90893 /* UserProfile.swift in Sources */,
 				DCC032D31AACC24300CE28FF /* MessageType.swift in Sources */,
 				DCA7485A1AB4B88A00A7430C /* RouteReply.swift in Sources */,
-				F40540851AD5B3A700C90893 /* CreateProfileViewController.swift in Sources */,
 				DCC032D51AACC2A000CE28FF /* Message.swift in Sources */,
 				DCC3E6101AA96A68008901DB /* User.swift in Sources */,
 				DCC3E6161AAA11B7008901DB /* Config.swift in Sources */,
@@ -392,20 +374,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		DC689E501AA0174800FD78FE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC689E511AA0174800FD78FE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		DC689E551AA0174800FD78FE /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				DC689E561AA0174800FD78FE /* Base */,
 			);
 			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-		F40540881AD5E31400C90893 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F40540891AD5E31400C90893 /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
