@@ -33,6 +33,7 @@
 		F40540851AD5B3A700C90893 /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40540841AD5B3A700C90893 /* CreateProfileViewController.swift */; };
 		F40540871AD5CCB700C90893 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40540861AD5CCB700C90893 /* UserProfile.swift */; };
 		F405408A1AD5E31400C90893 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F40540881AD5E31400C90893 /* Main.storyboard */; };
+		F4F82F041AD85FA2003F58B7 /* UserGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F82F031AD85FA2003F58B7 /* UserGroupViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -95,6 +96,7 @@
 		F40540841AD5B3A700C90893 /* CreateProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
 		F40540861AD5CCB700C90893 /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		F40540891AD5E31400C90893 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F4F82F031AD85FA2003F58B7 /* UserGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserGroupViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +149,7 @@
 				DCC3E6151AAA11B7008901DB /* Config.swift */,
 				DC689E4E1AA0174800FD78FE /* ViewController.swift */,
 				F40540861AD5CCB700C90893 /* UserProfile.swift */,
+				F4F82F031AD85FA2003F58B7 /* UserGroupViewController.swift */,
 				F40540841AD5B3A700C90893 /* CreateProfileViewController.swift */,
 				DC689E531AA0174800FD78FE /* Images.xcassets */,
 				DC689E551AA0174800FD78FE /* LaunchScreen.xib */,
@@ -344,6 +347,7 @@
 				DCC032D31AACC24300CE28FF /* MessageType.swift in Sources */,
 				DCA7485A1AB4B88A00A7430C /* RouteReply.swift in Sources */,
 				F40540851AD5B3A700C90893 /* CreateProfileViewController.swift in Sources */,
+				F4F82F041AD85FA2003F58B7 /* UserGroupViewController.swift in Sources */,
 				DCC032D51AACC2A000CE28FF /* Message.swift in Sources */,
 				DCC3E6101AA96A68008901DB /* User.swift in Sources */,
 				DCC3E6161AAA11B7008901DB /* Config.swift in Sources */,

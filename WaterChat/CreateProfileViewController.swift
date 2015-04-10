@@ -53,8 +53,12 @@ class CreateProfileViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        if (sender != self.joinBtn) return;
+        //if (sender != self.joinBtn) return
         readData()
+        //self.profile.userName = "Ding"
+        println("hello segue")
+        var svc = segue.destinationViewController as UserGroupViewController;
+        svc.profile = self.profile
     }
     
 

@@ -97,6 +97,7 @@ MCNearbyServiceAdvertiserDelegate, MCSessionDelegate {
         println("finish")
         
     }
+
     
     /*
     func browserViewControllerDidFinish(

@@ -80,23 +80,26 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Profile" id="0oE-zr-hJ9">
-                        <barButtonItem key="rightBarButtonItem" title="Join" style="done" id="UNw-Pc-JTw"/>
+                        <barButtonItem key="rightBarButtonItem" title="Join" style="done" id="uwk-dX-vjl">
+                            <connections>
+                                <segue destination="AHI-30-QSZ" kind="showDetail" id="ctz-dH-6R4"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="birthDD" destination="tsp-GI-bzt" id="KNc-xr-0fu"/>
                         <outlet property="birthMM" destination="WnE-yM-sjh" id="E5O-1P-uwu"/>
                         <outlet property="isFemale" destination="s4f-IT-re2" id="EBa-VB-05O"/>
-                        <outlet property="joinBtn" destination="UNw-Pc-JTw" id="mIY-Xl-nPE"/>
                         <outlet property="moreInfo" destination="eXJ-oR-oQd" id="eVc-WT-isF"/>
                         <outlet property="userName" destination="IyL-Zm-eFY" id="aJ2-sr-P6S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="49B-0R-jV0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2212" y="542"/>
+            <point key="canvasLocation" x="2124" y="712"/>
         </scene>
-        <!--Groups-->
+        <!--View Controller-->
         <scene sceneID="Wgz-eZ-eFt">
             <objects>
                 <viewController id="Mth-2C-syv" sceneMemberID="viewController">
@@ -118,30 +121,23 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Oj-G0-2cZ">
-                                <rect key="frame" x="16" y="500" width="136" height="30"/>
-                                <state key="normal" title="Create New Group">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="gWb-d3-Bew" kind="show" id="hhV-NG-wo8"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="4cv-Qw-VeZ" secondAttribute="centerX" id="YJT-Ut-aFc"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Groups" id="utv-KR-TZC"/>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="xnD-XG-dex">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="Faw-fM-YCp"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="w80-fG-Evc"/>
+                    </navigationItem>
                     <keyCommands/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wuj-u1-TpF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3099" y="1483"/>
+            <point key="canvasLocation" x="5535" y="1483"/>
         </scene>
         <!--Create New Group-->
         <scene sceneID="mf9-Ak-DuZ">
@@ -162,7 +158,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WmO-fU-cpN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3890" y="1908"/>
+            <point key="canvasLocation" x="6542" y="1906"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="mhe-sx-5Ha">
@@ -195,12 +191,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b1U-mJ-saf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4277" y="806"/>
+            <point key="canvasLocation" x="5901" y="806"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--User Group View Controller-->
         <scene sceneID="4Ir-uV-lwa">
             <objects>
-                <tabBarController id="AHI-30-QSZ" sceneMemberID="viewController">
+                <tabBarController id="AHI-30-QSZ" customClass="UserGroupViewController" customModule="WaterChat" customModuleProvider="target" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="gH0-qg-cZH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -209,12 +205,12 @@
                     </tabBar>
                     <connections>
                         <segue destination="BGL-rl-4OU" kind="relationship" relationship="viewControllers" id="f6q-Wr-4qW"/>
-                        <segue destination="Mth-2C-syv" kind="relationship" relationship="viewControllers" id="OHS-y8-PoU"/>
+                        <segue destination="GSV-W8-FUd" kind="relationship" relationship="viewControllers" id="OHS-y8-PoU"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rMr-rM-KrG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2837" y="363"/>
+            <point key="canvasLocation" x="2826" y="521"/>
         </scene>
         <!--Home-->
         <scene sceneID="tne-QT-ifu">
@@ -306,7 +302,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aoS-35-9rY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3078" y="1908"/>
+            <point key="canvasLocation" x="4642" y="2061"/>
         </scene>
         <!--Users-->
         <scene sceneID="4ct-om-3c7">
@@ -325,7 +321,26 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l8h-nm-APB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3627" y="615"/>
+            <point key="canvasLocation" x="3949" y="512"/>
+        </scene>
+        <!--Groups-->
+        <scene sceneID="RFK-vA-AfC">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GSV-W8-FUd" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Groups" id="utv-KR-TZC"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ce1-70-1tg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Mth-2C-syv" kind="relationship" relationship="rootViewController" id="ePI-Qh-I6X"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eWN-qd-4Hi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4723" y="1483"/>
         </scene>
     </scenes>
     <resources>
