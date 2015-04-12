@@ -8,8 +8,8 @@
 
 import UIKit
 
-class UserProfile: NSObject {
-    
+class UserProfile: NSData {
+    var type = MessageType.USER
     var userName = String()
     var isFemale = false
     var birthDate = String()

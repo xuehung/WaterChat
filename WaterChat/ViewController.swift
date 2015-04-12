@@ -25,7 +25,24 @@ class ViewController: UIViewController {
         var mp = MessagePasser.getInstance(Config.address)
         var rr = RoomRequest()
         rr.groupName = "hi"
-        mp.broadcast(rr)
+        
+        //testing json stuff
+//        var user = UserProfile()
+//        user.userName = "btagani"
+//        user.birthDate = "7/22/91"
+//        user.type = MessageType.USER
+//        user.moreInfo = "hello"
+//        user.isFemale = false
+//        var error: NSError?;
+//        var response: AnyObject? = NSJSONSerialization.JSONObjectWithData(user, options: NSJSONReadingOptions(), error: &error);
+//        println("TEST")
+//        if let personDictionary = response as? NSDictionary {
+//            //            username = personDictionary["userName"] as? String;
+//            //            birth = personDictionary["birthDate"] as? String;
+//            println(personDictionary["userName"])
+//            println(personDictionary["birthDate"])
+//        }
+
         
     }
 }
