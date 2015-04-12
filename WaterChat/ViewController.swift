@@ -32,6 +32,5 @@ class ViewController: UIViewController {
             var xx = x as RoomRequest
             println(xx.name)
         }
-        
     }
 }

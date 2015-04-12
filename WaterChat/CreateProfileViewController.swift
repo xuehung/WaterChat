@@ -17,7 +17,7 @@ class CreateProfileViewController: UIViewController {
     
     @IBOutlet weak var birthDD: UITextField!
     
-    @IBOutlet weak var moreInfo: UITextView!
+    @IBOutlet weak var moreInfo: UITextField!
     
     @IBOutlet weak var joinBtn: UIBarButtonItem!
     
@@ -53,7 +53,12 @@ class CreateProfileViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        //if (sender != self.joinBtn) return
         readData()
+        //self.profile.userName = "Ding"
+        println("hello segue")
+        var svc = segue.destinationViewController as UserGroupViewController;
+        svc.profile = self.profile
     }
     
 
