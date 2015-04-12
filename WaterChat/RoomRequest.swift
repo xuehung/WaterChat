@@ -62,7 +62,7 @@ class RoomRequest: Message {
     
     // Get the Room Request message to initialize the Room() structure
     override init(bytes data: NSData) {
-        
+        println("room init");
         var roomInfo = Room()
         
         self.members = roomInfo.groupMemberList
@@ -74,8 +74,10 @@ class RoomRequest: Message {
         
         var nameBytes = [UInt8](count: SIZE, repeatedValue: 0)
         data.getBytes(&nameBytes, range: NSMakeRange(8, 8))
+        println("parse name")
         self.name = NSString(bytes: nameBytes,length: 8, encoding: NSUTF8StringEncoding)!
         
+        println(self.name)
         var content:[Byte] = Util.toByteArray(data)
         println("The content of the received message is: \(content)")
         for member in members {
@@ -93,7 +95,7 @@ class RoomRequest: Message {
         array[2] = self.curNum
         array[3] = self.maxNum
         var group = [UInt8](self.name.utf8)
-        var i = 0
+        var i = 8
         for namepart in group {
             array[i] = namepart
             i += 1

@@ -25,8 +25,11 @@ class Message {
         // type is a byte
         */
         //var type = array[0]
+        
         var type: UInt8 = 0
         data.getBytes(&type, range: NSMakeRange(0, 1))
+        
+        Logger.log("Message Factory \(type)")
         
         switch type {
         case MessageType.BROADCAST.rawValue:
@@ -38,6 +41,7 @@ class Message {
             msg.type = MessageType.RREQ
             return msg
         case MessageType.ROOMREQ.rawValue:
+            println("parse message roomreq");
             var msg = RoomRequest(bytes: data)
             msg.type = MessageType.ROOMREQ
             return msg

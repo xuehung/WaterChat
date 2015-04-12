@@ -23,10 +23,15 @@ class ViewController: UIViewController {
         // run this code when user presses test button
         println("hello it is test")
         var mp = MessagePasser.getInstance(Config.address)
-        var rr = RoomRequest()
-        rr.groupName = "hi"
-        rr.groupID = 45
-        mp.broadcast(rr)
+        var x = mp.receive()
+        if x is RoomRequest {
+            var xx = x as RoomRequest
+            println(xx.name)
+        } else {
+            println("fail")
+            var xx = x as RoomRequest
+            println(xx.name)
+        }
         
     }
 }
