@@ -47,11 +47,12 @@ class BroadcastJSONMessage: Message {
         Logger.log("Parse JSON")
         // Parse Json
         var error: NSError?
-        let maybeObj: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &error)
+        let maybeObj: AnyObject? = NSJSONSerialization.JSONObjectWithData(messageBody, options: nil, error: &error)
         
         if let obj: AnyObject = maybeObj {
             if let dict = obj as? NSDictionary {
                 self.dictionary = dict
+                Logger.error("Got NSDictionary")
             } else {
                 Logger.error("Fail to as NSDictionary")
             }
