@@ -11,7 +11,7 @@ import UIKit
 class UserProfile: NSObject {
     
     var userName = String()
-    var isFemale = false
+    //var isFemale = false
     var birthDate = String()
     var moreInfo = String()
    

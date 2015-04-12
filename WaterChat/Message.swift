@@ -27,11 +27,16 @@ class Message {
         //var type = array[0]
         var type: UInt8 = 0
         data.getBytes(&type, range: NSMakeRange(0, 1))
+        Logger.log("Mesage Factory: \(type)")
         
         switch type {
         case MessageType.BROADCAST.rawValue:
             var msg = BroadcastMessage(bytes: data)
             msg.type = MessageType.BROADCAST
+            return msg
+        case MessageType.BROADCASTJSON.rawValue:
+            var msg = BroadcastJSONMessage(bytes: data)
+            msg.type = MessageType.BROADCASTJSON
             return msg
         case MessageType.RREQ.rawValue:
             var msg = RouteRequest(bytes: data)

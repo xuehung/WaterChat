@@ -20,6 +20,7 @@
 		DC689E571AA0174800FD78FE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC689E551AA0174800FD78FE /* LaunchScreen.xib */; };
 		DC689E631AA0174900FD78FE /* WaterChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC689E621AA0174900FD78FE /* WaterChatTests.swift */; };
 		DC689E6D1AA01B8C00FD78FE /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC689E6C1AA01B8C00FD78FE /* MultipeerConnectivity.framework */; };
+		DC8067581ADB084C00C39546 /* NewUserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8067571ADB084C00C39546 /* NewUserProfile.swift */; };
 		DCA748521AADF71C00A7430C /* AODVConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA748511AADF71C00A7430C /* AODVConfig.swift */; };
 		DCA748541AAF6EB600A7430C /* CommunicationBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA748531AAF6EB600A7430C /* CommunicationBuffer.swift */; };
 		DCA748561AAF728100A7430C /* RawMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA748551AAF728100A7430C /* RawMessage.swift */; };
@@ -88,6 +89,7 @@
 		DC689E611AA0174900FD78FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC689E621AA0174900FD78FE /* WaterChatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterChatTests.swift; sourceTree = "<group>"; };
 		DC689E6C1AA01B8C00FD78FE /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
+		DC8067571ADB084C00C39546 /* NewUserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewUserProfile.swift; sourceTree = "<group>"; };
 		DCA748511AADF71C00A7430C /* AODVConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AODVConfig.swift; sourceTree = "<group>"; };
 		DCA748531AAF6EB600A7430C /* CommunicationBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunicationBuffer.swift; sourceTree = "<group>"; };
 		DCA748551AAF728100A7430C /* RawMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawMessage.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				963469BB1AD8645B00961722 /* RoomRequest.swift */,
 				DC1374501AD85C43000BBBBA /* CreateProfileViewController.swift */,
 				DC1374511AD85C43000BBBBA /* UserProfile.swift */,
+				DC8067571ADB084C00C39546 /* NewUserProfile.swift */,
 				DC689E6C1AA01B8C00FD78FE /* MultipeerConnectivity.framework */,
 				DC689E491AA0174800FD78FE /* WaterChat */,
 				DC689E5F1AA0174900FD78FE /* WaterChatTests */,
@@ -362,6 +365,7 @@
 				DC689E4D1AA0174800FD78FE /* AppDelegate.swift in Sources */,
 				DCA748541AAF6EB600A7430C /* CommunicationBuffer.swift in Sources */,
 				DCC3E6191AAA1874008901DB /* Logger.swift in Sources */,
+				DC8067581ADB084C00C39546 /* NewUserProfile.swift in Sources */,
 				DCC032D31AACC24300CE28FF /* MessageType.swift in Sources */,
 				DCA7485A1AB4B88A00A7430C /* RouteReply.swift in Sources */,
 				963469BE1AD8645B00961722 /* RoomRequest.swift in Sources */,

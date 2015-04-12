@@ -9,5 +9,9 @@
 import Foundation
 
 class JSONMessage: Message {
-    
+    var dict: NSDictionary!
+    init(dict: NSDictionary) {
+        self.dict = dict
+        super.init()
+    }
 }

@@ -16,15 +16,14 @@ class BroadcastJSONMessage: Message {
     
     var broadcastSeqNum: UInt32 = 0
     var srcMacAddr: UInt64 = 0
-    var message: JSONMessage!
+    var dictionary: NSDictionary!
     
     
     override init() {
         super.init()
     }
     
-    init(message: JSONMessage, seqNum: UInt32, srcMacAddr: UInt64) {
-        self.message = message
+    init(message: NSDictionary, seqNum: UInt32, srcMacAddr: UInt64) {
         self.broadcastSeqNum = seqNum
         self.srcMacAddr = srcMacAddr
         
@@ -32,6 +31,7 @@ class BroadcastJSONMessage: Message {
             Util.toByteArray(self.broadcastSeqNum) +
             Util.toByteArray(self.srcMacAddr)
         
+        Logger.log("can covert? \(NSJSONSerialization.isValidJSONObject(message))")
         var bytes: NSData = NSJSONSerialization.dataWithJSONObject(message, options: nil, error: nil)!
         
         var nsData = NSMutableData()
@@ -44,17 +44,29 @@ class BroadcastJSONMessage: Message {
         data.getBytes(&self.broadcastSeqNum, range: NSMakeRange(1, 4))
         data.getBytes(&self.srcMacAddr, range: NSMakeRange(5, 8))
         var messageBody: NSData = data.subdataWithRange(NSMakeRange(13, data.length - 13))
+        Logger.log("Parse JSON")
+        // Parse Json
+        var error: NSError?
+        let maybeObj: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &error)
         
-        //self.message = Message.messageFactory(messageBody)
-        
+        if let obj: AnyObject = maybeObj {
+            if let dict = obj as? NSDictionary {
+                self.dictionary = dict
+            } else {
+                Logger.error("Fail to as NSDictionary")
+            }
+        } else {
+            Logger.error("Not an object")
+        }        
         super.init(bytes: data)
     }
     
     override func serialize() -> NSData {
         return self.data
     }
-   
-    func getInnerJSONMessage() -> JSONMessage {
-        return self.message
+    
+    func getDict() -> NSDictionary {
+        return self.dictionary
     }
+   
 }

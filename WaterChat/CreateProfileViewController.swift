@@ -35,7 +35,11 @@ class CreateProfileViewController: UIViewController {
     
     func readData(){
         self.profile.userName = self.userName.text
-        self.profile.isFemale = self.isFemale.isEnabledForSegmentAtIndex(0)
+        
+        
+        
+        
+        //self.profile.isFemale = self.isFemale.isEnabledForSegmentAtIndex(0)
         self.profile.birthDate = self.birthMM.text+self.birthDD.text
         self.profile.moreInfo = self.moreInfo.text
     }
