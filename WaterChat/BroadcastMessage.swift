@@ -50,7 +50,7 @@ class BroadcastMessage: Message {
         return self.data
     }
     
-    func getMessageData() -> NSData {
+    func getMessageDataxx() -> NSData {
         return message.serialize()
     }
     

@@ -108,13 +108,15 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
     // reveive
     func session(session: MCSession!, didReceiveData data: NSData!,
         fromPeer peerID: MCPeerID!)  {
-            Logger.log("Got data from \(peerID)")
+            Logger.log("Got data from \(peerID.description)")
             
             // This needs to run on the main queue
             dispatch_async(dispatch_get_main_queue()) {
                 
                 var message = Message.messageFactory(data)
                 var fromAddr = Util.convertDisplayNameToMacAddr(peerID.displayName)
+                
+                Logger.log("Message Type = \(message.type)")
                 
                 
                 switch message.type {
@@ -147,6 +149,30 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
                         self.cb.broadcast(bmsg.serialize())
                     }
                     break
+                case MessageType.BROADCASTJSON:
+                    var bmsg = message as BroadcastJSONMessage
+                    if( bmsg.srcMacAddr == Config.address) {
+                        break
+                    }
+                    if let seqNum = self.broadcastSeqDict[bmsg.srcMacAddr] {
+                        println("seqNum = \(seqNum)")
+                        // the second condition is designed for smaller
+                        // broadcast seqNum when device restarts
+                        if ((bmsg.broadcastSeqNum <= self.broadcastSeqNum &&
+                            bmsg.broadcastSeqNum > self.broadcastSeqNum - 10)) {
+                                println("stop")
+                                break
+                        }
+                    }
+                    self.broadcastSeqDict[bmsg.srcMacAddr] = bmsg.broadcastSeqNum
+                    var jmsg = JSONMessage(dict: bmsg.getDict())
+                    Logger.log("put jmsg into buffer")
+                    self.cb.addToIncomingBuffer(jmsg)
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.cb.broadcast(bmsg.serialize())
+                    }
+                    break
+
                 default:
                     self.cb.addToIncomingBuffer(message)
                     break
@@ -190,9 +216,30 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
     }
     
     func broadcast(message: Message) {
+        Logger.log("Broadcast")
         dispatch_async(dispatch_get_main_queue()) {
             self.broadcastSeqNum++
             var bmsg = BroadcastMessage(message: message, seqNum: self.broadcastSeqNum, srcMacAddr: self.addr)
+            self.cb.broadcast(bmsg.serialize())
+        }
+    }
+    
+    /*
+    func broadcast(message: JSONMessage) {
+        Logger.log("Broadcast JSON Message")
+        dispatch_async(dispatch_get_main_queue()) {
+            self.broadcastSeqNum++
+            var bmsg = BroadcastJSONMessage(message: message, seqNum: self.broadcastSeqNum, srcMacAddr: self.addr)
+            self.cb.broadcast(bmsg.serialize())
+        }
+    }
+    */
+    
+    func broadcast(message: NSDictionary) {
+        Logger.log("Broadcast JSON Message")
+        dispatch_async(dispatch_get_main_queue()) {
+            self.broadcastSeqNum++
+            var bmsg = BroadcastJSONMessage(message: message, seqNum: self.broadcastSeqNum, srcMacAddr: self.addr)
             self.cb.broadcast(bmsg.serialize())
         }
     }
