@@ -25,6 +25,7 @@ class ViewController: UIViewController {
         var mp = MessagePasser.getInstance(Config.address)
         var rr = RoomRequest()
         rr.groupName = "hi"
+        rr.groupID = 45
         mp.broadcast(rr)
         
     }
