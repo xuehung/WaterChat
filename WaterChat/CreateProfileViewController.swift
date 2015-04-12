@@ -17,7 +17,7 @@ class CreateProfileViewController: UIViewController {
     
     @IBOutlet weak var birthDD: UITextField!
     
-    @IBOutlet weak var moreInfo: UITextView!
+    @IBOutlet weak var moreInfo: UITextField!
     
     @IBOutlet weak var joinBtn: UIBarButtonItem!
     

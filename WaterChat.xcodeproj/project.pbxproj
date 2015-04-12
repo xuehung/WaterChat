@@ -33,6 +33,9 @@
 		F40540851AD5B3A700C90893 /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40540841AD5B3A700C90893 /* CreateProfileViewController.swift */; };
 		F40540871AD5CCB700C90893 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40540861AD5CCB700C90893 /* UserProfile.swift */; };
 		F405408A1AD5E31400C90893 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F40540881AD5E31400C90893 /* Main.storyboard */; };
+		F4B3E56D1ADACBDF0095162C /* CreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B3E56C1ADACBDF0095162C /* CreateGroupViewController.swift */; };
+		F4B3E56F1ADACC6C0095162C /* ChatGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B3E56E1ADACC6C0095162C /* ChatGroup.swift */; };
+		F4B3E5711ADAD88A0095162C /* google_contacts.png in Resources */ = {isa = PBXBuildFile; fileRef = F4B3E5701ADAD88A0095162C /* google_contacts.png */; };
 		F4F82F041AD85FA2003F58B7 /* UserGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F82F031AD85FA2003F58B7 /* UserGroupViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +99,9 @@
 		F40540841AD5B3A700C90893 /* CreateProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
 		F40540861AD5CCB700C90893 /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		F40540891AD5E31400C90893 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F4B3E56C1ADACBDF0095162C /* CreateGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupViewController.swift; sourceTree = "<group>"; };
+		F4B3E56E1ADACC6C0095162C /* ChatGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatGroup.swift; sourceTree = "<group>"; };
+		F4B3E5701ADAD88A0095162C /* google_contacts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = google_contacts.png; path = Asset/google_contacts.png; sourceTree = SOURCE_ROOT; };
 		F4F82F031AD85FA2003F58B7 /* UserGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserGroupViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -146,7 +152,9 @@
 				DCC3E60E1AA96A4B008901DB /* DataType */,
 				DC689E4C1AA0174800FD78FE /* AppDelegate.swift */,
 				F40540881AD5E31400C90893 /* Main.storyboard */,
+				F4B3E56C1ADACBDF0095162C /* CreateGroupViewController.swift */,
 				DCC3E6151AAA11B7008901DB /* Config.swift */,
+				F4B3E56E1ADACC6C0095162C /* ChatGroup.swift */,
 				DC689E4E1AA0174800FD78FE /* ViewController.swift */,
 				F40540861AD5CCB700C90893 /* UserProfile.swift */,
 				F4F82F031AD85FA2003F58B7 /* UserGroupViewController.swift */,
@@ -161,6 +169,7 @@
 		DC689E4A1AA0174800FD78FE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F4B3E5701ADAD88A0095162C /* google_contacts.png */,
 				F40540821AD5A62000C90893 /* welcome.png */,
 				DC689E4B1AA0174800FD78FE /* Info.plist */,
 			);
@@ -310,6 +319,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4B3E5711ADAD88A0095162C /* google_contacts.png in Resources */,
 				DC689E571AA0174800FD78FE /* LaunchScreen.xib in Resources */,
 				F40540831AD5A62000C90893 /* welcome.png in Resources */,
 				DC689E541AA0174800FD78FE /* Images.xcassets in Resources */,
@@ -339,6 +349,7 @@
 				DCC3E61C1AAA1E24008901DB /* RouteManager.swift in Sources */,
 				DCC032DA1AACD72A00CE28FF /* TableEntry.swift in Sources */,
 				DCA748521AADF71C00A7430C /* AODVConfig.swift in Sources */,
+				F4B3E56D1ADACBDF0095162C /* CreateGroupViewController.swift in Sources */,
 				DCA748561AAF728100A7430C /* RawMessage.swift in Sources */,
 				DC689E4D1AA0174800FD78FE /* AppDelegate.swift in Sources */,
 				DCA748541AAF6EB600A7430C /* CommunicationBuffer.swift in Sources */,
@@ -348,6 +359,7 @@
 				DCA7485A1AB4B88A00A7430C /* RouteReply.swift in Sources */,
 				F40540851AD5B3A700C90893 /* CreateProfileViewController.swift in Sources */,
 				F4F82F041AD85FA2003F58B7 /* UserGroupViewController.swift in Sources */,
+				F4B3E56F1ADACC6C0095162C /* ChatGroup.swift in Sources */,
 				DCC032D51AACC2A000CE28FF /* Message.swift in Sources */,
 				DCC3E6101AA96A68008901DB /* User.swift in Sources */,
 				DCC3E6161AAA11B7008901DB /* Config.swift in Sources */,
