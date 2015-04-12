@@ -197,6 +197,14 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
         }
     }
     
+    func broadcast(message: JSONMessage) {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.broadcastSeqNum++
+            var bmsg = BroadcastMessage(message: message, seqNum: self.broadcastSeqNum, srcMacAddr: self.addr)
+            self.cb.broadcast(bmsg.serialize())
+        }
+    }
+    
     // called by the application
     func receive() -> Message {
         return self.cb.takeOneFromIncomingBuffer()

@@ -37,6 +37,8 @@
 		DCC3E61C1AAA1E24008901DB /* RouteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC3E61B1AAA1E24008901DB /* RouteManager.swift */; };
 		DCC3E61F1AAA2491008901DB /* MessagePasser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC3E61E1AAA2491008901DB /* MessagePasser.swift */; };
 		DCC4342B1AD4F6CB00583928 /* BroadcastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC4342A1AD4F6CB00583928 /* BroadcastMessage.swift */; };
+		DCE4CF811ADAD26000F06C4F /* JSONMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE4CF801ADAD26000F06C4F /* JSONMessage.swift */; };
+		DCE4CF831ADAD69200F06C4F /* BroadcastJSONMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE4CF821ADAD69200F06C4F /* BroadcastJSONMessage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -103,6 +105,8 @@
 		DCC3E61B1AAA1E24008901DB /* RouteManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteManager.swift; sourceTree = "<group>"; };
 		DCC3E61E1AAA2491008901DB /* MessagePasser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagePasser.swift; sourceTree = "<group>"; };
 		DCC4342A1AD4F6CB00583928 /* BroadcastMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcastMessage.swift; sourceTree = "<group>"; };
+		DCE4CF801ADAD26000F06C4F /* JSONMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONMessage.swift; sourceTree = "<group>"; };
+		DCE4CF821ADAD69200F06C4F /* BroadcastJSONMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcastJSONMessage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				963469B91AD8645B00961722 /* Room.swift */,
+				DCE4CF801ADAD26000F06C4F /* JSONMessage.swift */,
 				963469BA1AD8645B00961722 /* RoomManager.swift */,
 				963469BB1AD8645B00961722 /* RoomRequest.swift */,
 				DC1374501AD85C43000BBBBA /* CreateProfileViewController.swift */,
@@ -213,6 +218,7 @@
 				DCC032D21AACC24300CE28FF /* MessageType.swift */,
 				DCC032D41AACC2A000CE28FF /* Message.swift */,
 				DCC4342A1AD4F6CB00583928 /* BroadcastMessage.swift */,
+				DCE4CF821ADAD69200F06C4F /* BroadcastJSONMessage.swift */,
 			);
 			name = DataType;
 			sourceTree = "<group>";
@@ -361,6 +367,8 @@
 				963469BE1AD8645B00961722 /* RoomRequest.swift in Sources */,
 				DCC032D51AACC2A000CE28FF /* Message.swift in Sources */,
 				DCC3E6101AA96A68008901DB /* User.swift in Sources */,
+				DCE4CF831ADAD69200F06C4F /* BroadcastJSONMessage.swift in Sources */,
+				DCE4CF811ADAD26000F06C4F /* JSONMessage.swift in Sources */,
 				DCC3E6161AAA11B7008901DB /* Config.swift in Sources */,
 				963469BD1AD8645B00961722 /* RoomManager.swift in Sources */,
 				DCA748581AAFF56900A7430C /* RouteStatus.swift in Sources */,
