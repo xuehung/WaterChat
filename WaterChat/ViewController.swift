@@ -34,14 +34,24 @@ class ViewController: UIViewController {
         //println(NSJSONSerialization.isValidJSONObject(u));
 
 
-        var name: NSString = "Bill Nace"
-        var type = NSNumber(unsignedChar: MessageType.USRPROFILE.rawValue)
-
-        var mdict = NSMutableDictionary()
-
-        mdict.setObject(type, forKey: "type")
-        mdict.setObject(name, forKey: "name")
-        println(NSJSONSerialization.isValidJSONObject(mdict));
-        mp.broadcast(mdict)
+//        var name: NSString = "Bill Nace"
+//        var type = NSNumber(unsignedChar: MessageType.USRPROFILE.rawValue)
+//
+//        var mdict = NSMutableDictionary()
+//
+//        mdict.setObject(type, forKey: "type")
+//        mdict.setObject(name, forKey: "name")
+//        println(NSJSONSerialization.isValidJSONObject(mdict));
+//        mp.broadcast(mdict)
+        
+        var x = mp.receive()
+        if (x is JSONMessage) {
+            println("is json msg")
+            var xx = x as JSONMessage
+            println(xx.dict["name"])
+            }
+        else {
+            println("is not json msg")
+            }
     }
 }
