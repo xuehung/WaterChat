@@ -23,6 +23,7 @@ class ViewController: UIViewController {
         // run this code when user presses test button
         println("hello it is test")
         var mp = MessagePasser.getInstance(Config.address)
+        /*
         var x = mp.receive()
         if x is RoomRequest {
             var xx = x as RoomRequest
@@ -31,6 +32,6 @@ class ViewController: UIViewController {
             println("fail")
             var xx = x as RoomRequest
             println(xx.name)
-        }
+        }*/
     }
 }
