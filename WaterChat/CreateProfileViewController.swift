@@ -23,7 +23,7 @@ class CreateProfileViewController: UIViewController {
     
     
     var profile = UserProfile()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -34,12 +34,21 @@ class CreateProfileViewController: UIViewController {
     }
     
     func readData(){
+
+        var stringGender: NSString
+        if (self.isFemale.isEnabledForSegmentAtIndex(0)){
+            stringGender = "female"
+        }
+        else {
+            stringGender = "male"
+        }
+        var user = User(name: self.userName.text, gender: stringGender, birthDate: self.birthMM.text+self.birthDD.text, moreInfo: self.moreInfo.text)
+        UserManager.setCurrentUser(user)
+        
+        //user object ready for broadcast
+        
         self.profile.userName = self.userName.text
-        
-        
-        
-        
-        //self.profile.isFemale = self.isFemale.isEnabledForSegmentAtIndex(0)
+        self.profile.isFemale = self.isFemale.isEnabledForSegmentAtIndex(0)
         self.profile.birthDate = self.birthMM.text+self.birthDD.text
         self.profile.moreInfo = self.moreInfo.text
     }

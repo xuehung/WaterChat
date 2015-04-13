@@ -23,35 +23,32 @@ class ViewController: UIViewController {
         // run this code when user presses test button
         println("hello it is test")
         var mp = MessagePasser.getInstance(Config.address)
-        /*
-        var rr = RoomRequest()
-        //rr.groupName = "hi"
-        rr.groupID = 45
-        mp.broadcast(rr)
-        */
-        //println(NSJSONSerialization.isValidJSONObject(dict));
 
-        //println(NSJSONSerialization.isValidJSONObject(u));
-
-
-//        var name: NSString = "Bill Nace"
-//        var type = NSNumber(unsignedChar: MessageType.USRPROFILE.rawValue)
-//
-//        var mdict = NSMutableDictionary()
-//
-//        mdict.setObject(type, forKey: "type")
-//        mdict.setObject(name, forKey: "name")
-//        println(NSJSONSerialization.isValidJSONObject(mdict));
-//        mp.broadcast(mdict)
+            /*  USER TESTING    */
         
+//        var u = User(name: "BUJAR", gender: "MALE", birthDate: "72291", moreInfo: "NONE")
+//        var mdict = u.createJsonDict()
+//
+//        UserManager.addUserToList(u)
+        
+        
+        //announce current my user info
+        UserManager.announceUserInfo()
+
         var x = mp.receive()
-        if (x is JSONMessage) {
-            println("is json msg")
-            var xx = x as JSONMessage
-            println(xx.dict["name"])
-            }
-        else {
-            println("is not json msg")
-            }
+        
+        // If message is JSON, add user to userList
+        if (x is JSONMessage){
+        
+        var newUser = UserManager.JsonToUserObject(x)
+            UserManager.addUserToList(newUser)
+        }
+        
+        println("All Users: ")
+        // print out all current users
+        for element in userList{
+            println(element.name)
+        }
+
     }
 }
