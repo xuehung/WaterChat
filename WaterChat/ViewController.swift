@@ -61,5 +61,15 @@ class ViewController: UIViewController {
                 println(r.groupID)
             }
         }
+        /*
+        var x = mp.receive()
+        if x is RoomRequest {
+            var xx = x as RoomRequest
+            println(xx.name)
+        } else {
+            println("fail")
+            var xx = x as RoomRequest
+            println(xx.name)
+        }*/
     }
 }

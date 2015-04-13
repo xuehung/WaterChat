@@ -70,8 +70,10 @@ class CreateProfileViewController: UIViewController {
         readData()
         //self.profile.userName = "Ding"
         println("hello segue")
-        var svc = segue.destinationViewController as UserGroupViewController;
-        svc.profile = self.profile
+        //var svc = segue.destinationViewController as UserGroupViewController;
+        //svc.profile = self.profile
+        //var svc = segue.destinationViewController as UserListTableViewController;
+        //svc.profile = self.profile
     }
     
 
