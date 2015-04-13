@@ -19,7 +19,7 @@ class RoomInfo {
     var memberList: [String] = []
     
     init() {
-        self.groupID = 45;//TODO: random
+        self.groupID = random() % 1024
         self.name = "unknown"
         self.maximumNumber = 10
         self.currentNumber = 1

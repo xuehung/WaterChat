@@ -50,10 +50,20 @@ class UserGroupViewController: UITabBarController {
                         var newUser = UserManager.JsonToUserObject(x)
                         UserManager.addUserToList(newUser)
                     }
+                    else if (tt == MessageType.ROOMREQ) {
+                        var rm = RoomManager()
+                        var newRoom = rm.JSONToRoom(xx.dict)
+                        rm.addRoomToList(newRoom)
+                    }
                     println("All Users: ")
                     // print out all current users
                     for element in userList{
                         println(element.name)
+                    }
+                    // print out all public rooms
+                    println("All Rooms: ")
+                    for room in groupList{
+                        println(room.name)
                     }
                     
                 }

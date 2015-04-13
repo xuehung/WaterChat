@@ -9,6 +9,8 @@
 import Foundation
 import MultipeerConnectivity
 
+var groupList = [RoomInfo]()
+
 class RoomManager {
     
     // A dictionary to record all the public group IDs
@@ -57,6 +59,18 @@ class RoomManager {
         r.memberList = room["memList"] as [String]
         
         return r
+    }
+    
+    func addRoomToList(newRoom: RoomInfo) {
+        var exists = false
+        for element in groupList{
+            if element.groupID == newRoom.groupID {
+                exists = true
+            }
+        }
+        if (!exists){
+            groupList.append(newRoom)
+        }
     }
     
     func input() -> String {
