@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		217557651ADB74E20077DD00 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217557641ADB74E20077DD00 /* UserManager.swift */; };
 		21A71D9C1ADB34F600EBE8A2 /* ChatGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A71D991ADB34F600EBE8A2 /* ChatGroup.swift */; };
 		21A71D9D1ADB34F600EBE8A2 /* CreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A71D9A1ADB34F600EBE8A2 /* CreateGroupViewController.swift */; };
 		21A71D9E1ADB34F600EBE8A2 /* UserGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A71D9B1ADB34F600EBE8A2 /* UserGroupViewController.swift */; };
-		21A71DA01ADB583300EBE8A2 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A71D9F1ADB583300EBE8A2 /* UserManager.swift */; };
 		963469BC1AD8645B00961722 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963469B91AD8645B00961722 /* Room.swift */; };
 		963469BD1AD8645B00961722 /* RoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963469BA1AD8645B00961722 /* RoomManager.swift */; };
 		963469BE1AD8645B00961722 /* RoomRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963469BB1AD8645B00961722 /* RoomRequest.swift */; };
@@ -76,10 +76,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		217557641ADB74E20077DD00 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserManager.swift; path = WaterChat/UserManager.swift; sourceTree = "<group>"; };
 		21A71D991ADB34F600EBE8A2 /* ChatGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatGroup.swift; path = WaterChat/ChatGroup.swift; sourceTree = "<group>"; };
 		21A71D9A1ADB34F600EBE8A2 /* CreateGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateGroupViewController.swift; path = WaterChat/CreateGroupViewController.swift; sourceTree = "<group>"; };
 		21A71D9B1ADB34F600EBE8A2 /* UserGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserGroupViewController.swift; path = WaterChat/UserGroupViewController.swift; sourceTree = "<group>"; };
-		21A71D9F1ADB583300EBE8A2 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		963469B91AD8645B00961722 /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Room.swift; path = WaterChat/Room.swift; sourceTree = "<group>"; };
 		963469BA1AD8645B00961722 /* RoomManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoomManager.swift; path = WaterChat/RoomManager.swift; sourceTree = "<group>"; };
 		963469BB1AD8645B00961722 /* RoomRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoomRequest.swift; path = WaterChat/RoomRequest.swift; sourceTree = "<group>"; };
@@ -141,7 +141,7 @@
 		DC689E3E1AA0174800FD78FE = {
 			isa = PBXGroup;
 			children = (
-				21A71D9F1ADB583300EBE8A2 /* UserManager.swift */,
+				217557641ADB74E20077DD00 /* UserManager.swift */,
 				21A71D991ADB34F600EBE8A2 /* ChatGroup.swift */,
 				21A71D9A1ADB34F600EBE8A2 /* CreateGroupViewController.swift */,
 				21A71D9B1ADB34F600EBE8A2 /* UserGroupViewController.swift */,
@@ -367,6 +367,7 @@
 				DCC032D71AACC37C00CE28FF /* RouteRequest.swift in Sources */,
 				DCC4342B1AD4F6CB00583928 /* BroadcastMessage.swift in Sources */,
 				DCC3E6121AA96DA3008901DB /* MIME.swift in Sources */,
+				217557651ADB74E20077DD00 /* UserManager.swift in Sources */,
 				21A71D9C1ADB34F600EBE8A2 /* ChatGroup.swift in Sources */,
 				DCC3E61F1AAA2491008901DB /* MessagePasser.swift in Sources */,
 				DCC3E61C1AAA1E24008901DB /* RouteManager.swift in Sources */,
@@ -384,7 +385,6 @@
 				21A71D9D1ADB34F600EBE8A2 /* CreateGroupViewController.swift in Sources */,
 				DCA7485A1AB4B88A00A7430C /* RouteReply.swift in Sources */,
 				963469BE1AD8645B00961722 /* RoomRequest.swift in Sources */,
-				21A71DA01ADB583300EBE8A2 /* UserManager.swift in Sources */,
 				DCC032D51AACC2A000CE28FF /* Message.swift in Sources */,
 				DCC3E6101AA96A68008901DB /* User.swift in Sources */,
 				DCE4CF831ADAD69200F06C4F /* BroadcastJSONMessage.swift in Sources */,

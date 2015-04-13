@@ -83,6 +83,14 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
     
     func browser(browser: MCNearbyServiceBrowser!,
         lostPeer: MCPeerID!) {
+            var i = 0
+            for element in userList{
+                
+                if element.macAddress == lostPeer.displayName{
+                    userList.removeAtIndex(i)
+                }
+                i = i+1
+            }
             Logger.log("lost a new peer \(lostPeer.displayName)")
     }
     

@@ -42,7 +42,7 @@ class CreateProfileViewController: UIViewController {
         else {
             stringGender = "male"
         }
-        var user = User(name: self.userName.text, gender: stringGender, birthDate: self.birthMM.text+self.birthDD.text, moreInfo: self.moreInfo.text)
+        var user = User(name: self.userName.text, gender: stringGender, birthDate: self.birthMM.text+self.birthDD.text, moreInfo: self.moreInfo.text, )
         UserManager.setCurrentUser(user)
         
         //user object ready for broadcast

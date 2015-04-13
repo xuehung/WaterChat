@@ -8,7 +8,7 @@
 
 import Foundation
 import MultipeerConnectivity
-
+import ExternalAccessory
 
 class User {
     var type: NSNumber;
@@ -16,6 +16,7 @@ class User {
     var gender: NSString;
     var birthDate: NSString
     var moreInfo: NSString
+    var macAddress: NSString
 //    var peerID: MCPeerID;
 //    var phoneNumber: String;
 //    var image: NSData? = nil;
@@ -25,6 +26,7 @@ class User {
         self.gender = ""
         self.birthDate = ""
         self.moreInfo = ""
+        self.macAddress = ""
         
     }
     init(name: NSString, gender: NSString, birthDate: NSString, moreInfo: NSString) {
@@ -33,7 +35,7 @@ class User {
         self.gender = gender;
         self.birthDate = birthDate
         self.moreInfo = moreInfo
-
+        self.macAddress = EAWiFiUnconfiguredAccessory().macAddress
     }
 
     
@@ -46,6 +48,7 @@ class User {
         mdict.setObject(self.gender, forKey: "gender")
         mdict.setObject(self.birthDate, forKey: "birthDate")
         mdict.setObject(self.moreInfo, forKey: "moreInfo")
+        mdict.setObject(self.macAddress, forKey: "macAdress")
         
         return mdict
     }
