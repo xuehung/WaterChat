@@ -23,27 +23,14 @@ class ViewController: UIViewController {
         // run this code when user presses test button
         println("hello it is test")
         var mp = MessagePasser.getInstance(Config.address)
-        /*
-        var rr = RoomRequest()
-        //rr.groupName = "hi"
-        rr.groupID = 45
-        mp.broadcast(rr)
-        */
-        //println(NSJSONSerialization.isValidJSONObject(dict));
 
-        //println(NSJSONSerialization.isValidJSONObject(u));
+            /*  USER TESTING    */
 
-
-//        var name: NSString = "Bill Nace"
-//        var type = NSNumber(unsignedChar: MessageType.USRPROFILE.rawValue)
+//        var u = User(name: "BUJAR", gender: "MALE", birthDate: "72291", moreInfo: "NONE")
+//        var mdict = u.createJsonDict()
 //
-//        var mdict = NSMutableDictionary()
-//
-//        mdict.setObject(type, forKey: "type")
-//        mdict.setObject(name, forKey: "name")
-//        println(NSJSONSerialization.isValidJSONObject(mdict));
-//        mp.broadcast(mdict)
-        
+//        UserManager.addUserToList(u)
+
 //        var x = mp.receive()
 //        if (x is JSONMessage) {
 //            println("is json msg")
@@ -53,15 +40,15 @@ class ViewController: UIViewController {
 //        else {
 //            println("is not json msg")
 //            }
-        
+
         var rm = RoomManager()
         var r = RoomInfo()
-        
+
         // send out the room request by JSONMessage
         var mdict = rm.RoomToJSON(r)
         println(NSJSONSerialization.isValidJSONObject(mdict));
         mp.broadcast(mdict)
-        
+
         // receive the room request as JSONMessage
         var x = mp.receive()
         if (x is JSONMessage) {
