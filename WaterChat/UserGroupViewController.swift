@@ -50,13 +50,14 @@ class UserGroupViewController: UITabBarController {
                         var newUser = UserManager.JsonToUserObject(x)
                         UserManager.addUserToList(newUser)
                     }
+                    println("All Users: ")
+                    // print out all current users
+                    for element in userList{
+                        println(element.name)
+                    }
+                    
                 }
-                println("All Users: ")
-                // print out all current users
-                for element in userList{
-                    println(element.name)
-                }
-                
+
             }
             
         }
