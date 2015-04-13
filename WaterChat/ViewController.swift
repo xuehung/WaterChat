@@ -44,14 +44,34 @@ class ViewController: UIViewController {
 //        println(NSJSONSerialization.isValidJSONObject(mdict));
 //        mp.broadcast(mdict)
         
+//        var x = mp.receive()
+//        if (x is JSONMessage) {
+//            println("is json msg")
+//            var xx = x as JSONMessage
+//            println(xx.dict["name"])
+//            }
+//        else {
+//            println("is not json msg")
+//            }
+        
+        var rm = RoomManager()
+        
+        // send out the room request by JSONMessage
+        var mdict = rm.RoomToJSON()
+        println(NSJSONSerialization.isValidJSONObject(mdict));
+        mp.broadcast(mdict)
+        
+        // receive the room request as JSONMessage
         var x = mp.receive()
         if (x is JSONMessage) {
-            println("is json msg")
             var xx = x as JSONMessage
-            println(xx.dict["name"])
+            var type = xx.type
+            if (type == MessageType.ROOMREQ) {
+                var r = rm.JSONToRoom(xx.dict)
+                println(r.name)
+                println(r.groupID)
             }
-        else {
-            println("is not json msg")
-            }
+        }
+        
     }
 }

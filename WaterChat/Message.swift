@@ -47,7 +47,8 @@ class Message {
             return msg
         case MessageType.ROOMREQ.rawValue:
             println("parse message roomreq");
-            var msg = RoomRequest(bytes: data)
+            //var msg = RoomRequest(bytes: data)
+            var msg = BroadcastJSONMessage(bytes: data)
             msg.type = MessageType.ROOMREQ
             return msg
         default:

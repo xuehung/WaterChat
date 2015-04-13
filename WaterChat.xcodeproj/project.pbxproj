@@ -10,6 +10,7 @@
 		963469BC1AD8645B00961722 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963469B91AD8645B00961722 /* Room.swift */; };
 		963469BD1AD8645B00961722 /* RoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963469BA1AD8645B00961722 /* RoomManager.swift */; };
 		963469BE1AD8645B00961722 /* RoomRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963469BB1AD8645B00961722 /* RoomRequest.swift */; };
+		967E1B161ADB1C7E001DD1C6 /* RoomInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967E1B151ADB1C7E001DD1C6 /* RoomInfo.swift */; };
 		DC1374521AD85C43000BBBBA /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1374501AD85C43000BBBBA /* CreateProfileViewController.swift */; };
 		DC1374531AD85C43000BBBBA /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1374511AD85C43000BBBBA /* UserProfile.swift */; };
 		DC59B8AC1AD5ABAB001CB2DF /* welcome.png in Resources */ = {isa = PBXBuildFile; fileRef = DC59B8AB1AD5ABAB001CB2DF /* welcome.png */; };
@@ -75,6 +76,7 @@
 		963469B91AD8645B00961722 /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Room.swift; path = WaterChat/Room.swift; sourceTree = "<group>"; };
 		963469BA1AD8645B00961722 /* RoomManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoomManager.swift; path = WaterChat/RoomManager.swift; sourceTree = "<group>"; };
 		963469BB1AD8645B00961722 /* RoomRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoomRequest.swift; path = WaterChat/RoomRequest.swift; sourceTree = "<group>"; };
+		967E1B151ADB1C7E001DD1C6 /* RoomInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomInfo.swift; sourceTree = "<group>"; };
 		DC1374501AD85C43000BBBBA /* CreateProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateProfileViewController.swift; path = WaterChat/CreateProfileViewController.swift; sourceTree = "<group>"; };
 		DC1374511AD85C43000BBBBA /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserProfile.swift; path = WaterChat/UserProfile.swift; sourceTree = "<group>"; };
 		DC59B8AB1AD5ABAB001CB2DF /* welcome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = welcome.png; path = Asset/welcome.png; sourceTree = SOURCE_ROOT; };
@@ -133,6 +135,7 @@
 		DC689E3E1AA0174800FD78FE = {
 			isa = PBXGroup;
 			children = (
+				967E1B151ADB1C7E001DD1C6 /* RoomInfo.swift */,
 				963469B91AD8645B00961722 /* Room.swift */,
 				DCE4CF801ADAD26000F06C4F /* JSONMessage.swift */,
 				963469BA1AD8645B00961722 /* RoomManager.swift */,
@@ -367,6 +370,7 @@
 				DCC3E6191AAA1874008901DB /* Logger.swift in Sources */,
 				DC8067581ADB084C00C39546 /* NewUserProfile.swift in Sources */,
 				DCC032D31AACC24300CE28FF /* MessageType.swift in Sources */,
+				967E1B161ADB1C7E001DD1C6 /* RoomInfo.swift in Sources */,
 				DCA7485A1AB4B88A00A7430C /* RouteReply.swift in Sources */,
 				963469BE1AD8645B00961722 /* RoomRequest.swift in Sources */,
 				DCC032D51AACC2A000CE28FF /* Message.swift in Sources */,

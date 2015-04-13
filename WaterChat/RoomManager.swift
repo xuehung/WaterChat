@@ -9,33 +9,53 @@
 import Foundation
 import MultipeerConnectivity
 
-class GroupManager {
-    // All the public teams in this network
-    
-    // All the users in this network
-    
-    // The current maximum ID of group creation message
-    var seqNum: UInt32 = 0
-    var mp: MessagePasser!
-    var macAddr: MacAddr!
+class RoomManager {
     
     // A dictionary to record all the public group IDs
-    // MacAddr: The mac address of the group holder
+    // Int: The group ID of this group
     // Room: The group information of one specific room
-    var publicGroupIDs = Dictionary<MacAddr, Room>()
-    // A dictionary to record all the group creation requests
-    // UInt32: the sequence number of this creation request
-    // Room: The group information of one specific room
-    var publicGroupReqs = Dictionary<UInt32, Room>()
+    var publicGroups = Dictionary<Int, Room>()
     
     // A dictionary to record all the members in this network
     // There is no need to record how many groups one user belong to
-    var users = Dictionary<MCPeerID, User>()
+    var users = Dictionary<MacAddr, User>()
     
+    func RoomToJSON() -> NSMutableDictionary {
+        
+        var mdict = NSMutableDictionary()
+        var newRoom = RoomInfo()
+        var groupID: NSNumber = newRoom.groupID
+        var name: NSString = newRoom.name
+        var type = NSNumber(unsignedChar: MessageType.ROOMREQ.rawValue)
+        var maxNum: NSNumber = newRoom.maximumNumber
+        var curNum: NSNumber = newRoom.currentNumber
+        var macAddr: NSString = newRoom.groupHolder
+        var memberList: [NSString] = newRoom.memberList
+        
+        mdict.setObject(type, forKey: "type")
+        mdict.setObject(groupID, forKey: "groupID")
+        mdict.setObject(name, forKey: "name")
+        mdict.setObject(maxNum, forKey: "maxNum")
+        mdict.setObject(curNum, forKey: "curNum")
+        mdict.setObject(macAddr, forKey: "macAddr")
+        mdict.setObject(memberList, forKey: "memList")
+        
+        return mdict
+    }
     
-    init(addr: MacAddr, mp: MessagePasser) {
-        self.macAddr = addr
-        self.mp = mp
+    func JSONToRoom(room: NSDictionary) -> RoomInfo {
+
+        var r = RoomInfo()
+        var type: Int? = (room["type"] as Int)
+        Logger.log("type is \(type)")
+        r.name = room["name"] as String
+        r.groupID = room["groupID"] as Int
+        r.groupHolder = room["macAddr"] as String
+        r.maximumNumber = room["maxNum"] as Int
+        r.currentNumber = room["curNum"] as Int
+        r.memberList = room["memList"] as [String]
+        
+        return r
     }
     
     func input() -> String {
@@ -65,8 +85,6 @@ class GroupManager {
         //rcr.groupName = roomName
         //rcr.maxNum = maxNumber
         
-        
-        self.mp.broadcast(rcr)
     }
     
     // Receive a creation request
