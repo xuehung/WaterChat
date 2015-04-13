@@ -62,7 +62,7 @@ class CreateRoomTableViewController: UITableViewController {
     }
     
     @IBAction func saveRoomDetail(segue:UIStoryboardSegue) {
-        println("create new room")
+        println("in func create new room")
         println("name: \(self.roomName.text)")
         println("size: \(self.size)")
         
@@ -121,6 +121,7 @@ class CreateRoomTableViewController: UITableViewController {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
         println("in segue")
+        println(segue.identifier)
         if segue.identifier == "SaveRoomDetail" {
             //room.name = self.roomName.text
             //room.maximumNumber = self.
@@ -128,10 +129,6 @@ class CreateRoomTableViewController: UITableViewController {
             println("create new room")
             println("name: \(self.roomName.text)")
             println("size: \(self.size)")
-        }
-        if segue.identifier == "PickSize" {
-            let sizePickerViewController = segue.destinationViewController as SizePickerTableViewController
-            sizePickerViewController.selectedSize = size
         }
         
     }

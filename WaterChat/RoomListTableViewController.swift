@@ -1,20 +1,18 @@
 //
-//  UserListTableViewController.swift
+//  RoomListTableViewController.swift
 //  WaterChat
 //
-//  Created by Ding ZHAO on 4/12/15.
+//  Created by Ding ZHAO on 4/13/15.
 //  Copyright (c) 2015 Hsueh-Hung Cheng. All rights reserved.
 //
 
 import UIKit
 
-class UserListTableViewController: UITableViewController {
-    
-    var users: [User] = userList
-
+class RoomListTableViewController: UITableViewController {
+    //var rooms: [Room] = roomList
     override func viewDidLoad() {
         super.viewDidLoad()
-        println("enter user list table table")
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -38,17 +36,20 @@ class UserListTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return users.count
+        //return rooms.count
+        return 0
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        println("fill in cell")
+        println("fill in room cell")
         let cell = tableView.dequeueReusableCellWithIdentifier("UserCell", forIndexPath: indexPath)
             as UITableViewCell
-        let user = users[indexPath.row] as User
-        cell.textLabel?.text = user.name
-        cell.detailTextLabel?.text = user.moreInfo
+        /*let room = rooms[indexPath.row] as Room
+        cell.textLabel?.text = room.name
+        var currentNum = String(room.currentNumber)
+        var maxNum = String(room.maximumNumber)
+        cell.detailTextLabel?.text = "\(currentNum)/\(maxNum)"*/
         return cell
     }
     
