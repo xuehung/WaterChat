@@ -35,20 +35,22 @@ class ViewController: UIViewController {
         //announce current my user info
         UserManager.announceUserInfo()
 
-        var x = mp.receive()
+//        var x = mp.receive()
+//        println("received message")
+//        // If message is JSON, add user to userList
+//        if (x is JSONMessage){
+//        println("is JSON message")
+//        var newUser = UserManager.JsonToUserObject(x)
+//            println("created user object")
+//            UserManager.addUserToList(newUser)
+//            println("added user to list")
+//        }
         
-        // If message is JSON, add user to userList
-        if (x is JSONMessage){
-        
-        var newUser = UserManager.JsonToUserObject(x)
-            UserManager.addUserToList(newUser)
-        }
-        
-        println("All Users: ")
-        // print out all current users
-        for element in userList{
-            println(element.name)
-        }
+//        println("All Users: ")
+//        // print out all current users
+//        for element in userList{
+//            println(element.name)
+//        }
 
     }
 }

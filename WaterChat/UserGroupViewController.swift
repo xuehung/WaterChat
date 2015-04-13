@@ -19,6 +19,47 @@ class UserGroupViewController: UITabBarController {
         println(self.profile.isFemale)
         println(self.profile.birthDate)
         println(self.profile.moreInfo)
+        
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) {
+            
+            var mp = MessagePasser.getInstance(Config.address)
+            
+            while(true) {
+                
+                UserManager.announceUserInfo()
+                
+                sleep(5)
+                
+            }
+            
+        }
+        
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) {
+            
+            var mp = MessagePasser.getInstance(Config.address)
+            
+            while(true) {
+                
+                var x = mp.receive()
+                // If message is JSON, add user to userList
+                if (x is JSONMessage){
+                    var xx = x as JSONMessage
+                    var type = xx.dict["type"] as Int
+                    var tt = MessageType(rawValue: UInt8(type))
+                    if (tt == MessageType.USRPROFILE) {
+                        var newUser = UserManager.JsonToUserObject(x)
+                        UserManager.addUserToList(newUser)
+                    }
+                }
+                println("All Users: ")
+                // print out all current users
+                for element in userList{
+                    println(element.name)
+                }
+                
+            }
+            
+        }
     }
 
     override func didReceiveMemoryWarning() {

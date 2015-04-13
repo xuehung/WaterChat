@@ -12,13 +12,13 @@ var userList = [User]()
 var currentUserInfo: User = User()
 
 class UserManager{
-
+    
     class func setCurrentUser(user: User){
-      currentUserInfo = user
+        currentUserInfo = user
     }
-     class func announceUserInfo(){
+    class func announceUserInfo(){
         var mp = MessagePasser.getInstance(Config.address)
-//        var mdict = currentUserInfo.createJsonDict()      //commented out for testing
+        //        var mdict = currentUserInfo.createJsonDict()      //commented out for testing
         var u = User(name: "BUJAR", gender: "MALE", birthDate: "72291", moreInfo: "NONE")
         var mdict = u.createJsonDict()
         println("announcing")
@@ -33,7 +33,7 @@ class UserManager{
             }
         }
         if (!exists){
-     userList.append(newUser)
+            userList.append(newUser)
         }
     }
     class func JsonToUserObject(data: Message) -> User{
@@ -43,7 +43,7 @@ class UserManager{
         user.birthDate = json.dict["birthDate"] as NSString
         user.gender = json.dict["gender"] as NSString
         user.moreInfo = json.dict["moreInfo"] as NSString
-
+        
         return user
-}
+    }
 }
