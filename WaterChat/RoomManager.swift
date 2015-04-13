@@ -20,10 +20,11 @@ class RoomManager {
     // There is no need to record how many groups one user belong to
     var users = Dictionary<MacAddr, User>()
     
-    func RoomToJSON() -> NSMutableDictionary {
+    func RoomToJSON(newRoom: RoomInfo) -> NSMutableDictionary {
+        
+        //var newRoom = RoomInfo()
         
         var mdict = NSMutableDictionary()
-        var newRoom = RoomInfo()
         var groupID: NSNumber = newRoom.groupID
         var name: NSString = newRoom.name
         var type = NSNumber(unsignedChar: MessageType.ROOMREQ.rawValue)

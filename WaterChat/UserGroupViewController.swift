@@ -16,7 +16,7 @@ class UserGroupViewController: UITabBarController {
         println("now in user group view")
         // Do any additional setup after loading the view.
         println(self.profile.userName)
-        println(self.profile.isFemale)
+        //println(self.profile.isFemale)
         println(self.profile.birthDate)
         println(self.profile.moreInfo)
     }

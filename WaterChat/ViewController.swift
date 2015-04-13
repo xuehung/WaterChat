@@ -55,9 +55,10 @@ class ViewController: UIViewController {
 //            }
         
         var rm = RoomManager()
+        var r = RoomInfo()
         
         // send out the room request by JSONMessage
-        var mdict = rm.RoomToJSON()
+        var mdict = rm.RoomToJSON(r)
         println(NSJSONSerialization.isValidJSONObject(mdict));
         mp.broadcast(mdict)
         
@@ -65,13 +66,13 @@ class ViewController: UIViewController {
         var x = mp.receive()
         if (x is JSONMessage) {
             var xx = x as JSONMessage
-            var type = xx.type
-            if (type == MessageType.ROOMREQ) {
+            var t = xx.dict["type"] as Int
+            var tt = MessageType(rawValue: UInt8(t))
+            if (tt == MessageType.ROOMREQ) {
                 var r = rm.JSONToRoom(xx.dict)
                 println(r.name)
                 println(r.groupID)
             }
         }
-        
     }
 }
