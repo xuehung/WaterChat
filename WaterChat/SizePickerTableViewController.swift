@@ -1,5 +1,5 @@
 //
-//  CreateRoomTableViewController.swift
+//  SizePickerTableViewController.swift
 //  WaterChat
 //
 //  Created by Ding ZHAO on 4/12/15.
@@ -8,75 +8,77 @@
 
 import UIKit
 
-class CreateRoomTableViewController: UITableViewController {
+class SizePickerTableViewController: UITableViewController {
+    var sizes:[Int]!
+    var selectedSize:Int? = nil
+    var selectedSizeIndex:Int? = nil
 
-    
-    @IBOutlet weak var roomName: UITextField!
-    @IBOutlet weak var subjectLabel: UILabel!
-    var size:Int = 10
-    //var room = RoomInfo()
     override func viewDidLoad() {
         super.viewDidLoad()
-        subjectLabel.text = String(size)
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        sizes = [2,3,4,5,6,7,8,9,10]
+        
+        if let size = selectedSize {
+            selectedSizeIndex = find(sizes, size)!
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    @IBAction func selectedSize(segue:UIStoryboardSegue) {
-        let sizePickerViewController = segue.sourceViewController as SizePickerTableViewController
-        if let selectedSize = sizePickerViewController.selectedSize {
-            subjectLabel.text = String(selectedSize)
-            size = selectedSize
-        }
-    }
 
     // MARK: - Table view data source
-    /*
+
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 0
-    }*/
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 0 {
-            roomName.becomeFirstResponder()
-        }
-    }
-    
-    @IBAction func cancelToRoomsViewController(segue:UIStoryboardSegue) {
-        
-    }
-    
-    @IBAction func saveRoomDetail(segue:UIStoryboardSegue) {
-        println("create new room")
-        println("name: \(self.roomName.text)")
-        println("size: \(self.size)")
-        
+        return sizes.count
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("SizeCell", forIndexPath: indexPath) as UITableViewCell
 
         // Configure the cell...
+        cell.textLabel?.text = String(sizes[indexPath.row])
+        if indexPath.row == selectedSizeIndex {
+            cell.accessoryType = .Checkmark
+        } else {
+            cell.accessoryType = .None
+        }
 
         return cell
     }
-    */
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        //Other row is selected - need to deselect it
+        if let index = selectedSizeIndex {
+            let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: index, inSection: 0))
+            cell?.accessoryType = .None
+        }
+        
+        selectedSizeIndex = indexPath.row
+        selectedSize = sizes[indexPath.row]
+        
+        //update the checkmark for the current row
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        cell?.accessoryType = .Checkmark
+    }
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -120,20 +122,14 @@ class CreateRoomTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
-        println("in segue")
-        if segue.identifier == "SaveRoomDetail" {
-            //room.name = self.roomName.text
-            //room.maximumNumber = self.
-            //player = Player(name: self.nameTextField.text, game: "Chess", rating: 1)
-            println("create new room")
-            println("name: \(self.roomName.text)")
-            println("size: \(self.size)")
+        if segue.identifier == "SaveSelectedSize" {
+            let cell = sender as UITableViewCell
+            let indexPath = tableView.indexPathForCell(cell)
+            selectedSizeIndex = indexPath?.row
+            if let index = selectedSizeIndex {
+                selectedSize = sizes[index]
+            }
         }
-        if segue.identifier == "PickSize" {
-            let sizePickerViewController = segue.destinationViewController as SizePickerTableViewController
-            sizePickerViewController.selectedSize = size
-        }
-        
     }
     
 

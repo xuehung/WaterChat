@@ -1,5 +1,5 @@
 //
-//  CreateRoomTableViewController.swift
+//  UserListTableViewController.swift
 //  WaterChat
 //
 //  Created by Ding ZHAO on 4/12/15.
@@ -8,16 +8,12 @@
 
 import UIKit
 
-class CreateRoomTableViewController: UITableViewController {
+class UserListTableViewController: UITableViewController {
+    var profile = UserProfile()
 
-    
-    @IBOutlet weak var roomName: UITextField!
-    @IBOutlet weak var subjectLabel: UILabel!
-    var size:Int = 10
-    //var room = RoomInfo()
     override func viewDidLoad() {
         super.viewDidLoad()
-        subjectLabel.text = String(size)
+        println("enter user list table table")
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -29,54 +25,40 @@ class CreateRoomTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    @IBAction func selectedSize(segue:UIStoryboardSegue) {
-        let sizePickerViewController = segue.sourceViewController as SizePickerTableViewController
-        if let selectedSize = sizePickerViewController.selectedSize {
-            subjectLabel.text = String(selectedSize)
-            size = selectedSize
-        }
-    }
 
     // MARK: - Table view data source
-    /*
+
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 0
-    }*/
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 0 {
-            roomName.becomeFirstResponder()
-        }
-    }
-    
-    @IBAction func cancelToRoomsViewController(segue:UIStoryboardSegue) {
-        
-    }
-    
-    @IBAction func saveRoomDetail(segue:UIStoryboardSegue) {
-        println("create new room")
-        println("name: \(self.roomName.text)")
-        println("size: \(self.size)")
-        
+        return 50
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as UITableViewCell
-
+        println("fill in cell")
+        //let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as UITableViewCell
+        let cell = UITableViewCell()
+        if(indexPath.row == 1){
+            cell.textLabel?.text = "hello"
+        }
+        else if(indexPath.row == 2){
+            cell.textLabel?.text = "world"
+        }
+        else{
+            cell.textLabel?.text = "you"
+        }
         // Configure the cell...
 
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -113,28 +95,14 @@ class CreateRoomTableViewController: UITableViewController {
     }
     */
 
-    
+    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
-        println("in segue")
-        if segue.identifier == "SaveRoomDetail" {
-            //room.name = self.roomName.text
-            //room.maximumNumber = self.
-            //player = Player(name: self.nameTextField.text, game: "Chess", rating: 1)
-            println("create new room")
-            println("name: \(self.roomName.text)")
-            println("size: \(self.size)")
-        }
-        if segue.identifier == "PickSize" {
-            let sizePickerViewController = segue.destinationViewController as SizePickerTableViewController
-            sizePickerViewController.selectedSize = size
-        }
-        
     }
-    
+    */
 
 }
