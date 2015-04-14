@@ -33,7 +33,15 @@ class UserManager{
             }
         }
         if (!exists){
-     userList.append(newUser)
+            userList.append(newUser)
+            
+            //if(self.window.rootViewController is UserListTableViewController) {
+                
+            //}
+            
+            
+            
+            
         }
     }
     class func JsonToUserObject(data: Message) -> User{

@@ -52,7 +52,7 @@ class BroadcastJSONMessage: Message {
         if let obj: AnyObject = maybeObj {
             if let dict = obj as? NSDictionary {
                 self.dictionary = dict
-                Logger.error("Got NSDictionary")
+                Logger.log("Got NSDictionary")
             } else {
                 Logger.error("Fail to as NSDictionary")
             }

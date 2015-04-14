@@ -108,20 +108,21 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
     // reveive
     func session(session: MCSession!, didReceiveData data: NSData!,
         fromPeer peerID: MCPeerID!)  {
+            Logger.log("Got data from \(peerID)")
             Logger.log("Got data from \(peerID.description)")
             
             // This needs to run on the main queue
             dispatch_async(dispatch_get_main_queue()) {
                 
                 var message = Message.messageFactory(data)
-                var fromAddr = Util.convertDisplayNameToMacAddr(peerID.displayName)
+                //var fromAddr = Util.convertDisplayNameToMacAddr(peerID.displayName)
                 
-                Logger.log("Message Type = \(message.type)")
+                Logger.log("@@@@@@@@@@@@@ Message Type = \(message.type.rawValue)")
                 
                 
                 switch message.type {
                 case MessageType.RREQ:
-                    self.rm.reveiveRouteRequest(fromAddr, message: message as RouteRequest)
+                    //self.rm.reveiveRouteRequest(fromAddr, message: message as RouteRequest)
                     break
                 case MessageType.RREP:
                     break
@@ -133,12 +134,14 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
                     if( bmsg.srcMacAddr == Config.address) {
                         break
                     }
+                    Logger.log("bmsg.broadcastSeqNum = \(bmsg.broadcastSeqNum)")
+                    
                     if let seqNum = self.broadcastSeqDict[bmsg.srcMacAddr] {
-                        println("seqNum = \(seqNum)")
+                        Logger.log("old seqNum = \(seqNum)")
                         // the second condition is designed for smaller
                         // broadcast seqNum when device restarts
-                        if ((bmsg.broadcastSeqNum <= self.broadcastSeqNum &&
-                            bmsg.broadcastSeqNum > self.broadcastSeqNum - 10)) {
+                        if ((bmsg.broadcastSeqNum <= seqNum &&
+                            bmsg.broadcastSeqNum > seqNum - 10)) {
                                 println("stop")
                                 break
                         }
@@ -146,7 +149,7 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
                     self.broadcastSeqDict[bmsg.srcMacAddr] = bmsg.broadcastSeqNum
                     self.cb.addToIncomingBuffer(bmsg.getInnerMessage())
                     dispatch_async(dispatch_get_main_queue()) {
-                        self.cb.broadcast(bmsg.serialize())
+                        //self.cb.broadcast(bmsg.serialize())
                     }
                     break
                 case MessageType.BROADCASTJSON:
@@ -154,8 +157,9 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
                     if( bmsg.srcMacAddr == Config.address) {
                         break
                     }
+                    Logger.log("bmsg.broadcastSeqNum = \(bmsg.broadcastSeqNum)")
                     if let seqNum = self.broadcastSeqDict[bmsg.srcMacAddr] {
-                        println("seqNum = \(seqNum)")
+                        Logger.log("old seqNum = \(seqNum)")
                         // the second condition is designed for smaller
                         // broadcast seqNum when device restarts
                         if ((bmsg.broadcastSeqNum <= self.broadcastSeqNum &&
@@ -169,7 +173,7 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
                     Logger.log("put jmsg into buffer")
                     self.cb.addToIncomingBuffer(jmsg)
                     dispatch_async(dispatch_get_main_queue()) {
-                        self.cb.broadcast(bmsg.serialize())
+                        //self.cb.broadcast(bmsg.serialize())
                     }
                     break
 

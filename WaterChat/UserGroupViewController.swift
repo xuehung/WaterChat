@@ -9,16 +9,16 @@
 import UIKit
 
 class UserGroupViewController: UITabBarController {
-    var profile = UserProfile()
+    //var profile = UserProfile()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         println("now in user group view")
         // Do any additional setup after loading the view.
-        println(self.profile.userName)
+        //println(self.profile.userName)
         //println(self.profile.isFemale)
-        println(self.profile.birthDate)
-        println(self.profile.moreInfo)
+        //println(self.profile.birthDate)
+        //println(self.profile.moreInfo)
         
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) {
             

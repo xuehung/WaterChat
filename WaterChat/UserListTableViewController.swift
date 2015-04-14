@@ -10,18 +10,36 @@ import UIKit
 
 class UserListTableViewController: UITableViewController {
     
-    var users: [User] = userList
+    //var users: [User] = userList
+    //var refreshControl:UIRefreshControl!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         println("enter user list table table")
+        println(userList.count)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        //self.refreshControl = UIRefreshControl()
+        //self.refreshControl?.attributedTitle=NSAttributedString(string: "Pull to refresh")
+        //self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        //self.tableView.addSubview(refreshControl!)
+        //self.tableView.addSubview(self.refreshControl)
     }
 
+    func refresh(sender:AnyObject)
+    {
+        // Code to refresh table view
+        self.tableView.reloadData()
+        Logger.log("refresh")
+        Logger.log("userList.count = \(userList.count)")
+        self.refreshControl?.endRefreshing()
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -38,7 +56,7 @@ class UserListTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return users.count
+        return userList.count
     }
 
     
@@ -46,11 +64,13 @@ class UserListTableViewController: UITableViewController {
         println("fill in cell")
         let cell = tableView.dequeueReusableCellWithIdentifier("UserCell", forIndexPath: indexPath)
             as UITableViewCell
-        let user = users[indexPath.row] as User
+        let user = userList[indexPath.row] as User
         cell.textLabel?.text = user.name
         cell.detailTextLabel?.text = user.moreInfo
         return cell
     }
+    
+    
     
 
     /*
@@ -95,7 +115,8 @@ class UserListTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
-    }
-    */
+        
+    }*/
+    
 
 }
