@@ -26,4 +26,12 @@ class RoomInfo {
         // Add the yourself(the group holder into this group's member list)
         self.memberList.append(groupHolder)
     }
+    init(name: String, maxNum: Int) {
+        self.groupID = random() % 1024
+        self.name = name
+        self.maximumNumber = maxNum
+        self.currentNumber = 1
+        // Add the yourself(the group holder into this group's member list)
+        self.memberList.append(groupHolder)
+    }
 }

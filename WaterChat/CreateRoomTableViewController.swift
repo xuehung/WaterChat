@@ -13,6 +13,7 @@ class CreateRoomTableViewController: UITableViewController {
     
     @IBOutlet weak var roomName: UITextField!
     @IBOutlet weak var subjectLabel: UILabel!
+    
     var size:Int = 10
     //var room = RoomInfo()
     override func viewDidLoad() {
@@ -51,6 +52,7 @@ class CreateRoomTableViewController: UITableViewController {
         // Return the number of rows in the section.
         return 0
     }*/
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 0 {
             roomName.becomeFirstResponder()
@@ -112,7 +114,21 @@ class CreateRoomTableViewController: UITableViewController {
         return true
     }
     */
-
+    
+    
+    func readData(){
+        
+        /*var stringGender: NSString
+        if (self.isFemale.isEnabledForSegmentAtIndex(0)){
+            stringGender = "female"
+        }
+        else {
+            stringGender = "male"
+        }*/
+        var room = RoomInfo(name: self.roomName.text, maxNum: self.size)
+        var rm = RoomManager()
+        rm.addRoomToList(room)
+    }
     
     // MARK: - Navigation
 
@@ -120,6 +136,7 @@ class CreateRoomTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
+        readData()
         println("in segue")
         println(segue.identifier)
         if segue.identifier == "SaveRoomDetail" {

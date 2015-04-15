@@ -140,6 +140,7 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
                         Logger.log("old seqNum = \(seqNum)")
                         // the second condition is designed for smaller
                         // broadcast seqNum when device restarts
+                        
                         if ((bmsg.broadcastSeqNum <= seqNum &&
                             bmsg.broadcastSeqNum > seqNum - 10)) {
                                 println("stop")
