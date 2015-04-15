@@ -29,8 +29,12 @@ class UserGroupViewController: UITabBarController {
                 UserManager.announceUserInfo()
                 
                 var rm = RoomManager()
-                var mdict = rm.RoomToJSON(currentRoomInfo)
-                mp.broadcast(mdict)
+                for room in groupList {
+                    var mdict = rm.RoomToJSON(room)
+                    mp.broadcast(mdict)
+                }
+//                var mdict = rm.RoomToJSON(currentRoomInfo)
+//                mp.broadcast(mdict)
                 
                 sleep(5)
                 
