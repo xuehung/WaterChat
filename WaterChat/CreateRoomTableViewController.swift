@@ -136,16 +136,23 @@ class CreateRoomTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
-        readData()
+        
         println("in segue")
         println(segue.identifier)
-        if segue.identifier == "SaveRoomDetail" {
+        if (segue.identifier == "PickMaximumSize"){
+            println("pick size")
+        }
+        else if (segue.identifier == "SaveRoomDetail") {
+            readData()
             //room.name = self.roomName.text
             //room.maximumNumber = self.
             //player = Player(name: self.nameTextField.text, game: "Chess", rating: 1)
             println("create new room")
             println("name: \(self.roomName.text)")
             println("size: \(self.size)")
+        }
+        else{
+            println("just cancel")
         }
         
     }

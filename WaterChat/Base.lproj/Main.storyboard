@@ -163,7 +163,7 @@
                     <navigationItem key="navigationItem" title="Create New Room" id="Tld-73-Bzb">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Ygy-yw-Ks4">
                             <connections>
-                                <segue destination="AHI-30-QSZ" kind="presentation" id="rGG-Du-Ko1"/>
+                                <segue destination="AHI-30-QSZ" kind="presentation" identifier="CancelRoomCreation" id="rGG-Du-Ko1"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="ICV-AM-WNW">
@@ -573,6 +573,6 @@
         <image name="welcome.png" width="640" height="960"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="cCv-vi-neP"/>
+        <segue reference="rGG-Du-Ko1"/>
     </inferredMetricsTieBreakers>
 </document>
