@@ -161,9 +161,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Create New Room" id="Tld-73-Bzb">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="3zO-km-sFi">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Ygy-yw-Ks4">
                             <connections>
-                                <segue destination="Zgh-gY-L78" kind="unwind" unwindAction="cancelToRoomsViewController:" id="cwg-mb-7vV"/>
+                                <segue destination="AHI-30-QSZ" kind="presentation" id="rGG-Du-Ko1"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="ICV-AM-WNW">
@@ -178,9 +178,8 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UnI-FV-yvV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="Zgh-gY-L78" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="5900" y="1001"/>
+            <point key="canvasLocation" x="4884" y="1769"/>
         </scene>
         <!--Choose Maximum Room Size-->
         <scene sceneID="dlr-kf-4eh">
@@ -246,14 +245,18 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Chat Room" id="Uct-x7-v3Z">
-                        <barButtonItem key="leftBarButtonItem" title="Leave" id="By1-wc-4Om"/>
+                        <barButtonItem key="leftBarButtonItem" title="Leave" id="By1-wc-4Om">
+                            <connections>
+                                <segue destination="AHI-30-QSZ" kind="presentation" id="cCv-vi-neP"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Details" id="Heu-tn-96e"/>
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="njr-Bo-iKn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7183" y="1001"/>
+            <point key="canvasLocation" x="3675" y="1725"/>
         </scene>
         <!--User Group View Controller-->
         <scene sceneID="4Ir-uV-lwa">
@@ -489,7 +492,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Md-oD-2sv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6541" y="1001"/>
+            <point key="canvasLocation" x="6185" y="1013"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pEZ-bt-30f">
@@ -525,7 +528,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xJ8-w3-f8P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5900" y="1769"/>
+            <point key="canvasLocation" x="5800" y="2045"/>
         </scene>
         <!--Users-->
         <scene sceneID="ber-A0-J1J">
@@ -569,4 +572,7 @@
     <resources>
         <image name="welcome.png" width="640" height="960"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="cCv-vi-neP"/>
+    </inferredMetricsTieBreakers>
 </document>
