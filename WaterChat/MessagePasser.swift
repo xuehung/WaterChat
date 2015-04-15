@@ -173,9 +173,9 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
                     var jmsg = JSONMessage(dict: bmsg.getDict())
                     Logger.log("put jmsg into buffer")
                     self.cb.addToIncomingBuffer(jmsg)
-                    //dispatch_async(dispatch_get_main_queue()) {
-                        //self.cb.broadcast(bmsg.serialize())
-                    //}
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.cb.broadcast(bmsg.serialize())
+                    }
                     break
 
                 default:
