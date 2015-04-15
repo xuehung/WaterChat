@@ -10,6 +10,7 @@ import Foundation
 import MultipeerConnectivity
 
 var groupList = [RoomInfo]()
+var currentRoomInfo: RoomInfo = RoomInfo()
 
 class RoomManager {
     
@@ -71,6 +72,7 @@ class RoomManager {
         if (!exists){
             groupList.append(newRoom)
         }
+        currentRoomInfo = newRoom
     }
     
     func input() -> String {
