@@ -164,7 +164,7 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
                         // the second condition is designed for smaller
                         // broadcast seqNum when device restarts
                         if ((bmsg.broadcastSeqNum <= seqNum &&
-                            bmsg.broadcastSeqNum > seqNum - 10)) {
+                            bmsg.broadcastSeqNum + 10 > seqNum)) {
                                 println("stop")
                                 break
                         }
