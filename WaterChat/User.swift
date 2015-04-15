@@ -35,7 +35,9 @@ class User {
         self.gender = gender;
         self.birthDate = birthDate
         self.moreInfo = moreInfo
-        self.macAddress = EAWiFiUnconfiguredAccessory().macAddress
+//        self.macAddress = EAWiFiUnconfiguredAccessory().macAddress
+        self.macAddress = Config.address
+        
     }
 
     
