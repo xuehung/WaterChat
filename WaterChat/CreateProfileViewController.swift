@@ -67,9 +67,16 @@ class CreateProfileViewController: UIViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         //if (sender != self.joinBtn) return
-        readData()
+        if(self.userName.text.isEmpty){
+            var alert = UIAlertController(title: "Could Not Join", message: "Username should not be empty", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        else{
+            readData()
+        }
         //self.profile.userName = "Ding"
-        println("hello segue")
+        //println("hello segue")
         //var svc = segue.destinationViewController as UserGroupViewController;
         //svc.profile = self.profile
         //var svc = segue.destinationViewController as UserListTableViewController;
