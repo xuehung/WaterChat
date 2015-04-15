@@ -20,17 +20,17 @@ class RoomListTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
     }
+    
     func refresh(sender:AnyObject)
     {
         // Code to refresh table view
         self.tableView.reloadData()
         Logger.log("refresh")
-        Logger.log("userList.count = \(groupList.count)")
+        Logger.log("groupList.count = \(groupList.count)")
         self.refreshControl?.endRefreshing()
         
     }
     
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

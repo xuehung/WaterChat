@@ -112,7 +112,7 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
             Logger.log("Got data from \(peerID.description)")
             
             // This needs to run on the main queue
-            dispatch_async(dispatch_get_main_queue()) {
+            //dispatch_async(dispatch_get_main_queue()) {
                 
                 var message = Message.messageFactory(data)
                 //var fromAddr = Util.convertDisplayNameToMacAddr(peerID.displayName)
@@ -173,16 +173,16 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
                     var jmsg = JSONMessage(dict: bmsg.getDict())
                     Logger.log("put jmsg into buffer")
                     self.cb.addToIncomingBuffer(jmsg)
-                    dispatch_async(dispatch_get_main_queue()) {
+                    //dispatch_async(dispatch_get_main_queue()) {
                         //self.cb.broadcast(bmsg.serialize())
-                    }
+                    //}
                     break
 
                 default:
                     self.cb.addToIncomingBuffer(message)
                     break
                 }
-            }
+            //}
     }
     
     // The following methods do nothing, but the MCSessionDelegate protocol
