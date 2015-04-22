@@ -14,15 +14,6 @@ var currentRoomInfo: RoomInfo = RoomInfo()
 
 class RoomManager {
     
-    // A dictionary to record all the public group IDs
-    // Int: The group ID of this group
-    // Room: The group information of one specific room
-    var publicGroups = Dictionary<Int, Room>()
-    
-    // A dictionary to record all the members in this network
-    // There is no need to record how many groups one user belong to
-    var users = Dictionary<MacAddr, User>()
-    
     func RoomToJSON(newRoom: RoomInfo) -> NSMutableDictionary {
         
         //var newRoom = RoomInfo()
@@ -71,6 +62,7 @@ class RoomManager {
                 // Only need to change the current room member number and the memberlist of this room
                 room.currentNumber = newRoom.currentNumber
                 room.memberList = newRoom.memberList
+                break
             }
         }
         if (!exists){
@@ -88,15 +80,46 @@ class RoomManager {
         }
     }
     
-    func selectOneRoom(roomName: String) -> RoomInfo {
+    func enterOneRoom(roomName: String) -> RoomInfo {
         // traverse the room list to find the matching roomInfo
         for room in groupList {
             if (room.name == roomName) {
+                // try to add this member into this room
+                if (Config.address.description != room.groupHolder) {
+                    room.currentNumber += 1
+                    room.memberList.append(Config.address.description)
+                }
                 currentRoomInfo = room;
                 break;
             }
         }
         return currentRoomInfo;
+    }
+    
+    func leaveOneRoom(roomName: String) {
+        for room in groupList {
+            if (room.name == roomName) {
+                // try to remove this member from the memberlist
+                // the roomholder cannot be removed
+                var i = 0
+                for mac in room.memberList {
+                    if (mac == roomName && room.groupHolder != roomName) {
+                        room.currentNumber -= 1
+                        room.memberList.removeAtIndex(i)
+                        break
+                    }
+                    i += 1
+                }
+            }
+        }
+    }
+    
+    func sendToRoom() {
+        
+    }
+    
+    func receiveRoom() {
+        
     }
     
     func addMemberToRoom(memName: String) -> RoomInfo {

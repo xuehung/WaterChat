@@ -22,19 +22,12 @@ class UserGroupViewController: UITabBarController {
         
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) {
             
-            var mp = MessagePasser.getInstance(Config.address)
-            
             while(true) {
                 
                 UserManager.announceUserInfo()
                 
                 var rm = RoomManager()
-                for room in groupList {
-                    var mdict = rm.RoomToJSON(room)
-                    mp.broadcast(mdict)
-                }
-//                var mdict = rm.RoomToJSON(currentRoomInfo)
-//                mp.broadcast(mdict)
+                rm.announceRoomInfo()
                 
                 sleep(5)
                 
