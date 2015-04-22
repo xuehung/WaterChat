@@ -126,8 +126,7 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
                 
                 switch message.type {
                 case MessageType.RREQ:
-                    Logger.log("Got RouteRequest")
-                    self.rm.reveiveRouteRequest(fromAddr, message: message as RouteRequest)
+                    Logger.error("Impossible to get RouteRequest")
                     break
                 case MessageType.RREP:
                     Logger.log("Got RouteReply")
@@ -149,16 +148,23 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
                         // broadcast seqNum when device restarts
                         
                         if ((bmsg.broadcastSeqNum <= seqNum &&
-                            bmsg.broadcastSeqNum > seqNum - 10)) {
+                            bmsg.broadcastSeqNum + 10 > seqNum)) {
                                 println("stop")
                                 break
                         }
                     }
                     self.broadcastSeqDict[bmsg.srcMacAddr] = bmsg.broadcastSeqNum
-                    self.cb.addToIncomingBuffer(bmsg.getInnerMessage())
-                    dispatch_async(dispatch_get_main_queue()) {
-                        //self.cb.broadcast(bmsg.serialize())
+                    var innerMsg = bmsg.getInnerMessage()
+                    if (innerMsg.type == MessageType.RREQ) {
+                        Logger.log("Got RouteRequest")
+                        self.rm.reveiveRouteRequest(fromAddr, message: message as RouteRequest)
+                    } else {
+                        self.cb.addToIncomingBuffer(bmsg.getInnerMessage())
+                        dispatch_async(dispatch_get_main_queue()) {
+                            self.cb.broadcast(innerMsg.serialize())
+                        }
                     }
+                    
                     break
                 case MessageType.BROADCASTJSON:
                     var bmsg = message as BroadcastJSONMessage

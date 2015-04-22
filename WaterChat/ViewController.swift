@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         // run this code when user presses test button
         println("hello it is test")
         var mp = MessagePasser.getInstance(Config.address)
-        var dest: MacAddr = 1111
+        var dest: MacAddr = 1
         mp.rm.sendRouteRequest(dest)
     }
 }
