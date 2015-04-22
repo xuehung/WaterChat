@@ -84,12 +84,18 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
     func browser(browser: MCNearbyServiceBrowser!,
         lostPeer: MCPeerID!) {
             var i = 0
+            var userToRemove : User
             for element in userList{
                 if element.macAddress == lostPeer.displayName{
+                    userToRemove = userList[i]
                     userList.removeAtIndex(i)
+                    userToRemove.type = NSNumber(unsignedChar: MessageType.RMVUSER.rawValue)    //sending broadcast message to let everyone know this user has left
+                                                                                                //needed for multihop that do not directly lose this peer
+                    broadcast(userToRemove.createJsonDict())
                 }
                 i = i+1
             }
+            
             Logger.log("lost a new peer \(lostPeer.displayName)")
             var mac = Util.convertDisplayNameToMacAddr(lostPeer.displayName)
             self.macPeerMapping.removeValueForKey(mac)

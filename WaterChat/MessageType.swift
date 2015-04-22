@@ -15,7 +15,7 @@ enum MessageType: UInt8 {
     case RERR = 3 // Route Response
     case RREP = 4 // Route Reply
     case ROOMREQ = 5 // Room Request
-    
+    case RMVUSER = 6 // Remove User
     
     case USRPROFILE = 31 
     
