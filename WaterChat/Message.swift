@@ -70,15 +70,15 @@ class Message {
         fatalError("This method must be overridden")
     }
     
-    func fromByteArray<T>(value: [Byte], _: T.Type) -> T {
+    func fromByteArray<T>(value: [UInt8], _: T.Type) -> T {
         return value.withUnsafeBufferPointer {
             return UnsafePointer<T>($0.baseAddress).memory
         }
     }
     
-    func toByteArray<T>(var value: T) -> [Byte] {
+    func toByteArray<T>(var value: T) -> [UInt8] {
         return withUnsafePointer(&value) {
-            Array(UnsafeBufferPointer(start: UnsafePointer<Byte>($0), count: sizeof(T)))
+            Array(UnsafeBufferPointer(start: UnsafePointer<UInt8>($0), count: sizeof(T)))
         }
     }
 }

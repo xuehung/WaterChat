@@ -63,10 +63,10 @@ class UserListTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         println("fill in cell")
         let cell = tableView.dequeueReusableCellWithIdentifier("UserCell", forIndexPath: indexPath)
-            as UITableViewCell
+            as! UITableViewCell
         let user = userList[indexPath.row] as User
-        cell.textLabel?.text = user.name
-        cell.detailTextLabel?.text = user.moreInfo
+        cell.textLabel?.text = user.name as String
+        cell.detailTextLabel?.text = user.moreInfo as String
         return cell
     }
     

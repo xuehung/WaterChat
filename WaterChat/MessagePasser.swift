@@ -130,13 +130,13 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
                     break
                 case MessageType.RREP:
                     Logger.log("Got RouteReply")
-                    self.rm.reveiveRouteReply(fromAddr, reply: message as RouteReply)
+                    self.rm.reveiveRouteReply(fromAddr, reply: message as! RouteReply)
                     break
                 case MessageType.RERR:
                     break
                 case MessageType.BROADCAST:
                     
-                    var bmsg = message as BroadcastMessage
+                    var bmsg = message as! BroadcastMessage
                     if( bmsg.srcMacAddr == Config.address) {
                         break
                     }
@@ -157,7 +157,7 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
                     var innerMsg = bmsg.getInnerMessage()
                     if (innerMsg.type == MessageType.RREQ) {
                         Logger.log("Got RouteRequest")
-                        self.rm.reveiveRouteRequest(fromAddr, message: message as RouteRequest)
+                        self.rm.reveiveRouteRequest(fromAddr, message: message as! RouteRequest)
                     } else {
                         self.cb.addToIncomingBuffer(bmsg.getInnerMessage())
                         dispatch_async(dispatch_get_main_queue()) {
@@ -167,7 +167,7 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
                     
                     break
                 case MessageType.BROADCASTJSON:
-                    var bmsg = message as BroadcastJSONMessage
+                    var bmsg = message as! BroadcastJSONMessage
                     if( bmsg.srcMacAddr == Config.address) {
                         break
                     }

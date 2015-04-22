@@ -75,10 +75,10 @@ class RoomRequest: Message {
         var nameBytes = [UInt8](count: SIZE, repeatedValue: 0)
         data.getBytes(&nameBytes, range: NSMakeRange(8, 8))
         println("parse name")
-        self.name = NSString(bytes: nameBytes,length: 8, encoding: NSUTF8StringEncoding)!
+        self.name = NSString(bytes: nameBytes,length: 8, encoding: NSUTF8StringEncoding)! as String
         
         println(self.name)
-        var content:[Byte] = Util.toByteArray(data)
+        var content:[UInt8] = Util.toByteArray(data)
         println("The content of the received message is: \(content)")
         for member in members {
             content += Util.toByteArray(member)

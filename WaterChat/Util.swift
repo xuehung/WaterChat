@@ -18,15 +18,15 @@ class Util {
         }
     }
     
-    class func fromByteArray<T>(value: [Byte], _: T.Type) -> T {
+    class func fromByteArray<T>(value: [UInt8], _: T.Type) -> T {
         return value.withUnsafeBufferPointer {
             return UnsafePointer<T>($0.baseAddress).memory
         }
     }
     
-    class func toByteArray<T>(var value: T) -> [Byte] {
+    class func toByteArray<T>(var value: T) -> [UInt8] {
         return withUnsafePointer(&value) {
-            Array(UnsafeBufferPointer(start: UnsafePointer<Byte>($0), count: sizeof(T)))
+            Array(UnsafeBufferPointer(start: UnsafePointer<UInt8>($0), count: sizeof(T)))
         }
     }
 }
