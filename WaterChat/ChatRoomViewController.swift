@@ -15,6 +15,28 @@ class ChatRoomViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         self.navigationController?.setToolbarHidden(false, animated: true)
+        
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) {
+            
+            var mp = MessagePasser.getInstance(Config.address)
+            
+            while(true) {
+                
+                var x = mp.receive()
+                // If message is JSON, add user to userList
+                if (x is JSONMessage){
+                    var xx = x as! JSONMessage
+                    var type = xx.dict["type"] as! Int
+                    var tt = MessageType(rawValue: UInt8(type))
+                    if (tt == MessageType.ROOMTALK) {
+                        var rm = RoomManager()
+                        var msg = rm.JSONToMsg(xx.dict)
+                        
+                    }
+                }
+            }
+        }
+
     }
 
     override func didReceiveMemoryWarning() {

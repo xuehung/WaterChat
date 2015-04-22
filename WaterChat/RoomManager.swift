@@ -41,7 +41,7 @@ class RoomManager {
     func JSONToRoom(room: NSDictionary) -> RoomInfo {
 
         var r = RoomInfo()
-        var type: Int? = (room["type"] as! Int)
+        var type: Int = (room["type"] as! Int)
         Logger.log("type is \(type)")
         r.name = room["name"] as! String
         r.groupID = room["groupID"] as! Int
@@ -51,6 +51,24 @@ class RoomManager {
         r.memberList = room["memList"] as! [String]
         
         return r
+    }
+    
+    func MsgToJSON(msg: String) -> NSMutableDictionary {
+        var mdict = NSMutableDictionary()
+        var type = NSNumber(unsignedChar: MessageType.ROOMTALK.rawValue)
+        var content: NSString = msg
+        
+        mdict.setObject(type, forKey: "type")
+        mdict.setObject(content, forKey: "content")
+        
+        return mdict
+    }
+    
+    func JSONToMsg(content: NSDictionary) -> String {
+        var type: Int = (content["type"] as! Int)
+        var msg: String = (content["content"] as! String)
+        
+        return msg;
     }
     
     func addRoomToList(newRoom: RoomInfo) {
