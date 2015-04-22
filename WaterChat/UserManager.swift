@@ -46,11 +46,11 @@ class UserManager{
     }
     class func JsonToUserObject(data: Message) -> User{
         var user = User()
-        var json = data as JSONMessage
-        user.name = json.dict["name"] as NSString
-        user.birthDate = json.dict["birthDate"] as NSString
-        user.gender = json.dict["gender"] as NSString
-        user.moreInfo = json.dict["moreInfo"] as NSString
+        var json = data as! JSONMessage
+        user.name = json.dict["name"] as! NSString
+        user.birthDate = json.dict["birthDate"] as! NSString
+        user.gender = json.dict["gender"] as! NSString
+        user.moreInfo = json.dict["moreInfo"] as! NSString
 
         return user
 }

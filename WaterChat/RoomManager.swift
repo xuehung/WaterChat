@@ -50,14 +50,14 @@ class RoomManager {
     func JSONToRoom(room: NSDictionary) -> RoomInfo {
 
         var r = RoomInfo()
-        var type: Int? = (room["type"] as Int)
+        var type: Int? = (room["type"] as! Int)
         Logger.log("type is \(type)")
-        r.name = room["name"] as String
-        r.groupID = room["groupID"] as Int
-        r.groupHolder = room["macAddr"] as String
-        r.maximumNumber = room["maxNum"] as Int
-        r.currentNumber = room["curNum"] as Int
-        r.memberList = room["memList"] as [String]
+        r.name = room["name"] as! String
+        r.groupID = room["groupID"] as! Int
+        r.groupHolder = room["macAddr"] as! String
+        r.maximumNumber = room["maxNum"] as! Int
+        r.currentNumber = room["curNum"] as! Int
+        r.memberList = room["memList"] as! [String]
         
         return r
     }

@@ -24,7 +24,7 @@ class Room {
     init() {
         self.groupID = 0;
         self.name = "unknown"
-        self.nameLen = Int32(countElements(self.name))
+        self.nameLen = Int32(count(self.name))
         self.maximumNumber = 10;
         // Add the yourself(the group holder into this group's member list)
         self.groupMemberList.append(groupHolder)
@@ -35,7 +35,7 @@ class Room {
         // use random number to replace this group ID
         self.groupID = groupID;
         self.name = name;
-        self.nameLen = Int32(countElements(self.name))
+        self.nameLen = Int32(count(self.name))
         self.maximumNumber = maximumNumber;
         // Add the yourself(the group holder into this group's member list)
         self.groupMemberList.append(groupHolder)

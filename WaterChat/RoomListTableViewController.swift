@@ -55,7 +55,7 @@ class RoomListTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         println("fill in room cell")
         let cell = tableView.dequeueReusableCellWithIdentifier("RoomCell", forIndexPath: indexPath)
-            as UITableViewCell
+            as! UITableViewCell
         let room = groupList[indexPath.row] as RoomInfo
         cell.textLabel?.text = room.name
         var currentNum = String(room.currentNumber)

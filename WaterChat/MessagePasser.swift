@@ -100,7 +100,7 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
                 invitationHandler(true, self.session)
             } else {
                 Logger.log("reject")
-                invitationHandler(falseg, self.session)
+                invitationHandler(false, self.session)
             }
             var mac = Util.convertDisplayNameToMacAddr(peerID.displayName)
             self.macPeerMapping[mac] = peerID
@@ -134,7 +134,7 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
                     break
                 case MessageType.BROADCAST:
                     
-                    var bmsg = message as BroadcastMessage
+                    var bmsg = message as! BroadcastMessage
                     if( bmsg.srcMacAddr == Config.address) {
                         break
                     }
@@ -158,7 +158,7 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
                     }
                     break
                 case MessageType.BROADCASTJSON:
-                    var bmsg = message as BroadcastJSONMessage
+                    var bmsg = message as! BroadcastJSONMessage
                     if( bmsg.srcMacAddr == Config.address) {
                         break
                     }

@@ -51,8 +51,8 @@ class UserGroupViewController: UITabBarController {
                 var x = mp.receive()
                 // If message is JSON, add user to userList
                 if (x is JSONMessage){
-                    var xx = x as JSONMessage
-                    var type = xx.dict["type"] as Int
+                    var xx = x as! JSONMessage
+                    var type = xx.dict["type"] as! Int
                     var tt = MessageType(rawValue: UInt8(type))
                     if (tt == MessageType.USRPROFILE) {
                         var newUser = UserManager.JsonToUserObject(x)

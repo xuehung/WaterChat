@@ -52,8 +52,8 @@ class ViewController: UIViewController {
         // receive the room request as JSONMessage
         var x = mp.receive()
         if (x is JSONMessage) {
-            var xx = x as JSONMessage
-            var t = xx.dict["type"] as Int
+            var xx = x as! JSONMessage
+            var t = xx.dict["type"] as! Int
             var tt = MessageType(rawValue: UInt8(t))
             if (tt == MessageType.ROOMREQ) {
                 var r = rm.JSONToRoom(xx.dict)

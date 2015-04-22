@@ -32,7 +32,7 @@ class CreateRoomTableViewController: UITableViewController {
     }
     
     @IBAction func selectedSize(segue:UIStoryboardSegue) {
-        let sizePickerViewController = segue.sourceViewController as SizePickerTableViewController
+        let sizePickerViewController = segue.sourceViewController as! SizePickerTableViewController
         if let selectedSize = sizePickerViewController.selectedSize {
             subjectLabel.text = String(selectedSize)
             size = selectedSize
