@@ -63,7 +63,6 @@ class RouteManager {
                 Logger.log("Route to \(addr) is requested before but timeout")
                 // not first, should have this key addr
                 // update here in case of race condition
-                refreshAttempt(addr)
                 self.failNumber[addr]!++
             }
         } else {
@@ -108,6 +107,19 @@ class RouteManager {
     
     func reveiveRouteRequest(from: MacAddr, message: RouteRequest) {
         
+        // creates or updates a route to the previous hop without a valid sequence number
+        if self.routeTable[from] == nil {
+            var entry = TableEntry()
+            entry.destAddr = from
+            self.routeTable[from] = entry
+        }
+        var fromEntry = self.routeTable[from]!
+        fromEntry.isDestSeqNumValid = false
+        fromEntry.status = RouteStatus.valid
+        fromEntry.nextHop = from
+        fromEntry.lifeTime = current() + AODVConfig.ACTIVE_ROUTE_TIMEOUT
+
+        
         // it has received a RREQ with the same Originator IP Address and RREQ ID within at least the last PATH_DISCOVERY_TIME, return
         if (message.origMacAddr == self.macAddr) {
             Logger.log("got RREQ from myself")
@@ -126,38 +138,50 @@ class RouteManager {
         receivedID[message.origMacAddr] = message.PREQID
         receivedTime[message.origMacAddr] = current()
         
+        
+        // increments the hop count value in the RREQ by one
         message.hopCount++
         
-        var minimalLifetime: UInt64 = current() + 2 * AODVConfig.NET_TRAVERSAL_TIME - UInt64(2 * message.hopCount) * UInt64(AODVConfig.NODE_TRAVERSAL_TIME)
-        if let entry = self.routeTable[message.origMacAddr] {
-            // the Originator Sequence Number from the RREQ is compared to
-            // thecorresponding destination sequence number in the route 
-            // table entry and copied if greater than the existing value 
-            // there
-            if (message.origSeqNum > entry.destSeqNum) {
+        
+        // reverse route is created or updated
+        
+        if (from != message.origMacAddr) {
+            if let entry = self.routeTable[message.origMacAddr] {
+                // the Originator Sequence Number from the RREQ is compared to
+                // thecorresponding destination sequence number in the route 
+                // table entry and copied if greater than the existing value 
+                // there
+                if (message.origSeqNum > entry.destSeqNum) {
+                    entry.destSeqNum = message.origSeqNum
+                }
+                Logger.log("entry is updated")
+            } else {
+                var entry = TableEntry()
+                entry.destAddr = message.origMacAddr
                 entry.destSeqNum = message.origSeqNum
+                // entry.lifetime is 0 here, will be updated later
+                self.routeTable[message.origMacAddr] = entry
+                Logger.log("entry is created")
             }
-            Logger.log("entry is updated")
-        } else {
-            var entry = TableEntry()
-            entry.destAddr = message.origMacAddr
-            entry.destSeqNum = message.origSeqNum
-            entry.status = RouteStatus.valid
+            var entry = self.routeTable[message.origMacAddr]!
             entry.isDestSeqNumValid = true
-            entry.hopCount = message.hopCount
+            entry.status = RouteStatus.valid
             entry.nextHop = from
-            // entry.lifetime is 0 here, will be updated later
-            self.routeTable[message.origMacAddr] = entry
-            Logger.log("entry is created")
-        }
-        var entry = self.routeTable[message.origMacAddr]!
-        // the valid sequence number field is set to true
-        entry.isDestSeqNumValid = true
-        if (minimalLifetime > entry.lifeTime) {
-            entry.lifeTime = minimalLifetime
-            Logger.log("entry's life time is set to \(minimalLifetime)")
+            entry.hopCount = message.hopCount
+            
+            var minimalLifetime: UInt64 = current() + 2 * AODVConfig.NET_TRAVERSAL_TIME - UInt64(2 * message.hopCount) * UInt64(AODVConfig.NODE_TRAVERSAL_TIME)
+            if (minimalLifetime > entry.lifeTime) {
+                entry.lifeTime = minimalLifetime
+                Logger.log("entry's life time is set to \(minimalLifetime)")
+            }
         }
         
+        if (message.destMacAddr == self.macAddr ||
+            isRouteAvailable(message.destMacAddr)) {
+            sendRouteReply(from, request: message)
+        } else {
+            self.mp.broadcast(message)
+        }
         
         //?
         //Lastly, the Destination Sequence number for the
@@ -165,24 +189,25 @@ class RouteManager {
         //value received in the RREQ message, and the destination sequence
         //value currently maintained by the node for the requested 
         //destination.
-        
-        self.mp.broadcast(message)
     }
     
-    func forwardOrReply(from: MacAddr, message: RouteRequest) {
+    func sendRouteReply(from: MacAddr, request: RouteRequest) {
+        var reply = RouteReply()
+        reply.destMacAddr = request.destMacAddr
+        reply.origMacAddr = request.origMacAddr
+
         // it is the destination
-        if (message.destMacAddr == self.macAddr) {
+        if (request.destMacAddr == self.macAddr) {
             // If the generating node is the destination itself, 
             // it MUST increment its own sequence number by one 
             // if the sequence number in the RREQ packet is equal 
             // to that incremented value.
-            if (message.destSeqNum == self.seqNum + 1) {
+            if (request.destSeqNum == self.seqNum + 1) {
                 self.seqNum++
             }
-            var reply = RouteReply()
-            reply.destMacAddr = self.macAddr
-            reply.origMacAddr = message.origMacAddr
+            
             reply.destSeqNum = self.seqNum
+            reply.hopCount = 0
             reply.lifeTime = UInt32(AODVConfig.MY_ROUTE_TIMEOUT)
             
             self.mp.send(from, message: reply)
@@ -190,10 +215,71 @@ class RouteManager {
         // it is the intermediate destination
         } else {
             
+            if let entry = self.routeTable[request.destMacAddr] {
+                reply.destSeqNum = entry.destSeqNum
+                reply.hopCount = entry.hopCount
+                reply.lifeTime = UInt32(entry.lifeTime - current())
+            } else {
+                Logger.error("not found entry")
+            }
         }
     }
     
-    func reveiveRouteReply(from: MacAddr, message: RouteReply) {
+    func reveiveRouteReply(from: MacAddr, reply: RouteReply) {
+        
+        // creates or updates a route to the previous hop without a valid sequence number
+        if self.routeTable[from] == nil {
+            var entry = TableEntry()
+            entry.destAddr = from
+            self.routeTable[from] = entry
+        }
+        var fromEntry = self.routeTable[from]!
+        fromEntry.isDestSeqNumValid = false
+        fromEntry.status = RouteStatus.valid
+        fromEntry.nextHop = from
+        fromEntry.lifeTime = current() + AODVConfig.ACTIVE_ROUTE_TIMEOUT
+        
+        reply.hopCount++
+        
+        // forward route for this destination is created if it does not already exist
+        if let entry = self.routeTable[reply.destMacAddr] {
+            if (entry.isDestSeqNumValid == false ||
+                reply.destSeqNum > entry.destSeqNum ||
+                (reply.destSeqNum == entry.destSeqNum &&
+                    (entry.status == RouteStatus.invalid ||
+                     entry.hopCount < reply.hopCount))) {
+                // leave empty
+            } else {
+                return
+            }
+        } else {
+            var entry = TableEntry()
+            entry.destAddr = reply.destMacAddr
+            self.routeTable[reply.destMacAddr] = entry
+        }
+        
+        
+        if let entry = self.routeTable[reply.destMacAddr] {
+            entry.status = RouteStatus.valid
+            entry.isDestSeqNumValid = true
+            entry.nextHop = from
+            entry.hopCount = reply.hopCount
+            entry.lifeTime = current() + Time(reply.lifeTime)
+            entry.destSeqNum = reply.destSeqNum
+        } else {
+            Logger.error("impossible!")
+            return
+        }
+        
+        if (reply.origMacAddr != self.macAddr) {
+            // forward
+            Logger.log("Forward reply")
+            var next = self.routeTable[reply.origMacAddr]!
+            self.mp.directSend(next.nextHop, data: reply.serialize())
+        } else {
+            Logger.log("Reply arrived")
+            // TODO
+        }
         
         
     }
@@ -211,6 +297,7 @@ class RouteManager {
             return entry
         } else {
             self.routeTable[addr] = TableEntry()
+            // TODO
             return self.routeTable[addr]!
         }
     }

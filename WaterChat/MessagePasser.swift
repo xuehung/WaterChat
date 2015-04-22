@@ -84,6 +84,8 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
     func browser(browser: MCNearbyServiceBrowser!,
         lostPeer: MCPeerID!) {
             Logger.log("lost a new peer \(lostPeer.displayName)")
+            var mac = Util.convertDisplayNameToMacAddr(lostPeer.displayName)
+            self.macPeerMapping.removeValueForKey(mac)
     }
     
     func advertiser(advertiser: MCNearbyServiceAdvertiser!,
@@ -98,8 +100,10 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
                 invitationHandler(true, self.session)
             } else {
                 Logger.log("reject")
-                invitationHandler(true, self.session)
+                invitationHandler(falseg, self.session)
             }
+            var mac = Util.convertDisplayNameToMacAddr(peerID.displayName)
+            self.macPeerMapping[mac] = peerID
     }
 
     
@@ -213,6 +217,20 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
     
     func send(dest: MacAddr, message: Message) {
         //self.cb.send(dest, data: message.serialize())
+    }
+    
+    func directSend(dest: MacAddr, data: NSData) {
+        if let peerID = self.macPeerMapping[dest] {
+            dispatch_async(dispatch_get_main_queue()) {
+                var error : NSError?
+                self.session.sendData(data, toPeers: [peerID], withMode: MCSessionSendDataMode.Reliable, error: &error)
+                if error != nil {
+                    Logger.log("Error sending data: \(error?.localizedDescription)")
+                }
+            }
+        } else {
+            Logger.error("Not found peerID \(dest)")
+        }
     }
     
     func send(dest: MCPeerID, message: Message) {
