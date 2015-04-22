@@ -83,6 +83,13 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
     
     func browser(browser: MCNearbyServiceBrowser!,
         lostPeer: MCPeerID!) {
+            //var i = 0
+            //for element in userList{
+            //    if element.macAddress == lostPeer.displayName{
+            //        userList.removeAtIndex(i)
+            //    }
+            //    i = i+1
+            //}
             Logger.log("lost a new peer \(lostPeer.displayName)")
             var mac = Util.convertDisplayNameToMacAddr(lostPeer.displayName)
             self.macPeerMapping.removeValueForKey(mac)
@@ -100,7 +107,7 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
                 invitationHandler(true, self.session)
             } else {
                 Logger.log("reject")
-                invitationHandler(false, self.session)
+                invitationHandler(true, self.session)
             }
             var mac = Util.convertDisplayNameToMacAddr(peerID.displayName)
             self.macPeerMapping[mac] = peerID

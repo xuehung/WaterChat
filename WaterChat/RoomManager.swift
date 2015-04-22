@@ -64,9 +64,13 @@ class RoomManager {
     
     func addRoomToList(newRoom: RoomInfo) {
         var exists = false
-        for element in groupList{
-            if element.groupID == newRoom.groupID {
+        for room in groupList{
+            if room.groupID == newRoom.groupID {
+                // It exists in the gorupList and need to be updated
                 exists = true
+                // Only need to change the current room member number and the memberlist of this room
+                room.currentNumber = newRoom.currentNumber
+                room.memberList = newRoom.memberList
             }
         }
         if (!exists){
@@ -75,44 +79,32 @@ class RoomManager {
         currentRoomInfo = newRoom
     }
     
-    func input() -> String {
-        var keyboard = NSFileHandle.fileHandleWithStandardInput()
-        var inputData = keyboard.availableData
-        var strData = NSString(data: inputData, encoding: NSUTF8StringEncoding)!
-        
-        return strData.stringByTrimmingCharactersInSet(NSCharacterSet.newlineCharacterSet())
+    func announceRoomInfo() {
+        var mp = MessagePasser.getInstance(Config.address)
+        var rm = RoomManager()
+        for room in groupList {
+            var mdict = rm.RoomToJSON(room)
+            mp.broadcast(mdict)
+        }
     }
     
-    // Broadcast to notify all the users in this network to create a new public room
-    // No destination macaddr
-    func createPublicRoom() {
-        // The public room name and the permitted maximum number are input by users
-        print("What is your new group name?")
-        var roomName = input()
-        
-        // TODO
-        // check whether this name is valid
-        
-        
-        print("What is the maximum number in this group?")
-        var maxNumber = input()
-        
-        // create the room creation request
-        var rcr = RoomRequest()
-        //rcr.groupName = roomName
-        //rcr.maxNum = maxNumber
-        
+    func selectOneRoom(roomName: String) -> RoomInfo {
+        // traverse the room list to find the matching roomInfo
+        for room in groupList {
+            if (room.name == roomName) {
+                currentRoomInfo = room;
+                break;
+            }
+        }
+        return currentRoomInfo;
     }
     
-    // Receive a creation request
-    func receiveRoomReq(from: MacAddr, message: RoomRequest) {
-        
-        
-        
-    }
-    
-    // Receive creation acknowledgement
-    func receiveRoomAck() {
-        
+    func addMemberToRoom(memName: String) -> RoomInfo {
+        currentRoomInfo.memberList.append(memName)
+        currentRoomInfo.currentNumber += 1
+        // Update the room information in group list for
+        addRoomToList(currentRoomInfo)
+        return currentRoomInfo
     }
 }
+
