@@ -23,53 +23,7 @@ class ViewController: UIViewController {
         // run this code when user presses test button
         println("hello it is test")
         var mp = MessagePasser.getInstance(Config.address)
-
-            /*  USER TESTING    */
-
-//        var u = User(name: "BUJAR", gender: "MALE", birthDate: "72291", moreInfo: "NONE")
-//        var mdict = u.createJsonDict()
-//
-//        UserManager.addUserToList(u)
-
-//        var x = mp.receive()
-//        if (x is JSONMessage) {
-//            println("is json msg")
-//            var xx = x as JSONMessage
-//            println(xx.dict["name"])
-//            }
-//        else {
-//            println("is not json msg")
-//            }
-
-        var rm = RoomManager()
-        var r = RoomInfo()
-
-        // send out the room request by JSONMessage
-        var mdict = rm.RoomToJSON(r)
-        println(NSJSONSerialization.isValidJSONObject(mdict));
-        mp.broadcast(mdict)
-
-        // receive the room request as JSONMessage
-        var x = mp.receive()
-        if (x is JSONMessage) {
-            var xx = x as JSONMessage
-            var t = xx.dict["type"] as Int
-            var tt = MessageType(rawValue: UInt8(t))
-            if (tt == MessageType.ROOMREQ) {
-                var r = rm.JSONToRoom(xx.dict)
-                println(r.name)
-                println(r.groupID)
-            }
-        }
-        /*
-        var x = mp.receive()
-        if x is RoomRequest {
-            var xx = x as RoomRequest
-            println(xx.name)
-        } else {
-            println("fail")
-            var xx = x as RoomRequest
-            println(xx.name)
-        }*/
+        var dest: MacAddr = 1111
+        mp.rm.sendRouteRequest(dest)
     }
 }

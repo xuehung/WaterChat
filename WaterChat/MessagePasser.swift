@@ -100,7 +100,7 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
                 invitationHandler(true, self.session)
             } else {
                 Logger.log("reject")
-                invitationHandler(falseg, self.session)
+                invitationHandler(false, self.session)
             }
             var mac = Util.convertDisplayNameToMacAddr(peerID.displayName)
             self.macPeerMapping[mac] = peerID
@@ -119,16 +119,19 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
             dispatch_async(dispatch_get_main_queue()) {
                 
                 var message = Message.messageFactory(data)
-                //var fromAddr = Util.convertDisplayNameToMacAddr(peerID.displayName)
+                var fromAddr = Util.convertDisplayNameToMacAddr(peerID.displayName)
                 
-                Logger.log("@@@@@@@@@@@@@ Message Type = \(message.type.rawValue)")
+                Logger.log("@@@@@@@@@@@@@ Message Type = \(message.type.rawValue.description)")
                 
                 
                 switch message.type {
                 case MessageType.RREQ:
-                    //self.rm.reveiveRouteRequest(fromAddr, message: message as RouteRequest)
+                    Logger.log("Got RouteRequest")
+                    self.rm.reveiveRouteRequest(fromAddr, message: message as RouteRequest)
                     break
                 case MessageType.RREP:
+                    Logger.log("Got RouteReply")
+                    self.rm.reveiveRouteReply(fromAddr, reply: message as RouteReply)
                     break
                 case MessageType.RERR:
                     break
