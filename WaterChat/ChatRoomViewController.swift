@@ -17,6 +17,14 @@ class ChatRoomViewController: UIViewController {
         self.navigationController?.setToolbarHidden(false, animated: true)
         
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) {
+            // send your group message
+            var rm = RoomManager()
+            // get the message string from the screen
+            var msg:String = ""
+            rm.sendToRoom(msg)
+        }
+        
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) {
             
             var mp = MessagePasser.getInstance(Config.address)
             

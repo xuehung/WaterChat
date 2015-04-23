@@ -91,9 +91,8 @@ class RoomManager {
     
     func announceRoomInfo() {
         var mp = MessagePasser.getInstance(Config.address)
-        var rm = RoomManager()
         for room in groupList {
-            var mdict = rm.RoomToJSON(room)
+            var mdict = RoomToJSON(room)
             mp.broadcast(mdict)
         }
     }
@@ -132,20 +131,23 @@ class RoomManager {
         }
     }
     
-    func sendToRoom() {
-        
+    func sendToRoom(msg: String) {
+        var mp = MessagePasser.getInstance(Config.address)
+        var mdict = MsgToJSON(msg)
+        for mem in currentRoomInfo.memberList {
+            if (mem != Config.address.description) {
+                var dest = mem.toInt()
+                // mp.send(dest, mdict)
+            }
+        }
     }
     
-    func receiveRoom() {
-        
-    }
-    
-    func addMemberToRoom(memName: String) -> RoomInfo {
-        currentRoomInfo.memberList.append(memName)
-        currentRoomInfo.currentNumber += 1
+    //func addMemberToRoom(memName: String) -> RoomInfo {
+    //    currentRoomInfo.memberList.append(memName)
+    //    currentRoomInfo.currentNumber += 1
         // Update the room information in group list for
-        addRoomToList(currentRoomInfo)
-        return currentRoomInfo
-    }
+    //    addRoomToList(currentRoomInfo)
+    //    return currentRoomInfo
+    //}
 }
 
