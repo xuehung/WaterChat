@@ -38,6 +38,29 @@ class RoomManager {
         return mdict
     }
     
+    func RmvRoomToJSON(roomToRmv: RoomInfo) -> NSMutableDictionary {
+        //var newRoom = RoomInfo()
+        
+        var mdict = NSMutableDictionary()
+        var groupID: NSNumber = roomToRmv.groupID
+        var name: NSString = roomToRmv.name
+        var type = NSNumber(unsignedChar: MessageType.ROOMRMV.rawValue)
+        var maxNum: NSNumber = roomToRmv.maximumNumber
+        var curNum: NSNumber = roomToRmv.currentNumber
+        var macAddr: NSString = roomToRmv.groupHolder
+        var memberList: [NSString] = roomToRmv.memberList
+        
+        mdict.setObject(type, forKey: "type")
+        mdict.setObject(groupID, forKey: "groupID")
+        mdict.setObject(name, forKey: "name")
+        mdict.setObject(maxNum, forKey: "maxNum")
+        mdict.setObject(curNum, forKey: "curNum")
+        mdict.setObject(macAddr, forKey: "macAddr")
+        mdict.setObject(memberList, forKey: "memList")
+        
+        return mdict
+    }
+    
     func JSONToRoom(room: NSDictionary) -> RoomInfo {
 
         var r = RoomInfo()
@@ -101,33 +124,43 @@ class RoomManager {
         // traverse the room list to find the matching roomInfo
         for room in groupList {
             if (room.name == roomName) {
-                // try to add this member into this room
-                if (Config.address.description != room.groupHolder) {
+                if (room.currentNumber < room.maximumNumber) {
                     room.currentNumber += 1
                     room.memberList.append(Config.address.description)
+                    currentRoomInfo = room
+                    break
+                } else {
+                    // TODO: the user is not permitted to enter this room
                 }
-                currentRoomInfo = room;
-                break;
             }
         }
         return currentRoomInfo;
     }
     
     func leaveOneRoom(roomName: String) {
+        var i = 0
         for room in groupList {
             if (room.name == roomName) {
                 // try to remove this member from the memberlist
                 // the roomholder cannot be removed
-                var i = 0
+                var j = 0
                 for mac in room.memberList {
-                    if (mac == roomName && room.groupHolder != roomName) {
+                    if (mac == roomName) {
                         room.currentNumber -= 1
-                        room.memberList.removeAtIndex(i)
-                        break
+                        room.memberList.removeAtIndex(j)
+                        if (room.currentNumber == 0) {
+                            // broadcast to remove this room
+                            var roomToRemove:RoomInfo = groupList[i]
+                            groupList.removeAtIndex(i)
+                            var mdict = RmvRoomToJSON(roomToRemove)
+                            var mp = MessagePasser.getInstance(Config.address)
+                            mp.broadcast(mdict)
+                        }
                     }
-                    i += 1
+                    j += 1
                 }
             }
+            i += 1
         }
     }
     

@@ -43,7 +43,7 @@ class UserGroupViewController: UITabBarController {
                 
                 var x = mp.receive()
                 // If message is JSON, add user to userList
-                if (x is JSONMessage){
+                if (x is JSONMessage) {
                     var xx = x as! JSONMessage
                     var type = xx.dict["type"] as! Int
                     var tt = MessageType(rawValue: UInt8(type))
@@ -56,15 +56,28 @@ class UserGroupViewController: UITabBarController {
                         var newRoom = rm.JSONToRoom(xx.dict)
                         rm.addRoomToList(newRoom)
                     }
-                    else if (tt == MessageType.RMVUSER){    //remove from userList if there
+                    else if (tt == MessageType.RMVUSER) {    //remove from userList if there
                         var lostPeer = UserManager.JsonToUserObject(x)
                         var i = 0
                         for element in userList{
                             if element.macAddress == lostPeer.macAddress{
                                 userList.removeAtIndex(i)
                                 //can also add ability to remove from groups they belong to. If we add GroupsBelongingTo in the User Class, you can then remove from all of these groups.
-                                }
+                                break
+                            }
                             i = i+1
+                        }
+                    }
+                    else if (tt == MessageType.ROOMRMV) {
+                        var rm = RoomManager()
+                        var rmvRoom = rm.JSONToRoom(xx.dict)
+                        var i = 0
+                        for room in groupList {
+                            if (rmvRoom.name == room.name) {
+                                groupList.removeAtIndex(i)
+                                break
+                            }
+                            i += 1
                         }
                     }
                     println("All Users: ")
