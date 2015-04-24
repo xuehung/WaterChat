@@ -85,6 +85,7 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
         lostPeer: MCPeerID!) {
             Logger.log("lost a new peer \(lostPeer.displayName)")
             var mac = Util.convertDisplayNameToMacAddr(lostPeer.displayName)
+            Logger.log("remove \(mac) from mapping")
             self.macPeerMapping.removeValueForKey(mac)
     }
     
@@ -104,6 +105,7 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
             }
             var mac = Util.convertDisplayNameToMacAddr(peerID.displayName)
             self.macPeerMapping[mac] = peerID
+            Logger.log("add \(mac) into mapping")
     }
 
     
