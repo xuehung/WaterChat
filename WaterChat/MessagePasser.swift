@@ -125,12 +125,21 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
                 
                 
                 switch message.type {
-                case MessageType.RREQ:
-                    Logger.error("Impossible to get RouteRequest")
-                    break
                 case MessageType.RREP:
                     Logger.log("Got RouteReply")
                     self.rm.reveiveRouteReply(fromAddr, reply: message as! RouteReply)
+                    break
+                case MessageType.UNICASTJSON:
+                    var um = message as! UnicastJSONMessage
+                    if um.destMacAddr == self.addr {
+                        Logger.log("Got a message for me")
+                        var jmsg = JSONMessage(dict: um.getDict())
+                        Logger.log("put jmsg into buffer")
+                        self.cb.addToIncomingBuffer(jmsg)
+                    } else {
+                        Logger.log("The message is not for me")
+                        self.directSend(um.destMacAddr, data: message.serialize())
+                    }
                     break
                 case MessageType.RERR:
                     break
@@ -192,7 +201,7 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
                     break
 
                 default:
-                    self.cb.addToIncomingBuffer(message)
+                    Logger.error("Wrong Message!!!")
                     break
                 }
             }
@@ -224,11 +233,12 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
             // Called when a connected peer changes state (for example, goes offline)
     }
     
-    func send(dest: MacAddr, message: Message) {
+    //func send(dest: MacAddr, message: Message) {
         //self.cb.send(dest, data: message.serialize())
-    }
+    //}
     
     func directSend(dest: MacAddr, data: NSData) {
+        Logger.log("Direct send to \(dest)")
         if let peerID = self.macPeerMapping[dest] {
             dispatch_async(dispatch_get_main_queue()) {
                 var error : NSError?
@@ -236,16 +246,19 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
                 if error != nil {
                     Logger.log("Error sending data: \(error?.localizedDescription)")
                 }
+                Logger.log("Direct send to \(dest) successfully")
             }
         } else {
             Logger.error("Not found peerID \(dest)")
         }
     }
     
+    /*
     func send(dest: MCPeerID, message: Message) {
         var rawMessage = RawMessage(dest: dest, data: message.serialize())
         self.cb.addToOutgoingBuffer(rawMessage)
     }
+    */
     
     func broadcast(message: Message) {
         Logger.log("Broadcast")
@@ -273,6 +286,15 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
             self.broadcastSeqNum++
             var bmsg = BroadcastJSONMessage(message: message, seqNum: self.broadcastSeqNum, srcMacAddr: self.addr)
             self.cb.broadcast(bmsg.serialize())
+        }
+    }
+    
+    func send(dest: MacAddr, message: NSDictionary) {
+        //self.cb.send(dest, data: message.serialize())
+        Logger.log("Unicast JSON Message")
+        dispatch_async(dispatch_get_main_queue()) {
+            var msg = UnicastJSONMessage(message: message, destMacAddr: dest)
+            self.cb.addToOutgoingBuffer(dest, data: msg.data)
         }
     }
     

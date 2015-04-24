@@ -214,7 +214,7 @@ class RouteManager {
             reply.hopCount = 0
             reply.lifeTime = UInt32(AODVConfig.MY_ROUTE_TIMEOUT)
             
-            self.mp.send(from, message: reply)
+            self.mp.directSend(from, data: reply.serialize())
 
         // it is the intermediate node
         } else {
@@ -275,6 +275,7 @@ class RouteManager {
             return
         }
         
+        
         if (reply.origMacAddr != self.macAddr) {
             // forward
             Logger.log("Forward reply")
@@ -285,7 +286,9 @@ class RouteManager {
             // TODO
         }
         
-        
+        dispatch_async(dispatch_get_main_queue()) {
+            self.mp.cb.cleanOutgoingBuffer(reply.destMacAddr)
+        }
     }
     
     func refreshAttempt(addr: MacAddr) {
@@ -308,5 +311,12 @@ class RouteManager {
     
     func current() -> Time {
         return UInt64(NSDate().timeIntervalSince1970)
+    }
+    
+    func getNextHop(dest: MacAddr) -> MacAddr? {
+        if (self.isRouteAvailable(dest)) {
+            return self.routeTable[dest]!.nextHop
+        }
+        return nil
     }
 }
