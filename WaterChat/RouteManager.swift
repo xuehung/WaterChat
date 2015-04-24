@@ -86,6 +86,7 @@ class RouteManager {
             rr.U = 1
         }
         
+        Logger.log("rr.origin = \(rr.origMacAddr)")
         
         self.mp.broadcast(rr)
         
@@ -144,7 +145,7 @@ class RouteManager {
         
         
         // reverse route is created or updated
-        
+        Logger.log("message(request).origin = \(message.origMacAddr)")
         if (from != message.origMacAddr) {
             if let entry = self.routeTable[message.origMacAddr] {
                 // the Originator Sequence Number from the RREQ is compared to
@@ -275,6 +276,7 @@ class RouteManager {
             return
         }
         
+        Logger.log("reply.origin = \(reply.origMacAddr)")
         
         if (reply.origMacAddr != self.macAddr) {
             // forward
