@@ -54,8 +54,8 @@ class RouteRequest: Message {
         data.getBytes(&self.hopCount, range: NSMakeRange(3, 1))
         data.getBytes(&self.PREQID, range: NSMakeRange(4, 4))
         data.getBytes(&self.destMacAddr, range: NSMakeRange(8, 8))
-        data.getBytes(&self.destSeqNum, range: NSMakeRange(16, 4))
-        data.getBytes(&self.origMacAddr, range: NSMakeRange(20, 8))
+        data.getBytes(&self.origMacAddr, range: NSMakeRange(16, 8))
+        data.getBytes(&self.destSeqNum, range: NSMakeRange(24, 4))
         data.getBytes(&self.origSeqNum, range: NSMakeRange(28, 4))
         super.init(bytes: data)
     }
