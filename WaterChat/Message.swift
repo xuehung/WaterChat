@@ -41,9 +41,17 @@ class Message {
             var msg = BroadcastJSONMessage(bytes: data)
             msg.type = MessageType.BROADCASTJSON
             return msg
+        case MessageType.UNICASTJSON.rawValue:
+            var msg = UnicastJSONMessage(bytes: data)
+            msg.type = MessageType.UNICASTJSON
+            return msg
         case MessageType.RREQ.rawValue:
             var msg = RouteRequest(bytes: data)
             msg.type = MessageType.RREQ
+            return msg
+        case MessageType.RREP.rawValue:
+            var msg = RouteReply(bytes: data)
+            msg.type = MessageType.RREP
             return msg
         case MessageType.ROOMREQ.rawValue:
             println("parse message roomreq");
