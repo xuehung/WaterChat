@@ -10,7 +10,8 @@ import Foundation
 import MultipeerConnectivity
 
 class CommunicationBuffer {
-    var outgoingBuffer: [RawMessage] = []
+    //var outgoingBuffer: [RawMessage] = []
+    var outgoingBuffer = Dictionary<MacAddr, [NSData]>()
     var incomingBuffer: [Message] = []
     var mp: MessagePasser!
     var outgoingCountSem: dispatch_semaphore_t!
@@ -46,7 +47,7 @@ class CommunicationBuffer {
         
         return message
     }
-    
+    /*
     func addToOutgoingBuffer(message: RawMessage) {
         
         dispatch_semaphore_wait(self.outgoingMutex, DISPATCH_TIME_FOREVER)
@@ -54,6 +55,46 @@ class CommunicationBuffer {
         dispatch_semaphore_signal(self.outgoingMutex)
         
         dispatch_semaphore_signal(self.outgoingCountSem)
+    }
+    */
+    
+    func addToOutgoingBuffer(dest: MacAddr, data: NSData) {
+        
+        dispatch_semaphore_wait(self.outgoingMutex, DISPATCH_TIME_FOREVER)
+        
+        if let next = self.mp.rm.getNextHop(dest) {
+            self.mp.directSend(next, data: data)
+        } else {
+            if self.outgoingBuffer[dest] == nil {
+               self.outgoingBuffer[dest] = []
+            }
+            Logger.log("Added int outgoing buffer")
+            self.outgoingBuffer[dest]?.append(data)
+            Logger.log("Ask rm to send route request")
+            self.mp.rm.sendRouteRequest(dest)
+        }
+        
+        dispatch_semaphore_signal(self.outgoingMutex)
+        
+    }
+    
+    func cleanOutgoingBuffer(dest: MacAddr) {
+        dispatch_semaphore_wait(self.outgoingMutex, DISPATCH_TIME_FOREVER)
+        
+        if let next = self.mp.rm.getNextHop(dest) {
+            if let dataArray = self.outgoingBuffer[dest] {
+                for data in dataArray {
+                    self.mp.directSend(dest, data: data)
+                }
+                self.outgoingBuffer[dest] = []
+            } else {
+                Logger.log("data is nil")
+            }
+        } else {
+            Logger.error("getNextHop is not available")
+        }
+        
+        dispatch_semaphore_signal(self.outgoingMutex)
     }
     
     func broadcast(data: NSData) {
@@ -71,7 +112,7 @@ class CommunicationBuffer {
             }
         }
     }
-    
+    /*
     func createSendingQueue() {
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) {
             while (true) {
@@ -93,4 +134,5 @@ class CommunicationBuffer {
             }
         }
     }
+    */
 }

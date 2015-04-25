@@ -18,9 +18,11 @@ enum MessageType: UInt8 {
     case RMVUSER = 6 // Remove User
     case ROOMTALK = 7
     case ROOMRMV = 8
-    
-    case USRPROFILE = 31 
-    
+
+    case UNICASTJSON = 10
+
+    case USRPROFILE = 31
+
     case BROADCASTJSON = 98
     case JSON = 99
 }

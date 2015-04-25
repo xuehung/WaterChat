@@ -38,11 +38,20 @@ class RouteManager {
         if let entry = routeTable[addr] {
             return isRouteValid(entry)
         }
+        Logger.log("cannot find in the route table")
         return false
     }
     
     func isRouteValid(route: TableEntry) -> Bool {
-        return route.status == RouteStatus.valid && current() > route.lifeTime
+        if (route.status != RouteStatus.valid) {
+            Logger.log("route to \(route.destAddr) is not valid")
+        }
+        if (current() > route.lifeTime) {
+            Logger.log("route to \(route.destAddr) is expired")
+            Logger.log("current = \(current())")
+            Logger.log("route.lifetime = \(route.lifeTime)")
+        }
+        return route.status == RouteStatus.valid && current() <= route.lifeTime
     }
     
     func sendRouteRequest(addr: MacAddr) {
@@ -86,6 +95,7 @@ class RouteManager {
             rr.U = 1
         }
         
+        Logger.log("rr.origin = \(rr.origMacAddr)")
         
         self.mp.broadcast(rr)
         
@@ -144,7 +154,7 @@ class RouteManager {
         
         
         // reverse route is created or updated
-        
+        Logger.log("message(request).origin = \(message.origMacAddr)")
         if (from != message.origMacAddr) {
             if let entry = self.routeTable[message.origMacAddr] {
                 // the Originator Sequence Number from the RREQ is compared to
@@ -178,8 +188,10 @@ class RouteManager {
         
         if (message.destMacAddr == self.macAddr ||
             isRouteAvailable(message.destMacAddr)) {
+            Logger.log("It is the destination or route is available")
             sendRouteReply(from, request: message)
         } else {
+            Logger.log("no route available, rebroadcast")
             self.mp.broadcast(message)
         }
         
@@ -192,12 +204,14 @@ class RouteManager {
     }
     
     func sendRouteReply(from: MacAddr, request: RouteRequest) {
+        Logger.log("sendRouteReply is called")
         var reply = RouteReply()
         reply.destMacAddr = request.destMacAddr
         reply.origMacAddr = request.origMacAddr
 
         // it is the destination
         if (request.destMacAddr == self.macAddr) {
+            Logger.log("I am the destination")
             // If the generating node is the destination itself, 
             // it MUST increment its own sequence number by one 
             // if the sequence number in the RREQ packet is equal 
@@ -210,11 +224,11 @@ class RouteManager {
             reply.hopCount = 0
             reply.lifeTime = UInt32(AODVConfig.MY_ROUTE_TIMEOUT)
             
-            self.mp.send(from, message: reply)
+            self.mp.directSend(from, data: reply.serialize())
 
-        // it is the intermediate destination
+        // it is the intermediate node
         } else {
-            
+            Logger.log("I am the intermediate node")
             if let entry = self.routeTable[request.destMacAddr] {
                 reply.destSeqNum = entry.destSeqNum
                 reply.hopCount = entry.hopCount
@@ -266,10 +280,17 @@ class RouteManager {
             entry.hopCount = reply.hopCount
             entry.lifeTime = current() + Time(reply.lifeTime)
             entry.destSeqNum = reply.destSeqNum
+
+            Logger.log("add route to \(reply.destMacAddr) via nexthop \(from)")
+            Logger.log("lifetime = \(entry.lifeTime)")
+            Logger.log("destSeq = \(reply.destSeqNum)")
+            
         } else {
             Logger.error("impossible!")
             return
         }
+        
+        Logger.log("reply.origin = \(reply.origMacAddr)")
         
         if (reply.origMacAddr != self.macAddr) {
             // forward
@@ -281,7 +302,9 @@ class RouteManager {
             // TODO
         }
         
-        
+        dispatch_async(dispatch_get_main_queue()) {
+            self.mp.cb.cleanOutgoingBuffer(reply.destMacAddr)
+        }
     }
     
     func refreshAttempt(addr: MacAddr) {
@@ -304,5 +327,12 @@ class RouteManager {
     
     func current() -> Time {
         return UInt64(NSDate().timeIntervalSince1970)
+    }
+    
+    func getNextHop(dest: MacAddr) -> MacAddr? {
+        if (self.isRouteAvailable(dest)) {
+            return self.routeTable[dest]!.nextHop
+        }
+        return nil
     }
 }

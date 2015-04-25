@@ -29,9 +29,7 @@ class Message {
         var type: UInt8 = 0
         data.getBytes(&type, range: NSMakeRange(0, 1))
         Logger.log("Mesage Factory: \(type)")
-        
-        Logger.log("Message Factory \(type)")
-        
+            
         switch type {
         case MessageType.BROADCAST.rawValue:
             var msg = BroadcastMessage(bytes: data)
@@ -41,9 +39,18 @@ class Message {
             var msg = BroadcastJSONMessage(bytes: data)
             msg.type = MessageType.BROADCASTJSON
             return msg
+        case MessageType.UNICASTJSON.rawValue:
+            var msg = UnicastJSONMessage(bytes: data)
+            msg.type = MessageType.UNICASTJSON
+            return msg
         case MessageType.RREQ.rawValue:
             var msg = RouteRequest(bytes: data)
             msg.type = MessageType.RREQ
+            return msg
+        case MessageType.RREP.rawValue:
+            Logger.log("reply!!!!")
+            var msg = RouteReply(bytes: data)
+            msg.type = MessageType.RREP
             return msg
         case MessageType.ROOMREQ.rawValue:
             println("parse message roomreq");

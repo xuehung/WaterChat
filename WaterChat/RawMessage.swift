@@ -9,11 +9,11 @@
 import Foundation
 import MultipeerConnectivity
 
-struct RawMessage {
-    var dest: MCPeerID!
+struct RawMessageX {
+    var dest: MacAddr!
     var data: NSData!
     
-    init(dest: MCPeerID, data: NSData) {
+    init(dest: MacAddr, data: NSData) {
         self.dest = dest
         self.data = data
     }
