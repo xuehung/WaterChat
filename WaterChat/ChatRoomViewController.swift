@@ -62,5 +62,18 @@ class ChatRoomViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    
+    
+    @IBAction func testtest(sender: UIButton) {
+        // run this code when user presses test button
+        println("hello it is test")
+        var mp = MessagePasser.getInstance(Config.address)
+        // send your group message
+        var rm = RoomManager()
+        // get the message string from the screen
+        var msg:String = "test"
+        rm.sendToRoom(msg)
+    }
 
 }

@@ -20,6 +20,7 @@ class RoomInfo {
     
     init() {
         self.groupID = random() % 1024
+        Logger.log("Random group ID \(self.groupID)")
         self.name = "unknown"
         self.maximumNumber = 10
         self.currentNumber = 1
@@ -28,6 +29,7 @@ class RoomInfo {
     }
     init(name: String, maxNum: Int) {
         self.groupID = random() % 1024
+        Logger.log("Random group ID \(self.groupID)")
         self.name = name
         self.maximumNumber = maxNum
         self.currentNumber = 1

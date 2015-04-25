@@ -174,13 +174,5 @@ class RoomManager {
             }
         }
     }
-    
-    //func addMemberToRoom(memName: String) -> RoomInfo {
-    //    currentRoomInfo.memberList.append(memName)
-    //    currentRoomInfo.currentNumber += 1
-        // Update the room information in group list for
-    //    addRoomToList(currentRoomInfo)
-    //    return currentRoomInfo
-    //}
 }
 

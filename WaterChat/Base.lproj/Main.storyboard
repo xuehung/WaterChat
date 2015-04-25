@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NvW-Nk-lgo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NvW-Nk-lgo">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <scenes>
         <!--Profile-->
@@ -223,7 +223,7 @@
         <!--Chat Room-->
         <scene sceneID="tZc-dV-5MJ">
             <objects>
-                <viewController id="Qi6-Wj-lHb" sceneMemberID="viewController">
+                <viewController id="Qi6-Wj-lHb" customClass="ChatRoomViewController" customModule="WaterChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6Fb-qP-q7B"/>
                         <viewControllerLayoutGuide type="bottom" id="cwu-9I-Dsn"/>
@@ -237,6 +237,15 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KQB-6r-LmM">
+                                <rect key="frame" x="51" y="505" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="testtest:" destination="Qi6-Wj-lHb" eventType="touchDown" id="F2t-xL-E9l"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -424,7 +433,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="test:" destination="BYZ-38-t0r" eventType="touchDown" id="tRb-qY-z95"/>
+                                    <action selector="test:" destination="BYZ-38-t0r" eventType="touchDown" id="rpY-gk-rVD"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -573,6 +582,6 @@
         <image name="welcome.png" width="640" height="960"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rGG-Du-Ko1"/>
+        <segue reference="cCv-vi-neP"/>
     </inferredMetricsTieBreakers>
 </document>
