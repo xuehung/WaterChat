@@ -48,8 +48,8 @@ class RoomListTableViewController: UITableViewController {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
         //return rooms.count
-        //return groupList.count
-        return 3
+        return groupList.count
+        //return 3
     }
 
 
@@ -58,13 +58,13 @@ class RoomListTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("RoomCell", forIndexPath: indexPath)
             as! UITableViewCell
         let room = groupList[indexPath.row] as RoomInfo
-        /*let room = groupList[indexPath.row] as RoomInfo
+        //let room = groupList[indexPath.row] as RoomInfo
         cell.textLabel?.text = room.name
         var currentNum = String(room.currentNumber)
         var maxNum = String(room.maximumNumber)
-        cell.detailTextLabel?.text = "\(currentNum)/\(maxNum)"*/
-        cell.textLabel?.text = "Hello"
-        cell.detailTextLabel?.text = "World"
+        cell.detailTextLabel?.text = "\(currentNum)/\(maxNum)"
+        //cell.textLabel?.text = "Hello"
+        //cell.detailTextLabel?.text = "World"
         return cell
     }
 
