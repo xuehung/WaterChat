@@ -47,12 +47,16 @@ class ViewController: UIViewController {
         */
         
         
+
+        
         var u = User(name: "BUJAR", gender: "MALE", birthDate: "72291",moreInfo: "NONE")
         var mdict = u.createJsonDict()
         var dest: MacAddr = 2
         mp.send(dest, message: mdict)
         
+
         
+        /*
         var x = mp.receive()
         if (x is JSONMessage) {
             println("is json msg")
@@ -61,6 +65,15 @@ class ViewController: UIViewController {
         } else {
             println("is not json msg")
         }
+*/
         
+        /*
+        var rr = RouteRequest()
+        rr.origMacAddr = 99
+        var data = rr.serialize()
+        println(data.description)
+        var newrr = RouteRequest(bytes: data)
+        println(newrr.origMacAddr)
+        */
     }
 }

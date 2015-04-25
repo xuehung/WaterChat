@@ -38,11 +38,20 @@ class RouteManager {
         if let entry = routeTable[addr] {
             return isRouteValid(entry)
         }
+        Logger.log("cannot find in the route table")
         return false
     }
     
     func isRouteValid(route: TableEntry) -> Bool {
-        return route.status == RouteStatus.valid && current() > route.lifeTime
+        if (route.status != RouteStatus.valid) {
+            Logger.log("route to \(route.destAddr) is not valid")
+        }
+        if (current() > route.lifeTime) {
+            Logger.log("route to \(route.destAddr) is expired")
+            Logger.log("current = \(current())")
+            Logger.log("route.lifetime = \(route.lifeTime)")
+        }
+        return route.status == RouteStatus.valid && current() <= route.lifeTime
     }
     
     func sendRouteRequest(addr: MacAddr) {
@@ -271,6 +280,11 @@ class RouteManager {
             entry.hopCount = reply.hopCount
             entry.lifeTime = current() + Time(reply.lifeTime)
             entry.destSeqNum = reply.destSeqNum
+
+            Logger.log("add route to \(reply.destMacAddr) via nexthop \(from)")
+            Logger.log("lifetime = \(entry.lifeTime)")
+            Logger.log("destSeq = \(reply.destSeqNum)")
+            
         } else {
             Logger.error("impossible!")
             return
