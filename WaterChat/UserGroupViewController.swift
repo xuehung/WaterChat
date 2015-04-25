@@ -80,6 +80,11 @@ class UserGroupViewController: UITabBarController {
                             i += 1
                         }
                     }
+                    else if (tt == MessageType.ROOMTALK) {
+                        var rm = RoomManager()
+                        var msg = rm.JSONToMsg(xx.dict)
+                        
+                    }
                     println("All Users: ")
                     // print out all current users
                     for element in userList{

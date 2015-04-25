@@ -169,8 +169,8 @@ class RoomManager {
         var mdict = MsgToJSON(msg)
         for mem in currentRoomInfo.memberList {
             if (mem != Config.address.description) {
-                var dest = mem.toInt()
-                // mp.send(dest, mdict)
+                var dest: MacAddr = Util.convertDisplayNameToMacAddr(mem)
+                mp.send(dest, message: mdict)
             }
         }
     }
