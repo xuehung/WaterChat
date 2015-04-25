@@ -19,28 +19,28 @@ class UserGroupViewController: UITabBarController {
         //println(self.profile.isFemale)
         //println(self.profile.birthDate)
         //println(self.profile.moreInfo)
-        
+
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) {
-            
+
             while(true) {
-                
+
                 UserManager.announceUserInfo()
-                
+
                 var rm = RoomManager()
                 rm.announceRoomInfo()
-                
+
                 sleep(5)
-                
+
             }
-            
+
         }
-        
+
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) {
-            
+
             var mp = MessagePasser.getInstance(Config.address)
-            
+
             while(true) {
-                
+
                 var x = mp.receive()
                 // If message is JSON, add user to userList
                 if (x is JSONMessage) {
@@ -83,7 +83,7 @@ class UserGroupViewController: UITabBarController {
                     else if (tt == MessageType.ROOMTALK) {
                         var rm = RoomManager()
                         var msg = rm.JSONToMsg(xx.dict)
-                        
+
                     }
                     println("All Users: ")
                     // print out all current users
@@ -95,11 +95,11 @@ class UserGroupViewController: UITabBarController {
                     for room in groupList{
                         println(room.name)
                     }
-                    
+
                 }
 
             }
-            
+
         }
     }
 
@@ -107,7 +107,7 @@ class UserGroupViewController: UITabBarController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     @IBAction func readUserInfoAndDoStuff(segue: UIStoryboardSegue){
         //CreateProfileViewController source =
         //UserProfile profile = source.profile

@@ -22,19 +22,19 @@ class ViewController: UIViewController {
     @IBAction func test(sender: UIButton) {
         // run this code when user presses test button
         println("hello it is test")
-        
+
         var mp = MessagePasser.getInstance(Config.address)
-        
+
         /*
         var mp = MessagePasser.getInstance(Config.address)
         var dest: MacAddr = 1
         mp.rm.sendRouteRequest(dest)
         */
-        
-        
+
+
         /*
         var mp = MessagePasser.getInstance(Config.address)
-        
+
         var rr = RouteRequest()
         var from: MacAddr = Config.address + 1
         rr.destMacAddr = Config.address
@@ -42,23 +42,23 @@ class ViewController: UIViewController {
         rr.PREQID = 1
         rr.origSeqNum = 3
         rr.U = 1
-        
+
         mp.rm.reveiveRouteRequest(from, message: rr)
         */
-        
-        
 
-        
+
+
+
         var u = User(name: "BUJAR", gender: "MALE", birthDate: "72291",moreInfo: "NONE")
         var mdict = u.createJsonDict()
         var dest: MacAddr = 2
         mp.send(dest, message: mdict)
-        
-        var r = RoomInfo(name: "Anna's room", maxNum: 5)
-        
-        
 
-        
+        var r = RoomInfo(name: "Anna's room", maxNum: 5)
+
+
+
+
         /*
         var x = mp.receive()
         if (x is JSONMessage) {
@@ -67,9 +67,17 @@ class ViewController: UIViewController {
                 println(xx.dict["name"])
         } else {
             println("is not json msg")
+            var xx = x as! JSONMessage
+            var t = xx.dict["type"] as! Int
+            var tt = MessageType(rawValue: UInt8(t))
+            if (tt == MessageType.ROOMREQ) {
+                var r = rm.JSONToRoom(xx.dict)
+                println(r.name)
+                println(r.groupID)
+            }
         }
 */
-        
+
         /*
         var rr = RouteRequest()
         rr.origMacAddr = 99

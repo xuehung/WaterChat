@@ -20,7 +20,7 @@ class RoomListTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
     }
-    
+
     func refresh(sender:AnyObject)
     {
         // Code to refresh table view
@@ -28,9 +28,9 @@ class RoomListTableViewController: UITableViewController {
         Logger.log("refresh")
         Logger.log("groupList.count = \(groupList.count)")
         self.refreshControl?.endRefreshing()
-        
+
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -48,22 +48,26 @@ class RoomListTableViewController: UITableViewController {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
         //return rooms.count
-        return groupList.count
+        //return groupList.count
+        return 3
     }
 
-    
+
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         println("fill in room cell")
         let cell = tableView.dequeueReusableCellWithIdentifier("RoomCell", forIndexPath: indexPath)
             as! UITableViewCell
         let room = groupList[indexPath.row] as RoomInfo
+        /*let room = groupList[indexPath.row] as RoomInfo
         cell.textLabel?.text = room.name
         var currentNum = String(room.currentNumber)
         var maxNum = String(room.maximumNumber)
-        cell.detailTextLabel?.text = "\(currentNum)/\(maxNum)"
+        cell.detailTextLabel?.text = "\(currentNum)/\(maxNum)"*/
+        cell.textLabel?.text = "Hello"
+        cell.detailTextLabel?.text = "World"
         return cell
     }
-    
+
 
     /*
     // Override to support conditional editing of the table view.
@@ -81,7 +85,7 @@ class RoomListTableViewController: UITableViewController {
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
     */
 
@@ -109,5 +113,15 @@ class RoomListTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        //let room = groupList[indexPath.row] as RoomInfo
+
+        let row = indexPath.row
+        println(row)
+        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("chatroomview")
+        self.presentViewController(vc as! UIViewController, animated: true, completion: nil)
+    }
 
 }

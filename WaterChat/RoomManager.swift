@@ -13,11 +13,11 @@ var groupList = [RoomInfo]()
 var currentRoomInfo: RoomInfo = RoomInfo()
 
 class RoomManager {
-    
+
     func RoomToJSON(newRoom: RoomInfo) -> NSMutableDictionary {
-        
+
         //var newRoom = RoomInfo()
-        
+
         var mdict = NSMutableDictionary()
         var groupID: NSNumber = newRoom.groupID
         var name: NSString = newRoom.name
@@ -26,7 +26,7 @@ class RoomManager {
         var curNum: NSNumber = newRoom.currentNumber
         var macAddr: NSString = newRoom.groupHolder
         var memberList: [NSString] = newRoom.memberList
-        
+
         mdict.setObject(type, forKey: "type")
         mdict.setObject(groupID, forKey: "groupID")
         mdict.setObject(name, forKey: "name")
@@ -34,13 +34,13 @@ class RoomManager {
         mdict.setObject(curNum, forKey: "curNum")
         mdict.setObject(macAddr, forKey: "macAddr")
         mdict.setObject(memberList, forKey: "memList")
-        
+
         return mdict
     }
-    
+
     func RmvRoomToJSON(roomToRmv: RoomInfo) -> NSMutableDictionary {
         //var newRoom = RoomInfo()
-        
+
         var mdict = NSMutableDictionary()
         var groupID: NSNumber = roomToRmv.groupID
         var name: NSString = roomToRmv.name
@@ -49,7 +49,7 @@ class RoomManager {
         var curNum: NSNumber = roomToRmv.currentNumber
         var macAddr: NSString = roomToRmv.groupHolder
         var memberList: [NSString] = roomToRmv.memberList
-        
+
         mdict.setObject(type, forKey: "type")
         mdict.setObject(groupID, forKey: "groupID")
         mdict.setObject(name, forKey: "name")
@@ -57,14 +57,14 @@ class RoomManager {
         mdict.setObject(curNum, forKey: "curNum")
         mdict.setObject(macAddr, forKey: "macAddr")
         mdict.setObject(memberList, forKey: "memList")
-        
+
         return mdict
     }
-    
+
     func JSONToRoom(room: NSDictionary) -> RoomInfo {
 
         var r = RoomInfo()
-        var type: Int = (room["type"] as! Int)
+        var type: Int? = (room["type"] as! Int)
         Logger.log("type is \(type)")
         r.name = room["name"] as! String
         r.groupID = room["groupID"] as! Int
@@ -72,28 +72,28 @@ class RoomManager {
         r.maximumNumber = room["maxNum"] as! Int
         r.currentNumber = room["curNum"] as! Int
         r.memberList = room["memList"] as! [String]
-        
+
         return r
     }
-    
+
     func MsgToJSON(msg: String) -> NSMutableDictionary {
         var mdict = NSMutableDictionary()
         var type = NSNumber(unsignedChar: MessageType.ROOMTALK.rawValue)
         var content: NSString = msg
-        
+
         mdict.setObject(type, forKey: "type")
         mdict.setObject(content, forKey: "content")
-        
+
         return mdict
     }
-    
+
     func JSONToMsg(content: NSDictionary) -> String {
         var type: Int = (content["type"] as! Int)
         var msg: String = (content["content"] as! String)
-        
+
         return msg;
     }
-    
+
     func addRoomToList(newRoom: RoomInfo) {
         var exists = false
         for room in groupList{
@@ -111,7 +111,7 @@ class RoomManager {
         }
         currentRoomInfo = newRoom
     }
-    
+
     func announceRoomInfo() {
         var mp = MessagePasser.getInstance(Config.address)
         for room in groupList {
@@ -119,7 +119,7 @@ class RoomManager {
             mp.broadcast(mdict)
         }
     }
-    
+
     func enterOneRoom(roomName: String) -> RoomInfo {
         // traverse the room list to find the matching roomInfo
         for room in groupList {
@@ -136,7 +136,7 @@ class RoomManager {
         }
         return currentRoomInfo;
     }
-    
+
     func leaveOneRoom(roomName: String) {
         var i = 0
         for room in groupList {
@@ -163,7 +163,7 @@ class RoomManager {
             i += 1
         }
     }
-    
+
     func sendToRoom(msg: String) {
         var mp = MessagePasser.getInstance(Config.address)
         var mdict = MsgToJSON(msg)

@@ -15,7 +15,7 @@ class UserManager{
     class func setCurrentUser(user: User){
         currentUserInfo = user
     }
-    
+
     class func announceUserInfo() {
         var mp = MessagePasser.getInstance(Config.address)
         var mdict = currentUserInfo.createJsonDict()      //commented out for testing
@@ -25,7 +25,7 @@ class UserManager{
         println(mdict)
         mp.broadcast(mdict)
     }
-    
+
     class func addUserToList(newUser: User) {
         var exists = false
         for element in userList{
@@ -38,7 +38,7 @@ class UserManager{
             userList.append(newUser)
         }
     }
-    
+
     class func JsonToUserObject(data: Message) -> User {
         var user = User()
         var json = data as! JSONMessage
