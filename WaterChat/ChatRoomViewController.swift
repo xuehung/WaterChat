@@ -9,18 +9,18 @@ import UIKit
 
 class ChatRoomViewController: JSQMessagesViewController {
     
-    var messages = [Message]()
+    var messages = [ChatMessage]()
     var avatars = Dictionary<String, UIImage>()
     var outgoingBubbleImageView = JSQMessagesBubbleImageFactory.outgoingMessageBubbleImageViewWithColor(UIColor.jsq_messageBubbleLightGrayColor())
     var incomingBubbleImageView = JSQMessagesBubbleImageFactory.incomingMessageBubbleImageViewWithColor(UIColor.jsq_messageBubbleGreenColor())
     var senderImageUrl: String!
     var batchMessages = true
-    var ref: Firebase!
+    //var ref: Firebase!
     
     
     // *** STEP 1: STORE FIREBASE REFERENCES
-    var messagesRef: Firebase!
-    
+    //var messagesRef: Firebase!
+    /*
     func setupFirebase() {
         // *** STEP 2: SETUP FIREBASE
         messagesRef = Firebase(url: "https://swift-chat.firebaseio.com/messages")
@@ -35,19 +35,20 @@ class ChatRoomViewController: JSQMessagesViewController {
             self.messages.append(message)
             self.finishReceivingMessage()
         })
-    }
+    }*/
     
     func sendMessage(text: String!, sender: String!) {
         // *** STEP 3: ADD A MESSAGE TO FIREBASE
-        messagesRef.childByAutoId().setValue([
+        /*messagesRef.childByAutoId().setValue([
             "text":text,
             "sender":sender,
             "imageUrl":senderImageUrl
-            ])
+            ])*/
+        tempSendMessage(text, sender: sender)
     }
     
     func tempSendMessage(text: String!, sender: String!) {
-        let message = Message(text: text, sender: sender, imageUrl: senderImageUrl)
+        let message = ChatMessage(text: text, sender: sender, imageUrl: senderImageUrl)
         messages.append(message)
     }
     
@@ -88,19 +89,20 @@ class ChatRoomViewController: JSQMessagesViewController {
         super.viewDidLoad()
         inputToolbar.contentView.leftBarButtonItem = nil
         automaticallyScrollsToMostRecentMessage = true
-        navigationController?.navigationBar.topItem?.title = "Logout"
+        //navigationController?.navigationBar.topItem?.title = "Logout"
         
         sender = (sender != nil) ? sender : "Anonymous"
-        let profileImageUrl = user?.providerData["cachedUserProfile"]?["profile_image_url_https"] as? NSString
+        /*let profileImageUrl = user?.providerData["cachedUserProfile"]?["profile_image_url_https"] as? NSString
         if let urlString = profileImageUrl {
             setupAvatarImage(sender, imageUrl: urlString as String, incoming: false)
             senderImageUrl = urlString as String
         } else {
             setupAvatarColor(sender, incoming: false)
             senderImageUrl = ""
-        }
-        
-        setupFirebase()
+        }*/
+        setupAvatarColor(sender, incoming: false)
+        senderImageUrl = ""
+        //setupFirebase()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -111,9 +113,9 @@ class ChatRoomViewController: JSQMessagesViewController {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
-        if ref != nil {
+        /*if ref != nil {
             ref.unauth()
-        }
+        }*/
     }
     
     // ACTIONS

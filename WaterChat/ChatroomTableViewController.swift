@@ -44,7 +44,7 @@ class ChatroomTableViewController: UITableViewController {
         return _messages.count
     }
 
-    
+    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         //println("fill in cell")
         let cell = tableView.dequeueReusableCellWithIdentifier("MessageCell", forIndexPath: indexPath)
@@ -60,7 +60,7 @@ class ChatroomTableViewController: UITableViewController {
         }
         
         return cell
-    }
+    }*/
     
     @IBAction func readData(sender : AnyObject){
         _messages.append(self.messageToSend.text)
