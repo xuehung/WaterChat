@@ -168,7 +168,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="ICV-AM-WNW">
                             <connections>
-                                <segue destination="NYN-0o-bQX" kind="presentation" id="EEC-tL-PMY"/>
+                                <segue destination="NYN-0o-bQX" kind="presentation" identifier="SaveRoomDetail" id="EEC-tL-PMY"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -179,7 +179,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UnI-FV-yvV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5732" y="1693"/>
+            <point key="canvasLocation" x="5532" y="2205"/>
         </scene>
         <!--Choose Maximum Room Size-->
         <scene sceneID="dlr-kf-4eh">
@@ -563,6 +563,6 @@
         <image name="welcome.png" width="640" height="960"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ha0-BS-fsn"/>
+        <segue reference="rGG-Du-Ko1"/>
     </inferredMetricsTieBreakers>
 </document>
