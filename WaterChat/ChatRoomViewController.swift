@@ -7,11 +7,13 @@
 //
 import UIKit
 
+var chatMessages = [ChatMessage]()
+
 class ChatRoomViewController: JSQMessagesViewController {
     
     var curRoom = RoomInfo()
     
-    var messages = [ChatMessage]()
+    
     var avatars = Dictionary<String, UIImage>()
     var outgoingBubbleImageView = JSQMessagesBubbleImageFactory.outgoingMessageBubbleImageViewWithColor(UIColor.jsq_messageBubbleLightGrayColor())
     var incomingBubbleImageView = JSQMessagesBubbleImageFactory.incomingMessageBubbleImageViewWithColor(UIColor.jsq_messageBubbleGreenColor())
@@ -51,7 +53,20 @@ class ChatRoomViewController: JSQMessagesViewController {
     
     func tempSendMessage(text: String!, sender: String!) {
         let message = ChatMessage(text: text, sender: sender, imageUrl: senderImageUrl)
-        messages.append(message)
+        chatMessages.append(message)
+        sendToRoom(message)
+    }
+    
+    func sendToRoom(msg: ChatMessage) {
+        var mp = MessagePasser.getInstance(Config.address)
+        var rm = RoomManager()
+        var mdict = rm.MsgToJSON(msg)
+        for mem in curRoom.memberList {
+            if (mem != Config.address.description) {
+                var dest: MacAddr = Util.convertDisplayNameToMacAddr(mem)
+                mp.send(dest, message: mdict)
+            }
+        }
     }
     
     func setupAvatarImage(name: String, imageUrl: String?, incoming: Bool) {
@@ -89,9 +104,10 @@ class ChatRoomViewController: JSQMessagesViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //self.navigationController?.setNavigationBarHidden(false, animated: true)
         inputToolbar.contentView.leftBarButtonItem = nil
         automaticallyScrollsToMostRecentMessage = true
-        //navigationController?.navigationBar.topItem?.title = "Logout"
+        navigationController?.navigationBar.topItem?.title = "Leave"
         
         sender = (sender != nil) ? sender : "Anonymous"
         /*let profileImageUrl = user?.providerData["cachedUserProfile"]?["profile_image_url_https"] as? NSString
@@ -105,6 +121,7 @@ class ChatRoomViewController: JSQMessagesViewController {
         setupAvatarColor(sender, incoming: false)
         senderImageUrl = ""
         //setupFirebase()
+        Logger.log("current room name is \(curRoom.name)")
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -141,11 +158,11 @@ class ChatRoomViewController: JSQMessagesViewController {
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, messageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageData! {
-        return messages[indexPath.item]
+        return chatMessages[indexPath.item]
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, bubbleImageViewForItemAtIndexPath indexPath: NSIndexPath!) -> UIImageView! {
-        let message = messages[indexPath.item]
+        let message = chatMessages[indexPath.item]
         
         if message.sender() == sender {
             return UIImageView(image: outgoingBubbleImageView.image, highlightedImage: outgoingBubbleImageView.highlightedImage)
@@ -155,7 +172,7 @@ class ChatRoomViewController: JSQMessagesViewController {
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageViewForItemAtIndexPath indexPath: NSIndexPath!) -> UIImageView! {
-        let message = messages[indexPath.item]
+        let message = chatMessages[indexPath.item]
         if let avatar = avatars[message.sender()] {
             return UIImageView(image: avatar)
         } else {
@@ -165,13 +182,13 @@ class ChatRoomViewController: JSQMessagesViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return messages.count
+        return chatMessages.count
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as! JSQMessagesCollectionViewCell
         
-        let message = messages[indexPath.item]
+        let message = chatMessages[indexPath.item]
         if message.sender() == sender {
             cell.textView.textColor = UIColor.blackColor()
         } else {
@@ -189,7 +206,7 @@ class ChatRoomViewController: JSQMessagesViewController {
     
     // View  usernames above bubbles
     override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
-        let message = messages[indexPath.item];
+        let message = chatMessages[indexPath.item];
         
         // Sent by me, skip
         if message.sender() == sender {
@@ -198,7 +215,7 @@ class ChatRoomViewController: JSQMessagesViewController {
         
         // Same as previous sender, skip
         if indexPath.item > 0 {
-            let previousMessage = messages[indexPath.item - 1];
+            let previousMessage = chatMessages[indexPath.item - 1];
             if previousMessage.sender() == message.sender() {
                 return nil;
             }
@@ -208,7 +225,7 @@ class ChatRoomViewController: JSQMessagesViewController {
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
-        let message = messages[indexPath.item]
+        let message = chatMessages[indexPath.item]
         
         // Sent by me, skip
         if message.sender() == sender {
@@ -217,7 +234,7 @@ class ChatRoomViewController: JSQMessagesViewController {
         
         // Same as previous sender, skip
         if indexPath.item > 0 {
-            let previousMessage = messages[indexPath.item - 1];
+            let previousMessage = chatMessages[indexPath.item - 1];
             if previousMessage.sender() == message.sender() {
                 return CGFloat(0.0);
             }

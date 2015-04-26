@@ -75,7 +75,7 @@ class RoomManager {
 
         return r
     }
-
+    /*
     func MsgToJSON(msg: String) -> NSMutableDictionary {
         var mdict = NSMutableDictionary()
         var type = NSNumber(unsignedChar: MessageType.ROOMTALK.rawValue)
@@ -93,7 +93,7 @@ class RoomManager {
 
         return msg;
     }
-
+    */
     func addRoomToList(newRoom: RoomInfo) {
         var exists = false
         for room in groupList{
@@ -179,6 +179,21 @@ class RoomManager {
         }
     }
 
+    func MsgToJSON(msg: ChatMessage) -> NSMutableDictionary {
+        var mdict = NSMutableDictionary()
+        var type = NSNumber(unsignedChar: MessageType.ROOMTALK.rawValue)
+        var text: NSString = msg.text_
+        var sender: NSString = msg.sender_
+        var date: NSDate = msg.date_
+        
+        mdict.setObject(type, forKey: "type")
+        mdict.setObject(text, forKey: "text")
+        mdict.setObject(sender, forKey: "sender")
+        mdict.setObject(date, forKey: "date")
+        
+        return mdict
+    }
+    /*
     func sendToRoom(msg: String) {
         var mp = MessagePasser.getInstance(Config.address)
         var mdict = MsgToJSON(msg)
@@ -188,6 +203,18 @@ class RoomManager {
                 mp.send(dest, message: mdict)
             }
         }
+    }*/
+    
+    
+    func JSONToMsg(content: NSDictionary) -> ChatMessage {
+        var type: Int = (content["type"] as! Int)
+        var msg: ChatMessage!
+        msg.text_ = (content["text"] as! String)
+        msg.sender_ = (content["sender"] as! String)
+        msg.date_ = (content["date"] as! NSDate)
+        
+        return msg
     }
+    
 }
 

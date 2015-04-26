@@ -246,7 +246,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="njr-Bo-iKn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4607" y="2721"/>
+            <point key="canvasLocation" x="6903" y="925"/>
         </scene>
         <!--User Group View Controller-->
         <scene sceneID="4Ir-uV-lwa">
@@ -466,10 +466,10 @@
             </objects>
             <point key="canvasLocation" x="1843" y="789"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Enter Room View Controller-->
         <scene sceneID="5xz-Vl-Ysq">
             <objects>
-                <navigationController storyboardIdentifier="chatroomview" automaticallyAdjustsScrollViewInsets="NO" id="NYN-0o-bQX" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="chatroomview" automaticallyAdjustsScrollViewInsets="NO" id="NYN-0o-bQX" customClass="EnterRoomViewController" customModule="WaterChat" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6X1-ey-z53">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -563,6 +563,6 @@
         <image name="welcome.png" width="640" height="960"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rGG-Du-Ko1"/>
+        <segue reference="Ha0-BS-fsn"/>
     </inferredMetricsTieBreakers>
 </document>

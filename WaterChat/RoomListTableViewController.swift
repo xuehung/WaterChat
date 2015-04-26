@@ -122,9 +122,11 @@ class RoomListTableViewController: UITableViewController {
         println(row)
         var rm = RoomManager()
         let curRoom = rm.enterOneRoom(row)
-        let vc : AnyObject! = self.storyboard!.instantiateViewControllerWithIdentifier("chatroomview")
+        //let vc = self.storyboard!.instantiateViewControllerWithIdentifier("chatroomview") as! UIViewController
+        var vc = ChatRoomViewController()
         vc.curRoom = curRoom
-        self.presentViewController(vc as! UIViewController, animated: true, completion: nil)
+        self.showViewController(vc, sender: vc)
+        //self.navigationController?.presentViewController(vc, animated: true, completion: nil)
     }
 
 }

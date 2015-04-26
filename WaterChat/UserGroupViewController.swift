@@ -82,8 +82,9 @@ class UserGroupViewController: UITabBarController {
                     }
                     else if (tt == MessageType.ROOMTALK) {
                         var rm = RoomManager()
-                        var msg = rm.JSONToMsg(xx.dict)
-
+                        var msg = rm.JSONToMsg(xx.dict) as ChatMessage
+                        chatMessages.append(msg)
+                        
                     }
                     println("All Users: ")
                     // print out all current users
