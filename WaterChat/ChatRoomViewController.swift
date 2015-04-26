@@ -9,6 +9,8 @@ import UIKit
 
 class ChatRoomViewController: JSQMessagesViewController {
     
+    var curRoom = RoomInfo()
+    
     var messages = [ChatMessage]()
     var avatars = Dictionary<String, UIImage>()
     var outgoingBubbleImageView = JSQMessagesBubbleImageFactory.outgoingMessageBubbleImageViewWithColor(UIColor.jsq_messageBubbleLightGrayColor())
