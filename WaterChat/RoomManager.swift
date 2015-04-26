@@ -184,7 +184,7 @@ class RoomManager {
         var type = NSNumber(unsignedChar: MessageType.ROOMTALK.rawValue)
         var text: NSString = msg.text_
         var sender: NSString = msg.sender_
-        var date: NSDate = msg.date_
+        var date: NSNumber = msg.date_.timeIntervalSince1970
         
         mdict.setObject(type, forKey: "type")
         mdict.setObject(text, forKey: "text")
@@ -211,7 +211,7 @@ class RoomManager {
         var msg: ChatMessage!
         msg.text_ = (content["text"] as! String)
         msg.sender_ = (content["sender"] as! String)
-        msg.date_ = (content["date"] as! NSDate)
+        msg.date_ = NSDate(timeIntervalSince1970: (content["date"] as! Double))
         
         return msg
     }
