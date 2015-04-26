@@ -120,8 +120,9 @@ class RoomManager {
         }
     }
 
-    func enterOneRoom(roomName: String) -> RoomInfo {
+    func enterOneRoom(roomNumber: Int) -> RoomInfo {
         // traverse the room list to find the matching roomInfo
+        /*
         for room in groupList {
             if (room.name == roomName) {
                 if (room.currentNumber < room.maximumNumber) {
@@ -132,6 +133,20 @@ class RoomManager {
                 } else {
                     // TODO: the user is not permitted to enter this room
                 }
+            }
+        }*/
+        var index = 0;
+        for room in groupList {
+            if (index == roomNumber) {
+                if (room.currentNumber < room.maximumNumber) {
+                    room.currentNumber += 1
+                    room.memberList.append(Config.address.description)
+                    currentRoomInfo = room
+                    break
+                } else {
+                    // TODO: permit or not
+                }
+                index += 1
             }
         }
         return currentRoomInfo;
