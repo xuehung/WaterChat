@@ -168,7 +168,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="ICV-AM-WNW">
                             <connections>
-                                <segue destination="NYN-0o-bQX" kind="presentation" identifier="SaveRoomDetail" id="EEC-tL-PMY"/>
+                                <segue destination="EBu-9G-Oqo" kind="presentation" identifier="SaveRoomDetail" id="Tzi-WK-piI"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -223,7 +223,7 @@
         <!--Chat Room-->
         <scene sceneID="tZc-dV-5MJ">
             <objects>
-                <viewController id="Qi6-Wj-lHb" customClass="ChatRoomViewController" customModule="WaterChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="chatroomview" id="Qi6-Wj-lHb" customClass="ChatRoomViewController" customModule="WaterChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6Fb-qP-q7B"/>
                         <viewControllerLayoutGuide type="bottom" id="cwu-9I-Dsn"/>
@@ -235,18 +235,14 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Chat Room" id="Uct-x7-v3Z">
-                        <barButtonItem key="leftBarButtonItem" title="Leave" id="By1-wc-4Om">
-                            <connections>
-                                <segue destination="AHI-30-QSZ" kind="presentation" id="Ha0-BS-fsn"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="leftBarButtonItem" title="Leave" id="By1-wc-4Om"/>
                         <barButtonItem key="rightBarButtonItem" title="Details" id="Heu-tn-96e"/>
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="njr-Bo-iKn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6903" y="925"/>
+            <point key="canvasLocation" x="6795" y="953"/>
         </scene>
         <!--User Group View Controller-->
         <scene sceneID="4Ir-uV-lwa">
@@ -466,24 +462,6 @@
             </objects>
             <point key="canvasLocation" x="1843" y="789"/>
         </scene>
-        <!--Enter Room View Controller-->
-        <scene sceneID="5xz-Vl-Ysq">
-            <objects>
-                <navigationController storyboardIdentifier="chatroomview" automaticallyAdjustsScrollViewInsets="NO" id="NYN-0o-bQX" customClass="EnterRoomViewController" customModule="WaterChat" customModuleProvider="target" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6X1-ey-z53">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Qi6-Wj-lHb" kind="relationship" relationship="rootViewController" id="tre-5h-4z2"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6Md-oD-2sv" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="6185" y="1013"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="pEZ-bt-30f">
             <objects>
@@ -558,11 +536,29 @@
             </objects>
             <point key="canvasLocation" x="3925" y="1001"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="eST-dJ-cAW">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EBu-9G-Oqo" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="pR3-sh-Hg3">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Qi6-Wj-lHb" kind="relationship" relationship="rootViewController" id="02U-Sg-Per"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WZ2-Px-zFt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6099" y="849"/>
+        </scene>
     </scenes>
     <resources>
         <image name="welcome.png" width="640" height="960"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ha0-BS-fsn"/>
+        <segue reference="rGG-Du-Ko1"/>
     </inferredMetricsTieBreakers>
 </document>

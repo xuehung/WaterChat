@@ -24,8 +24,8 @@ class ChatRoomViewController: JSQMessagesViewController {
     
     // *** STEP 1: STORE FIREBASE REFERENCES
     //var messagesRef: Firebase!
-    /*
-    func setupFirebase() {
+    
+    /*func setupFirebase() {
         // *** STEP 2: SETUP FIREBASE
         messagesRef = Firebase(url: "https://swift-chat.firebaseio.com/messages")
         
@@ -41,6 +41,8 @@ class ChatRoomViewController: JSQMessagesViewController {
         })
     }*/
     
+    
+    
     func sendMessage(text: String!, sender: String!) {
         // *** STEP 3: ADD A MESSAGE TO FIREBASE
         /*messagesRef.childByAutoId().setValue([
@@ -55,6 +57,8 @@ class ChatRoomViewController: JSQMessagesViewController {
         let message = ChatMessage(text: text, sender: sender, imageUrl: senderImageUrl)
         chatMessages.append(message)
         sendToRoom(message)
+        //self.collectionView.reloadData()
+        //finishReceivingMessage()
     }
     
     func sendToRoom(msg: ChatMessage) {
@@ -120,8 +124,10 @@ class ChatRoomViewController: JSQMessagesViewController {
         }*/
         setupAvatarColor(sender, incoming: false)
         senderImageUrl = ""
-        //setupFirebase()
+        //q()
         Logger.log("current room name is \(curRoom.name)")
+        
+        //Util.roomvc = self
     }
     
     override func viewDidAppear(animated: Bool) {

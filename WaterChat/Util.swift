@@ -29,4 +29,5 @@ class Util {
             Array(UnsafeBufferPointer(start: UnsafePointer<UInt8>($0), count: sizeof(T)))
         }
     }
+
 }

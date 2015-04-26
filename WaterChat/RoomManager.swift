@@ -207,13 +207,18 @@ class RoomManager {
     
     
     func JSONToMsg(content: NSDictionary) -> ChatMessage {
+        Logger.log(content.description)
         var type: Int = (content["type"] as! Int)
-        var msg: ChatMessage!
+        //var text = content["text"]
+        //Logger.log("\(text)")
+        Logger.log(content.description)
+        let message = ChatMessage(text: (content["text"] as! String), sender: (content["sender"] as! String), imageUrl: "")
+        /*var msg: ChatMessage!
         msg.text_ = (content["text"] as! String)
         msg.sender_ = (content["sender"] as! String)
         msg.date_ = NSDate(timeIntervalSince1970: (content["date"] as! Double))
-        
-        return msg
+        Logger.log(msg.description)*/
+        return message
     }
     
 }
