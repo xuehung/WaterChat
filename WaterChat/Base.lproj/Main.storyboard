@@ -235,14 +235,18 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Chat Room" id="Uct-x7-v3Z">
-                        <barButtonItem key="leftBarButtonItem" title="Leave" id="By1-wc-4Om"/>
+                        <barButtonItem key="leftBarButtonItem" title="Leave" id="By1-wc-4Om">
+                            <connections>
+                                <segue destination="AHI-30-QSZ" kind="presentation" id="Nbq-cV-PuE"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Details" id="Heu-tn-96e"/>
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="njr-Bo-iKn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6795" y="953"/>
+            <point key="canvasLocation" x="3239" y="1521"/>
         </scene>
         <!--User Group View Controller-->
         <scene sceneID="4Ir-uV-lwa">
@@ -559,6 +563,6 @@
         <image name="welcome.png" width="640" height="960"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rGG-Du-Ko1"/>
+        <segue reference="Nbq-cV-PuE"/>
     </inferredMetricsTieBreakers>
 </document>
