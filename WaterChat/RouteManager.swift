@@ -233,6 +233,8 @@ class RouteManager {
                 reply.destSeqNum = entry.destSeqNum
                 reply.hopCount = entry.hopCount
                 reply.lifeTime = UInt32(entry.lifeTime - current())
+                
+                self.mp.directSend(from, data: reply.serialize())
             } else {
                 Logger.error("not found entry")
             }
@@ -299,7 +301,8 @@ class RouteManager {
             self.mp.directSend(next.nextHop, data: reply.serialize())
         } else {
             Logger.log("Reply arrived")
-            // TODO
+            // do nothing because the route to the destination has been
+            // established in the previous code
         }
         
         dispatch_async(dispatch_get_main_queue()) {

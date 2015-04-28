@@ -317,5 +317,10 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
     func receive() -> Message {
         return self.cb.takeOneFromIncomingBuffer()
     }
+    
+    func getNeighbors() -> String{
+        var x = self.session.connectedPeers
+        return x.description
+    }
 
 }
