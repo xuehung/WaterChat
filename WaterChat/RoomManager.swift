@@ -149,6 +149,7 @@ class RoomManager {
                 if (room.currentNumber < room.maximumNumber) {
                     room.currentNumber += 1
                     room.memberList.append(Config.address.description)
+                    Logger.log("enter room, room.memberList = \(room.memberList)")
                     currentRoomInfo = room
                     break
                 } else {

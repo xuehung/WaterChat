@@ -8,6 +8,7 @@
 import UIKit
 
 var chatMessages = [ChatMessage]()
+var isListening = false
 
 class ChatRoomViewController: JSQMessagesViewController {
     
@@ -40,35 +41,21 @@ class ChatRoomViewController: JSQMessagesViewController {
     }*/
     
     func setUpEventsListener() {
+        events.listenTo("newchat", action: self.finishReceivingMessage);
+        events.listenTo("newchat", action:  {
+            println("trigger listened!!!!!!!!!!!!!!!!!!!!!!!");
+        });
+
         
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) {
+        /*dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) {
             
             while(true) {
                 
-                /*events.listenTo("newchat", action: self.finishReceivingMessage);
-                events.listenTo("newchat", action:  {
-                    println("trigger listened!!!!!!!!!!!!!!!!!!!!!!!");
-                });*/
-                if(receiveNewChat){
-                    //self.finishReceivingMessage()
-                    self.showTypingIndicator = false
-                    
-                    self.collectionView.collectionViewLayout.invalidateLayoutWithContext(JSQMessagesCollectionViewFlowLayoutInvalidationContext())
-                    Logger.log("before receiving \(chatMessages.count) msgs")
-                    self.collectionView.reloadData()
-                    Logger.log("reloadddddddddddddddddddddddddddddddddddddddd")
-                    if (self.automaticallyScrollsToMostRecentMessage) {
-                        self.scrollToBottomAnimated(true)
-                    }
-                    receiveNewChat = false
-                    Logger.log("flag detected true")
-                }
-                
-                sleep(5)
+                                //sleep(5)
                 
             }
             
-        }
+        }*/
     }
     
     
@@ -129,7 +116,10 @@ class ChatRoomViewController: JSQMessagesViewController {
         let color = UIColor(red: r, green: g, blue: b, alpha: 0.5)
         
         let nameLength = count(name)
-        let initials : String? = name.substringToIndex(advance(sender.startIndex, min(3, nameLength)))
+        Logger.log("name length is \(nameLength)")
+        //let initials = name
+        let initials : String? = name.substringToIndex(advance(sender.startIndex, 1))
+            //min(1, nameLength)))
         let userImage = JSQMessagesAvatarFactory.avatarWithUserInitials(initials, backgroundColor: color, textColor: UIColor.blackColor(), font: UIFont.systemFontOfSize(CGFloat(13)), diameter: diameter)
         
         avatars[name] = userImage
@@ -160,7 +150,11 @@ class ChatRoomViewController: JSQMessagesViewController {
         //Util.roomvc = self
         curRoom = globalCurRoom
         Logger.log("current room name is \(curRoom.name)")
-        setUpEventsListener()
+        if(!isListening){
+            setUpEventsListener()
+            isListening = true
+        }
+        
     }
     
     override func viewDidAppear(animated: Bool) {

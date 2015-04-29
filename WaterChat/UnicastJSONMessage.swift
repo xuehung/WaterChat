@@ -38,7 +38,7 @@ class UnicastJSONMessage: Message {
     }
     
     override init(bytes data: NSData) {
-        data.getBytes(&self.destMacAddr, range: NSMakeRange(1, 4))
+        data.getBytes(&self.destMacAddr, range: NSMakeRange(1, 8))
         var messageBody: NSData = data.subdataWithRange(NSMakeRange(9, data.length - 9))
         Logger.log("Parse JSON")
         // Parse Json

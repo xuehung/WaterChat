@@ -284,6 +284,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)finishSendingMessage
 {
+    NSLog(@"!!!!!!!!!!!!!!!!!!!! inside finish send msg!!!!!!!!!!!!!!!!");
     UITextView *textView = self.inputToolbar.contentView.textView;
     textView.text = nil;
     
@@ -293,10 +294,12 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
     [self.collectionView reloadData];
+    NSLog(@"@@@@@@@@@@@@@@@@@@finish reloading@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
     
     if (self.automaticallyScrollsToMostRecentMessage) {
         [self scrollToBottomAnimated:YES];
     }
+    NSLog(@"@@@@@@@@@@@@@@@@@@finish sending@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 }
 
 - (void)finishReceivingMessage

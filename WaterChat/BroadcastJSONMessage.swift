@@ -42,7 +42,7 @@ class BroadcastJSONMessage: Message {
     
     override init(bytes data: NSData) {
         data.getBytes(&self.broadcastSeqNum, range: NSMakeRange(1, 4))
-        data.getBytes(&self.srcMacAddr, range: NSMakeRange(5, 8))
+        data.getBytes(&self.srcMacAddr, range: NSMakeRange(5, 12))
         var messageBody: NSData = data.subdataWithRange(NSMakeRange(13, data.length - 13))
         Logger.log("Parse JSON")
         // Parse Json
