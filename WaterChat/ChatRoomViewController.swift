@@ -40,9 +40,11 @@ class ChatRoomViewController: JSQMessagesViewController {
     }*/
     
     func setUpEventsListener() {
-        
+        events.listenTo("newchat", action: self.finishReceivingMessage);
+        events.listenTo("newchat", action:  {
+            println("trigger listened!!!!!!!!!!!!!!!!!!!!!!!");
+        });
     }
-    
     
     
     func sendMessage(text: String!, sender: String!) {
