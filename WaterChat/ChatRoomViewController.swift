@@ -272,12 +272,12 @@ class ChatRoomViewController: JSQMessagesViewController {
     }
 
     override func collectionView(collectionView: JSQMessagesCollectionView!, messageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageData! {
-        Logger.log("index path item in messageDataForItemAtIndexPaths \(indexPath.item)")
+        //Logger.log("index path item in messageDataForItemAtIndexPaths \(indexPath.item)")
         return roomChatMessages[indexPath.item]
     }
 
     override func collectionView(collectionView: JSQMessagesCollectionView!, bubbleImageViewForItemAtIndexPath indexPath: NSIndexPath!) -> UIImageView! {
-        Logger.log("index path item in bubbleImageViewForItemAtIndexPath \(indexPath.item)")
+        //Logger.log("index path item in bubbleImageViewForItemAtIndexPath \(indexPath.item)")
         let message = roomChatMessages[indexPath.item]
 
         if message.sender() == sender {
@@ -288,7 +288,7 @@ class ChatRoomViewController: JSQMessagesViewController {
     }
 
     override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageViewForItemAtIndexPath indexPath: NSIndexPath!) -> UIImageView! {
-        Logger.log("index path item in avatarImageViewForItemAtIndexPath \(indexPath.item)")
+        //Logger.log("index path item in avatarImageViewForItemAtIndexPath \(indexPath.item)")
         let message = roomChatMessages[indexPath.item]
         if let avatar = avatars[message.sender()] {
             return UIImageView(image: avatar)
@@ -304,7 +304,7 @@ class ChatRoomViewController: JSQMessagesViewController {
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as! JSQMessagesCollectionViewCell
-        Logger.log("index path item in cellForItemAtIndexPath \(indexPath.item)")
+        //Logger.log("index path item in cellForItemAtIndexPath \(indexPath.item)")
         let message = roomChatMessages[indexPath.item]
         if message.sender() == sender {
             cell.textView.textColor = UIColor.blackColor()
@@ -324,7 +324,7 @@ class ChatRoomViewController: JSQMessagesViewController {
     // View  usernames above bubbles
     override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
         Logger.log("roomChatMessages.length = \(roomChatMessages.count)")
-        Logger.log("index path item in attributedTextForMessageBubbleTopLabelAtIndexPath \(indexPath.item)")
+        //Logger.log("index path item in attributedTextForMessageBubbleTopLabelAtIndexPath \(indexPath.item)")
         let message = roomChatMessages[indexPath.item];
 
         // Sent by me, skip
@@ -344,7 +344,7 @@ class ChatRoomViewController: JSQMessagesViewController {
     }
 
     override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
-        Logger.log("index path item in heightForMessageBubbleTopLabelAtIndexPath \(indexPath.item)")
+        //Logger.log("index path item in heightForMessageBubbleTopLabelAtIndexPath \(indexPath.item)")
         let message = roomChatMessages[indexPath.item]
 
         // Sent by me, skip

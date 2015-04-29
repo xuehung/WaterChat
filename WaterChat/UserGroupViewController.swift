@@ -17,6 +17,7 @@ class UserGroupViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         println("now in user group view")
+        println("current user is \(currentUserInfo.name) \((currentUserInfo.macAddress as String))")
         // Do any additional setup after loading the view.
         //println(self.profile.userName)
         //println(self.profile.isFemale)
@@ -45,6 +46,7 @@ class UserGroupViewController: UITabBarController {
     }
 
     func setUpBroadcast(){
+        Logger.log("broadcasting")
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) {
             
             while(true) {
@@ -62,7 +64,7 @@ class UserGroupViewController: UITabBarController {
     }
     
     func setUpReceiver(){
-        
+        Logger.log("set up receive")
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) {
             
             var mp = MessagePasser.getInstance(Config.address)

@@ -50,7 +50,9 @@ class BroadcastJSONMessage: Message {
         let maybeObj: AnyObject? = NSJSONSerialization.JSONObjectWithData(messageBody, options: nil, error: &error)
         
         if let obj: AnyObject = maybeObj {
-            if let dict = obj as? NSDictionary {
+            Logger.log("maybeObj is anyobject")
+            if let dict: NSDictionary = obj as? NSDictionary {
+                Logger.log("obj is NSDictionary")
                 self.dictionary = dict
                 Logger.log("Got NSDictionary")
             } else {
