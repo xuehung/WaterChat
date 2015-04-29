@@ -10,6 +10,7 @@ import Foundation
 
 var userList = [User]()
 var currentUserInfo: User = User()
+var one2oneMsg = Dictionary<MacAddr, [ChatMessage]>()
 
 class UserManager{
     class func setCurrentUser(user: User){
