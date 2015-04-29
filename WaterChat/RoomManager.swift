@@ -12,6 +12,7 @@ import MultipeerConnectivity
 var groupList = [RoomInfo]()
 var currentRoomInfo: RoomInfo = RoomInfo()
 let events = EventManager()
+var receiveNewChat = false
 
 class RoomManager {
     
