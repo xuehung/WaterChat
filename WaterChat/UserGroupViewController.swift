@@ -128,7 +128,7 @@ class UserGroupViewController: UITabBarController {
                         } else {
                             // it is 1-1 talk
                             Logger.log("Got personal message")
-                            var mac: MacAddr = UInt64(xx.dict["mac"] as! Int)
+                            var mac: MacAddr = Util.convertDisplayNameToMacAddr(xx.dict["mac"] as! String)
                             One2OneCommunication.addMessage(mac, message: msg)
                             
                         }

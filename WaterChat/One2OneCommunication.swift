@@ -11,7 +11,8 @@ var one2oneMsg = Dictionary<MacAddr, [ChatMessage]>()
 
 class One2OneCommunication {
     class func addMessage(dest: MacAddr, message: ChatMessage) {
-        Logger.log("Add a message to 121 messages")
+        Logger.log("Add a message to 121 messages of \(dest)")
+        Logger.log(message.description)
         if(one2oneMsg[dest] == nil) {
             one2oneMsg[dest] = []
         }

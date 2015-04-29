@@ -88,11 +88,8 @@ class ChatRoomViewController: JSQMessagesViewController {
                 Logger.error("impossible")
             }
             
-        } else {
-            
-            roomChatMessages.append(message)
-            
         }
+        roomChatMessages.append(message)
         sendToRoom(message)
         //self.collectionView.reloadData()
         //finishReceivingMessage()

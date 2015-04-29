@@ -11,6 +11,6 @@ import Foundation
 // for configuration
 struct Config {
     static let serviceType = "WaterChat"
-    static let address: MacAddr = 11111
+    static let address: MacAddr = 333333
     static let maxNeighbor = 2
 }
