@@ -307,6 +307,7 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
     func send(dest: MacAddr, message: NSDictionary) {
         //self.cb.send(dest, data: message.serialize())
         Logger.log("Unicast JSON Message")
+        Logger.log(message.description)
         dispatch_async(dispatch_get_main_queue()) {
             var msg = UnicastJSONMessage(message: message, destMacAddr: dest)
             self.cb.addToOutgoingBuffer(dest, data: msg.data)

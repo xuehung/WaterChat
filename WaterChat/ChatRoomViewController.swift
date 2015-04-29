@@ -135,6 +135,7 @@ class ChatRoomViewController: JSQMessagesViewController {
         //Util.roomvc = self
         curRoom = globalCurRoom
         Logger.log("current room name is \(curRoom.name)")
+        setUpEventsListener()
     }
     
     override func viewDidAppear(animated: Bool) {

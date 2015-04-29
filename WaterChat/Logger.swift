@@ -9,13 +9,22 @@
 import Foundation
 import UIKit
 
+
+let mutext = dispatch_semaphore_create(1)
+
 class Logger {
+    //dispatch_semaphore_wait(self.incomingCountSem, DISPATCH_TIME_FOREVER)
+    //dispatch_semaphore_signal(self.incomingMutex)
     
     class func log(logMessage: String, functionName: String = __FUNCTION__) {
+        dispatch_semaphore_wait(mutext, DISPATCH_TIME_FOREVER)
         println("[LOG] \(functionName): \(logMessage)")
+        dispatch_semaphore_signal(mutext)
     }
     
     class func error(logMessage: String, functionName: String = __FUNCTION__) {
+        dispatch_semaphore_wait(mutext, DISPATCH_TIME_FOREVER)
+        dispatch_semaphore_signal(mutext)
         NSLog("[ERROR] \(functionName): \(logMessage)")
     }
     
