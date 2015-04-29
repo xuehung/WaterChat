@@ -40,10 +40,25 @@ class ChatRoomViewController: JSQMessagesViewController {
     }*/
     
     func setUpEventsListener() {
-        events.listenTo("newchat", action: self.finishReceivingMessage);
-        events.listenTo("newchat", action:  {
-            println("trigger listened!!!!!!!!!!!!!!!!!!!!!!!");
-        });
+        
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) {
+            
+            while(true) {
+                
+                events.listenTo("newchat", action: self.finishReceivingMessage);
+                events.listenTo("newchat", action:  {
+                    println("trigger listened!!!!!!!!!!!!!!!!!!!!!!!");
+                });
+                if(receiveNewChat){
+                    self.finishReceivingMessage()
+                    receiveNewChat = false
+                }
+                
+                sleep(5)
+                
+            }
+            
+        }
     }
     
     

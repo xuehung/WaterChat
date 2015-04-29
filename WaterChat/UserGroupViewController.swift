@@ -93,6 +93,7 @@ class UserGroupViewController: UITabBarController {
                             //Util.roomvc.finishReceivingMessage()
                             Logger.log("trigger")
                             events.trigger("newchat", information: "receives new chat msg")
+                            receiveNewChat = true
                             
                         }
                         println("All Users: ")
