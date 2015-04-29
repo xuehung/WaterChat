@@ -45,12 +45,21 @@ class ChatRoomViewController: JSQMessagesViewController {
             
             while(true) {
                 
-                events.listenTo("newchat", action: self.finishReceivingMessage);
+                /*events.listenTo("newchat", action: self.finishReceivingMessage);
                 events.listenTo("newchat", action:  {
                     println("trigger listened!!!!!!!!!!!!!!!!!!!!!!!");
-                });
+                });*/
                 if(receiveNewChat){
-                    self.finishSendingMessage()
+                    //self.finishReceivingMessage()
+                    self.showTypingIndicator = false
+                    
+                    self.collectionView.collectionViewLayout.invalidateLayoutWithContext(JSQMessagesCollectionViewFlowLayoutInvalidationContext())
+                    Logger.log("before receiving \(chatMessages.count) msgs")
+                    self.collectionView.reloadData()
+                    Logger.log("reloadddddddddddddddddddddddddddddddddddddddd")
+                    if (self.automaticallyScrollsToMostRecentMessage) {
+                        self.scrollToBottomAnimated(true)
+                    }
                     receiveNewChat = false
                     Logger.log("flag detected true")
                 }
@@ -179,7 +188,7 @@ class ChatRoomViewController: JSQMessagesViewController {
         JSQSystemSoundPlayer.jsq_playMessageSentSound()
         
         sendMessage(text, sender: sender)
-        
+        Logger.log("before sending \(chatMessages.count) msgs")
         finishSendingMessage()
     }
     

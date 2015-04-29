@@ -301,11 +301,12 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)finishReceivingMessage
 {
+    NSLog(@"!!!!!!!!!!!!!!!!!!!! inside finish receive msg!!!!!!!!!!!!!!!!");
     self.showTypingIndicator = NO;
     
     [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
     [self.collectionView reloadData];
-    
+    NSLog(@"@@@@@@@@@@@@@@@@@@finish reloading@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
     if (self.automaticallyScrollsToMostRecentMessage) {
         [self scrollToBottomAnimated:YES];
     }
