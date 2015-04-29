@@ -1,21 +1,23 @@
 //
-//  EnterRoomViewController.swift
+//  BirthdayPickerViewController.swift
 //  WaterChat
 //
-//  Created by Ding ZHAO on 4/25/15.
+//  Created by Ding ZHAO on 4/28/15.
 //  Copyright (c) 2015 Hsueh-Hung Cheng. All rights reserved.
 //
 
 import UIKit
 
-class EnterRoomViewController: UINavigationController {
-    var curRoom = RoomInfo()
+class BirthdayPickerViewController: UIViewController {
+
+    @IBOutlet weak var birthdayPicker: UIDatePicker!
+    
+    var selectedBirthday :NSDate? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Logger.log("enter room vc room name \(curRoom.name)")
+
         // Do any additional setup after loading the view.
-        self.navigationController?.popViewControllerAnimated(true)
     }
 
     override func didReceiveMemoryWarning() {
@@ -23,20 +25,20 @@ class EnterRoomViewController: UINavigationController {
         // Dispose of any resources that can be recreated.
     }
     
-    
-    
-    /*
+
     
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        Logger.log("in enterroom nav segue")
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        var svc = segue.destinationViewController as! ChatRoomViewController;
-        svc.curRoom = curRoom
-    }*/
-
+        if segue.identifier == "SaveSelectedDate" {
+            let pickerDate = birthdayPicker.date
+            selectedBirthday = pickerDate
+            Logger.log("SaveSelectedDate")
+        }
+    }
+    
 
 }

@@ -8,6 +8,8 @@
 
 import UIKit
 
+var globalCurRoom = RoomInfo()
+
 class RoomListTableViewController: UITableViewController {
     //var rooms: [Room] = roomList
     override func viewDidLoad() {
@@ -124,10 +126,10 @@ class RoomListTableViewController: UITableViewController {
         let curRoom = rm.enterOneRoom(row)
         //let vc = self.storyboard!.instantiateViewControllerWithIdentifier("chatroomview") as! UIViewController
         //var vc = ChatRoomViewController()
-        let vc : ChatRoomViewController = self.storyboard!.instantiateViewControllerWithIdentifier("chatroomview") as! ChatRoomViewController
-        vc.curRoom = curRoom
+        let vc = self.storyboard!.instantiateViewControllerWithIdentifier("chatroomview") as! UIViewController
+        globalCurRoom = curRoom
         //self.showViewController(vc, sender: vc)
-        self.navigationController?.presentViewController(vc, animated: true, completion: nil)
+        self.presentViewController(vc, animated: true, completion: nil)
     }
 
 }

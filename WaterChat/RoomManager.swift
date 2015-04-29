@@ -13,6 +13,8 @@ var groupList = [RoomInfo]()
 var currentRoomInfo: RoomInfo = RoomInfo()
 
 class RoomManager {
+    
+    
 
     func RoomToJSON(newRoom: RoomInfo) -> NSMutableDictionary {
 

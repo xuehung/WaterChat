@@ -233,6 +233,7 @@ class RouteManager {
                 reply.destSeqNum = entry.destSeqNum
                 reply.hopCount = entry.hopCount
                 reply.lifeTime = UInt32(entry.lifeTime - current())
+                //self.mp.directSend(from, data: reply.serialize())
                 
                 self.mp.directSend(from, data: reply.serialize())
             } else {

@@ -1,42 +1,46 @@
 //
-//  CreateRoomTableViewController.swift
+//  CreateMyProfileTableViewController.swift
 //  WaterChat
 //
-//  Created by Ding ZHAO on 4/12/15.
+//  Created by Ding ZHAO on 4/28/15.
 //  Copyright (c) 2015 Hsueh-Hung Cheng. All rights reserved.
 //
 
 import UIKit
 
-class CreateRoomTableViewController: UITableViewController {
-
+class CreateMyProfileTableViewController: UITableViewController {
     
-    @IBOutlet weak var roomName: UITextField!
-    @IBOutlet weak var subjectLabel: UILabel!
+    @IBOutlet weak var userName: UITextField!
     
-    var size:Int = 10
-    //var room = RoomInfo()
+    @IBOutlet weak var isFemale: UISegmentedControl!
+    
+    
+    @IBOutlet weak var userBirthday: UILabel!
+    
+    @IBOutlet weak var moreInfo: UITextField!
+    
+    
+    var profile = UserProfile()
+    
     override func viewDidLoad() {
+        Logger.log("view start load");
         super.viewDidLoad()
-        subjectLabel.text = String(size)
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        // Do any additional setup after loading the view.
+        //println("create profile view controller")
+        self.profile = UserProfile()
+        //readData()
+        Logger.log("view stop load");
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    @IBAction func selectedSize(segue:UIStoryboardSegue) {
-        let sizePickerViewController = segue.sourceViewController as! SizePickerTableViewController
-        if let selectedSize = sizePickerViewController.selectedSize {
-            subjectLabel.text = String(selectedSize)
-            size = selectedSize
-        }
     }
 
     // MARK: - Table view data source
@@ -52,27 +56,20 @@ class CreateRoomTableViewController: UITableViewController {
         // Return the number of rows in the section.
         return 0
     }*/
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 0 {
-            roomName.becomeFirstResponder()
+
+    @IBAction func selectedDate(segue:UIStoryboardSegue) {
+        Logger.log("inside selected Date")
+        let datePickerViewController = segue.sourceViewController as! BirthdayPickerViewController
+        if let selectedBirthday = datePickerViewController.selectedBirthday {
+                let dateFormatter = NSDateFormatter()
+                var theDateFormat = NSDateFormatterStyle.ShortStyle
+                dateFormatter.dateStyle = theDateFormat
+                userBirthday.text = dateFormatter.stringFromDate(selectedBirthday)
         }
     }
-    
-    @IBAction func cancelToRoomsViewController(segue:UIStoryboardSegue) {
-        
-    }
-    
-    @IBAction func saveRoomDetail(segue:UIStoryboardSegue) {
-        println("in func create new room")
-        println("name: \(self.roomName.text)")
-        println("size: \(self.size)")
-        
-    }
-
     /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
 
         // Configure the cell...
 
@@ -116,46 +113,58 @@ class CreateRoomTableViewController: UITableViewController {
     */
     
     
+    
     func readData(){
         
-        /*var stringGender: NSString
+        var stringGender: NSString
         if (self.isFemale.isEnabledForSegmentAtIndex(0)){
             stringGender = "female"
         }
         else {
             stringGender = "male"
-        }*/
-        var room = RoomInfo(name: self.roomName.text, maxNum: self.size)
-        var rm = RoomManager()
-        rm.addRoomToList(room)
-        globalCurRoom = room
+        }
+        var user = User(name: self.userName.text, gender: stringGender, birthDate: self.userBirthday.text!, moreInfo: self.moreInfo.text)
+        UserManager.setCurrentUser(user)
+        
+        //user object ready for broadcast
+        
+        self.profile.userName = self.userName.text
+        self.profile.isFemale = self.isFemale.isEnabledForSegmentAtIndex(0)
+        self.profile.birthDate = self.userBirthday.text!
+        self.profile.moreInfo = self.moreInfo.text
     }
     
+    
+    
+    
+    
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
+        Logger.log("in segue")
+        // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        
-        println("in segue")
-        println(segue.identifier)
-        if (segue.identifier == "PickMaximumSize"){
-            println("pick size")
+        //if (sender != self.joinBtn) return
+        if(segue.identifier == "joinWaterChat"){
+            if(self.userName.text.isEmpty){
+                var alert = UIAlertController(title: "Could Not Join", message: "Username should not be empty", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+            else{
+                readData()
+            }
         }
-        else if (segue.identifier == "SaveRoomDetail") {
-            readData()
-            //room.name = self.roomName.text
-            //room.maximumNumber = self.
-            //player = Player(name: self.nameTextField.text, game: "Chess", rating: 1)
-            println("create new room")
-            println("name: \(self.roomName.text)")
-            println("size: \(self.size)")
+        else if(segue.identifier == "selectBirthday"){
+            Logger.log("selectBirthday")
         }
-        else{
-            println("just cancel")
-        }
-        
+        //self.profile.userName = "Ding"
+        //println("hello segue")
+        //var svc = segue.destinationViewController as UserGroupViewController;
+        //svc.profile = self.profile
+        //var svc = segue.destinationViewController as UserListTableViewController;
+        //svc.profile = self.profile
     }
     
 

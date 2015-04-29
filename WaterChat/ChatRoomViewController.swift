@@ -12,8 +12,6 @@ var chatMessages = [ChatMessage]()
 class ChatRoomViewController: JSQMessagesViewController {
     
     var curRoom = RoomInfo()
-    
-    
     var avatars = Dictionary<String, UIImage>()
     var outgoingBubbleImageView = JSQMessagesBubbleImageFactory.outgoingMessageBubbleImageViewWithColor(UIColor.jsq_messageBubbleLightGrayColor())
     var incomingBubbleImageView = JSQMessagesBubbleImageFactory.incomingMessageBubbleImageViewWithColor(UIColor.jsq_messageBubbleGreenColor())
@@ -40,6 +38,10 @@ class ChatRoomViewController: JSQMessagesViewController {
             self.finishReceivingMessage()
         })
     }*/
+    
+    func setUpEventsListener() {
+        
+    }
     
     
     
@@ -111,9 +113,11 @@ class ChatRoomViewController: JSQMessagesViewController {
         //self.navigationController?.setNavigationBarHidden(false, animated: true)
         inputToolbar.contentView.leftBarButtonItem = nil
         automaticallyScrollsToMostRecentMessage = true
-        navigationController?.navigationBar.topItem?.title = "Leave"
+        //navigationController?.navigationBar.topItem?.title = "Leave"
+        //navigationController?.popToRootViewControllerAnimated(true)
         
-        sender = (sender != nil) ? sender : "Anonymous"
+        //sender = (sender != nil) ? sender : "Anonymous"
+        sender = currentUserInfo.name as String
         /*let profileImageUrl = user?.providerData["cachedUserProfile"]?["profile_image_url_https"] as? NSString
         if let urlString = profileImageUrl {
             setupAvatarImage(sender, imageUrl: urlString as String, incoming: false)
@@ -124,10 +128,11 @@ class ChatRoomViewController: JSQMessagesViewController {
         }*/
         setupAvatarColor(sender, incoming: false)
         senderImageUrl = ""
-        //q()
-        Logger.log("current room name is \(curRoom.name)")
+        
         
         //Util.roomvc = self
+        curRoom = globalCurRoom
+        Logger.log("current room name is \(curRoom.name)")
     }
     
     override func viewDidAppear(animated: Bool) {
