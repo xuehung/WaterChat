@@ -11,11 +11,10 @@ import MultipeerConnectivity
 
 var groupList = [RoomInfo]()
 var currentRoomInfo: RoomInfo = RoomInfo()
+let events = EventManager()
 
 class RoomManager {
     
-    
-
     func RoomToJSON(newRoom: RoomInfo) -> NSMutableDictionary {
 
         //var newRoom = RoomInfo()
@@ -222,6 +221,7 @@ class RoomManager {
         Logger.log(msg.description)*/
         return message
     }
+
     
 }
 
