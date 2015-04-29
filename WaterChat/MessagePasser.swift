@@ -134,6 +134,8 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
 
                 var message = Message.messageFactory(data)
                 var fromAddr = Util.convertDisplayNameToMacAddr(peerID.displayName)
+                
+                self.macPeerMapping[fromAddr] = peerID
 
                 Logger.log("@@@@@@@@@@@@@ Message Type = \(message.type.rawValue.description)")
 
@@ -263,7 +265,8 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
                 Logger.log("Direct send to \(dest) successfully")
             }
         } else {
-            Logger.error("Not found peerID \(dest)")
+            Logger.error("Not found peerID \(dest) in macPeerMapping")
+            Logger.error(self.macPeerMapping.description)
         }
     }
 
