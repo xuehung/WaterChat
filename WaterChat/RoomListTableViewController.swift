@@ -126,10 +126,17 @@ class RoomListTableViewController: UITableViewController {
         let curRoom = rm.enterOneRoom(row)
         //let vc = self.storyboard!.instantiateViewControllerWithIdentifier("chatroomview") as! UIViewController
         //var vc = ChatRoomViewController()
-        let vc = self.storyboard!.instantiateViewControllerWithIdentifier("chatroomview") as! UIViewController
-        //globalCurRoom = curRoom
-        //self.showViewController(vc, sender: vc)
-        self.presentViewController(vc, animated: true, completion: nil)
+        if(curRoom != nil){
+            let vc = self.storyboard!.instantiateViewControllerWithIdentifier("chatroomview") as! UIViewController
+            //globalCurRoom = curRoom
+            //self.showViewController(vc, sender: vc)
+            self.presentViewController(vc, animated: true, completion: nil)
+        }
+        else{
+            var alert = UIAlertController(title: "Room Full", message: "You can not enter the room due to the size limitation", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
     }
 
 }

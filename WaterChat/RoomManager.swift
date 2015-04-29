@@ -130,7 +130,7 @@ class RoomManager {
         }
     }
 
-    func enterOneRoom(roomNumber: Int) -> RoomInfo {
+    func enterOneRoom(roomNumber: Int) -> RoomInfo? {
         // traverse the room list to find the matching roomInfo
         /*
         for room in groupList {
@@ -156,7 +156,8 @@ class RoomManager {
                         currentRoomInfo = room
                         break
                     } else {
-                        // TODO: permit or not
+                        Logger.log("Full room!")
+                        return nil
                     }
                     index += 1
                 } else {
