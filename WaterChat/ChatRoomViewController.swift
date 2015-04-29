@@ -9,6 +9,7 @@ import UIKit
 
 var chatMessages = [ChatMessage]()
 var isListening = false
+var isChecking = false
 
 class ChatRoomViewController: JSQMessagesViewController {
     
@@ -40,24 +41,57 @@ class ChatRoomViewController: JSQMessagesViewController {
             self.finishReceivingMessage()
         })
     }*/
-    
+    /*
     func setUpEventsListener() {
-        events.listenTo("newchat", action: self.finishReceivingMessage)
-        events.listenTo("newchat", action:  {
-            println("trigger listened!!!!!!!!!!!!!!!!!!!!!!!");
-        })
-
-        
-        /*dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) {
-            
-            while(true) {
-                
-                                //sleep(5)
-                
+        //events.listenTo("send", action: {Logger.log("send listened!!!!!!!!!!!!!!!!!!!!")})
+        //events.listenTo("send", action: {updateDataSource()})
+        //Logger.log("after update \(roomChatMessages.count) messages")
+        //events.listenTo("send", action: {finishSendingMessage()})
+        events.listenTo("receive", action: self.updateDataSource)
+        events.listenTo("receive", action: self.finishReceivingMessage)
+    }*/
+    
+    func updateDataSource(){
+        if(self.curRoom.isPrivate == true) {
+            Logger.log("chat room view load detected private room")
+            //one to one dialog
+            for member in self.curRoom.memberList{
+                if(member != currentUserInfo.macAddress){
+                    let memberAddr = Util.convertDisplayNameToMacAddr(member)
+                    if(one2oneMsg[memberAddr] != nil){
+                        self.roomChatMessages = one2oneMsg[memberAddr]!
+                    }
+                }
             }
-            
-        }*/
+        }
+        else{
+            self.roomChatMessages = chatMessages
+        }
     }
+    /*
+    func setUpCheckingThread() {
+        Logger.log("inside checking thread....should be only once")
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) {
+            while(true) {
+                if(self.curRoom.isPrivate == true) {
+                    Logger.log("chat room view load detected private room")
+                    //one to one dialog
+                    for member in self.curRoom.memberList{
+                        if(member != currentUserInfo.macAddress){
+                            let memberAddr = Util.convertDisplayNameToMacAddr(member)
+                            if(one2oneMsg[memberAddr] != nil){
+                                self.roomChatMessages = one2oneMsg[memberAddr]!
+                            }
+                        }
+                    }
+                }
+                else{
+                    self.roomChatMessages = chatMessages
+                }
+                sleep(5)
+            }
+        }
+    }*/
     
     
     func sendMessage(text: String!, sender: String!) {
@@ -88,11 +122,11 @@ class ChatRoomViewController: JSQMessagesViewController {
                 Logger.error("impossible")
             }
             
-        } else {
-            
-            roomChatMessages.append(message)
-            
+        }else{
+            chatMessages.append(message)
         }
+        
+        //events.trigger("send", information: "send new chat msg")
         sendToRoom(message)
         //self.collectionView.reloadData()
         //finishReceivingMessage()
@@ -183,24 +217,24 @@ class ChatRoomViewController: JSQMessagesViewController {
         //Util.roomvc = self
         curRoom = currentRoomInfo
         Logger.log("current room name is \(curRoom.name)")
-        if(!isListening){
+        
+        /*if(!isListening){
             setUpEventsListener()
             isListening = true
-        }
-        if(curRoom.isPrivate == true) {
-            //one to one dialog
-            for member in curRoom.memberList{
-                if(member != currentUserInfo.macAddress){
-                    let memberAddr = Util.convertDisplayNameToMacAddr(member)
-                    if(one2oneMsg[memberAddr] != nil){
-                        roomChatMessages = one2oneMsg[memberAddr]!
-                    }
-                }
+        }*/
+        
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) {
+            while(true) {
+                self.updateDataSource()
+                self.finishReceivingMessage()
+                sleep(5)
             }
         }
-        else{
-            roomChatMessages = chatMessages
-        }
+        /*if(!isChecking){
+            
+            isChecking = true
+        }*/
+        //setUpCheckingThread()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -228,6 +262,7 @@ class ChatRoomViewController: JSQMessagesViewController {
         JSQSystemSoundPlayer.jsq_playMessageSentSound()
         
         sendMessage(text, sender: sender)
+        updateDataSource()
         Logger.log("before sending \(roomChatMessages.count) msgs")
         finishSendingMessage()
     }
@@ -237,10 +272,12 @@ class ChatRoomViewController: JSQMessagesViewController {
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, messageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageData! {
+        Logger.log("index path item in messageDataForItemAtIndexPaths \(indexPath.item)")
         return roomChatMessages[indexPath.item]
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, bubbleImageViewForItemAtIndexPath indexPath: NSIndexPath!) -> UIImageView! {
+        Logger.log("index path item in bubbleImageViewForItemAtIndexPath \(indexPath.item)")
         let message = roomChatMessages[indexPath.item]
         
         if message.sender() == sender {
@@ -251,6 +288,7 @@ class ChatRoomViewController: JSQMessagesViewController {
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageViewForItemAtIndexPath indexPath: NSIndexPath!) -> UIImageView! {
+        Logger.log("index path item in avatarImageViewForItemAtIndexPath \(indexPath.item)")
         let message = roomChatMessages[indexPath.item]
         if let avatar = avatars[message.sender()] {
             return UIImageView(image: avatar)
@@ -266,7 +304,7 @@ class ChatRoomViewController: JSQMessagesViewController {
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as! JSQMessagesCollectionViewCell
-        
+        Logger.log("index path item in cellForItemAtIndexPath \(indexPath.item)")
         let message = roomChatMessages[indexPath.item]
         if message.sender() == sender {
             cell.textView.textColor = UIColor.blackColor()
@@ -285,6 +323,8 @@ class ChatRoomViewController: JSQMessagesViewController {
     
     // View  usernames above bubbles
     override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
+        Logger.log("roomChatMessages.length = \(roomChatMessages.count)")
+        Logger.log("index path item in attributedTextForMessageBubbleTopLabelAtIndexPath \(indexPath.item)")
         let message = roomChatMessages[indexPath.item];
         
         // Sent by me, skip
@@ -304,6 +344,7 @@ class ChatRoomViewController: JSQMessagesViewController {
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+        Logger.log("index path item in heightForMessageBubbleTopLabelAtIndexPath \(indexPath.item)")
         let message = roomChatMessages[indexPath.item]
         
         // Sent by me, skip
@@ -321,4 +362,15 @@ class ChatRoomViewController: JSQMessagesViewController {
         
         return kJSQMessagesCollectionViewCellLabelHeightDefault
     }
+    
+    /*
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        Logger.log("clear array in segue")
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        //if (sender != self.joinBtn) return
+        chatMessages = []
+        //roomChatMessages = []
+        updateDataSource()
+    }*/
 }

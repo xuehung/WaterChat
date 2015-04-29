@@ -109,6 +109,7 @@ class UserGroupViewController: UITabBarController {
                         }
                     }
                     else if (tt == MessageType.ROOMTALK) {
+                        //events.trigger("receive", information: "receives new chat msg")
                         
                         var rm = RoomManager()
                         var msg = rm.JSONToMsg(xx.dict) as ChatMessage
@@ -123,12 +124,12 @@ class UserGroupViewController: UITabBarController {
                             Logger.log(xx.dict.description)
                         //Util.roomvc.finishReceivingMessage()
                             Logger.log("triggerssssssssssssssssss")
-                            events.trigger("newchat", information: "receives new chat msg")
+                            //events.trigger("receive", information: "receives new chat msg")
                         //receiveNewChat = true
                         } else {
                             // it is 1-1 talk
                             Logger.log("Got personal message")
-                            var mac: MacAddr = UInt64(xx.dict["mac"] as! Int)
+                            var mac: MacAddr = Util.convertDisplayNameToMacAddr(xx.dict["mac"] as! String)
                             One2OneCommunication.addMessage(mac, message: msg)
                             
                         }
