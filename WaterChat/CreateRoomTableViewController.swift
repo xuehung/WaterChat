@@ -125,10 +125,10 @@ class CreateRoomTableViewController: UITableViewController {
         else {
             stringGender = "male"
         }*/
-        var room = RoomInfo(name: self.roomName.text, maxNum: self.size)
+        var room = RoomInfo(name: self.roomName.text, maxNum: self.size, privateRoom: false)
         var rm = RoomManager()
         rm.addRoomToList(room)
-        globalCurRoom = room
+        currentRoomInfo = room
     }
     
     // MARK: - Navigation

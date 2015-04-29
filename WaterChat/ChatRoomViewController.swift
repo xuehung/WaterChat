@@ -12,6 +12,7 @@ var isListening = false
 
 class ChatRoomViewController: JSQMessagesViewController {
     
+    var roomChatMessages = [ChatMessage]()
     var curRoom = RoomInfo()
     var avatars = Dictionary<String, UIImage>()
     var outgoingBubbleImageView = JSQMessagesBubbleImageFactory.outgoingMessageBubbleImageViewWithColor(UIColor.jsq_messageBubbleLightGrayColor())
@@ -41,10 +42,10 @@ class ChatRoomViewController: JSQMessagesViewController {
     }*/
     
     func setUpEventsListener() {
-        events.listenTo("newchat", action: self.finishReceivingMessage);
+        events.listenTo("newchat", action: self.finishReceivingMessage)
         events.listenTo("newchat", action:  {
             println("trigger listened!!!!!!!!!!!!!!!!!!!!!!!");
-        });
+        })
 
         
         /*dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) {
@@ -71,7 +72,7 @@ class ChatRoomViewController: JSQMessagesViewController {
     
     func tempSendMessage(text: String!, sender: String!) {
         let message = ChatMessage(text: text, sender: sender, imageUrl: senderImageUrl)
-        chatMessages.append(message)
+        roomChatMessages.append(message)
         sendToRoom(message)
         //self.collectionView.reloadData()
         //finishReceivingMessage()
@@ -148,13 +149,26 @@ class ChatRoomViewController: JSQMessagesViewController {
         
         
         //Util.roomvc = self
-        curRoom = globalCurRoom
+        curRoom = currentRoomInfo
         Logger.log("current room name is \(curRoom.name)")
         if(!isListening){
             setUpEventsListener()
             isListening = true
         }
-        
+        if(curRoom.isPrivate == true) {
+            //one to one dialog
+            for member in curRoom.memberList{
+                if(member != currentUserInfo.macAddress){
+                    let memberAddr = Util.convertDisplayNameToMacAddr(member)
+                    if(one2oneMsg[memberAddr] != nil){
+                        roomChatMessages = one2oneMsg[memberAddr]!
+                    }
+                }
+            }
+        }
+        else{
+            roomChatMessages = chatMessages
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -182,7 +196,7 @@ class ChatRoomViewController: JSQMessagesViewController {
         JSQSystemSoundPlayer.jsq_playMessageSentSound()
         
         sendMessage(text, sender: sender)
-        Logger.log("before sending \(chatMessages.count) msgs")
+        Logger.log("before sending \(roomChatMessages.count) msgs")
         finishSendingMessage()
     }
     
@@ -191,11 +205,11 @@ class ChatRoomViewController: JSQMessagesViewController {
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, messageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageData! {
-        return chatMessages[indexPath.item]
+        return roomChatMessages[indexPath.item]
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, bubbleImageViewForItemAtIndexPath indexPath: NSIndexPath!) -> UIImageView! {
-        let message = chatMessages[indexPath.item]
+        let message = roomChatMessages[indexPath.item]
         
         if message.sender() == sender {
             return UIImageView(image: outgoingBubbleImageView.image, highlightedImage: outgoingBubbleImageView.highlightedImage)
@@ -205,7 +219,7 @@ class ChatRoomViewController: JSQMessagesViewController {
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageViewForItemAtIndexPath indexPath: NSIndexPath!) -> UIImageView! {
-        let message = chatMessages[indexPath.item]
+        let message = roomChatMessages[indexPath.item]
         if let avatar = avatars[message.sender()] {
             return UIImageView(image: avatar)
         } else {
@@ -215,13 +229,13 @@ class ChatRoomViewController: JSQMessagesViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return chatMessages.count
+        return roomChatMessages.count
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as! JSQMessagesCollectionViewCell
         
-        let message = chatMessages[indexPath.item]
+        let message = roomChatMessages[indexPath.item]
         if message.sender() == sender {
             cell.textView.textColor = UIColor.blackColor()
         } else {
@@ -239,7 +253,7 @@ class ChatRoomViewController: JSQMessagesViewController {
     
     // View  usernames above bubbles
     override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
-        let message = chatMessages[indexPath.item];
+        let message = roomChatMessages[indexPath.item];
         
         // Sent by me, skip
         if message.sender() == sender {
@@ -248,7 +262,7 @@ class ChatRoomViewController: JSQMessagesViewController {
         
         // Same as previous sender, skip
         if indexPath.item > 0 {
-            let previousMessage = chatMessages[indexPath.item - 1];
+            let previousMessage = roomChatMessages[indexPath.item - 1];
             if previousMessage.sender() == message.sender() {
                 return nil;
             }
@@ -258,7 +272,7 @@ class ChatRoomViewController: JSQMessagesViewController {
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
-        let message = chatMessages[indexPath.item]
+        let message = roomChatMessages[indexPath.item]
         
         // Sent by me, skip
         if message.sender() == sender {
@@ -267,7 +281,7 @@ class ChatRoomViewController: JSQMessagesViewController {
         
         // Same as previous sender, skip
         if indexPath.item > 0 {
-            let previousMessage = chatMessages[indexPath.item - 1];
+            let previousMessage = roomChatMessages[indexPath.item - 1];
             if previousMessage.sender() == message.sender() {
                 return CGFloat(0.0);
             }
