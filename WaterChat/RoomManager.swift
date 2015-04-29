@@ -109,6 +109,7 @@ class RoomManager {
                 for member in newRoom.memberList {
                     room.memberList += [member]
                 }
+                println("newRoom.memberList = \(newRoom.memberList)")
                 println("room.memberList = \(room.memberList)")
                 break
             }
