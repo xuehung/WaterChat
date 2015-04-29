@@ -109,18 +109,32 @@ class UserGroupViewController: UITabBarController {
                         }
                     }
                     else if (tt == MessageType.ROOMTALK) {
+                        
                         var rm = RoomManager()
                         var msg = rm.JSONToMsg(xx.dict) as ChatMessage
+                        
+                        if (xx.dict["mac"] == nil) {
+                            
                         //var cr = ChatRoomViewController()
                         //cr.receiveMessage(msg)
-                        chatMessages.append(msg)
+                            chatMessages.append(msg)
                         //var cr = ChatRoomViewController()
                         //cr.finishReceivingMessage()
-                        Logger.log(xx.dict.description)
+                            Logger.log(xx.dict.description)
                         //Util.roomvc.finishReceivingMessage()
-                        Logger.log("triggerssssssssssssssssss")
-                        events.trigger("newchat", information: "receives new chat msg")
+                            Logger.log("triggerssssssssssssssssss")
+                            events.trigger("newchat", information: "receives new chat msg")
                         //receiveNewChat = true
+                        } else {
+                            Logger.log("Got personal message")
+                            var mac: MacAddr = UInt64(xx.dict["mac"] as! Int)
+                            if (one2oneMsg[mac] == nil) {
+                                one2oneMsg[mac] = []
+                            }
+                            one2oneMsg[mac]?.append(msg)
+                            // it is 1-1 talk
+                            //if one2oneMsg[]
+                        }
                         
                     }
                     println("All Users: ")
