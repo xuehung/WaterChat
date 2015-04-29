@@ -75,6 +75,10 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
         foundPeer: MCPeerID!,
         withDiscoveryInfo info: [NSObject : AnyObject]!) {
             Logger.log("found a new peer \(foundPeer.displayName)")
+            
+            if (session.connectedPeers.count >= Config.maxNeighbor) {
+                return
+            }
             // send the invitation
             self.session.connectPeer(foundPeer,
                 withNearbyConnectionData: nil)
@@ -109,6 +113,11 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
         MCSession!) -> Void)!) {
 
             Logger.log("Received an invitation from \(peerID.displayName)")
+            
+            if (session.connectedPeers.count >= Config.maxNeighbor) {
+                return
+            }
+            
             if (peerID.displayName > self.peerID.displayName) {
                 Logger.log("accept")
                 invitationHandler(true, self.session)
