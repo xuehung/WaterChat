@@ -37,10 +37,10 @@ class CreateProfileViewController: UIViewController {
 
         var stringGender: NSString
         if (self.isFemale.isEnabledForSegmentAtIndex(0)){
-            stringGender = "female"
+            stringGender = "male"
         }
         else {
-            stringGender = "male"
+            stringGender = "female"
         }
         var user = User(name: self.userName.text, gender: stringGender, birthDate: self.birthMM.text+self.birthDD.text, moreInfo: self.moreInfo.text)
         UserManager.setCurrentUser(user)
