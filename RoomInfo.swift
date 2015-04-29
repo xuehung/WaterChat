@@ -17,6 +17,7 @@ class RoomInfo {
     // yourself is in this public group
     var currentNumber: Int
     var memberList: [String] = []
+    var isPrivate = false
     
     init() {
         self.groupID = random() % 1024
@@ -27,7 +28,7 @@ class RoomInfo {
         // Add the yourself(the group holder into this group's member list)
         self.memberList.append(groupHolder)
     }
-    init(name: String, maxNum: Int) {
+    init(name: String, maxNum: Int, privateRoom: Bool) {
         self.groupID = random() % 1024
         Logger.log("Random group ID \(self.groupID)")
         self.name = name
@@ -35,5 +36,6 @@ class RoomInfo {
         self.currentNumber = 1
         // Add the yourself(the group holder into this group's member list)
         self.memberList.append(groupHolder)
+        self.isPrivate = privateRoom
     }
 }

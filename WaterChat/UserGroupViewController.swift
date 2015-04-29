@@ -126,14 +126,11 @@ class UserGroupViewController: UITabBarController {
                             events.trigger("newchat", information: "receives new chat msg")
                         //receiveNewChat = true
                         } else {
+                            // it is 1-1 talk
                             Logger.log("Got personal message")
                             var mac: MacAddr = UInt64(xx.dict["mac"] as! Int)
-                            if (one2oneMsg[mac] == nil) {
-                                one2oneMsg[mac] = []
-                            }
-                            one2oneMsg[mac]?.append(msg)
-                            // it is 1-1 talk
-                            //if one2oneMsg[]
+                            One2OneCommunication.addMessage(mac, message: msg)
+                            
                         }
                         
                     }

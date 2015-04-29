@@ -127,7 +127,7 @@ class RoomListTableViewController: UITableViewController {
         //let vc = self.storyboard!.instantiateViewControllerWithIdentifier("chatroomview") as! UIViewController
         //var vc = ChatRoomViewController()
         let vc = self.storyboard!.instantiateViewControllerWithIdentifier("chatroomview") as! UIViewController
-        globalCurRoom = curRoom
+        //globalCurRoom = curRoom
         //self.showViewController(vc, sender: vc)
         self.presentViewController(vc, animated: true, completion: nil)
     }

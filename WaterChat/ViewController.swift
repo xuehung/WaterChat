@@ -54,7 +54,7 @@ class ViewController: UIViewController {
         var dest: MacAddr = 2
         mp.send(dest, message: mdict)
 
-        var r = RoomInfo(name: "Anna's room", maxNum: 5)
+        var r = RoomInfo(name: "Anna's room", maxNum: 5, privateRoom: false)
 
 
 

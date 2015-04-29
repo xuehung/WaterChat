@@ -18,10 +18,10 @@
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>9777537F3CCBE9877F8478CD9C0B9DCF40B91252</key>
-		<string>../../../WaterChat%202</string>
+		<string>../../../WaterChatold</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/xuehung/WaterChat.git</string>
+	<string>https://github.com/xuehung/WaterChat</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>

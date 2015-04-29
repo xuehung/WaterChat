@@ -118,5 +118,29 @@ class UserListTableViewController: UITableViewController {
         
     }*/
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        //let room = groupList[indexPath.row] as RoomInfo
+        
+        let row = indexPath.row
+        println(row)
+        let talkTo = userList[row] as User
+        var room = RoomInfo(name: talkTo.name as String, maxNum: 2, privateRoom: true)
+        room.memberList.append(talkTo.macAddress as String)
+        //var rm = RoomManager()
+        //rm.addRoomToList(room)
+        currentRoomInfo = room
+        
+        
+        //var rm = RoomManager()
+        //let curRoom = rm.enterOneRoom(row)
+        //let vc = self.storyboard!.instantiateViewControllerWithIdentifier("chatroomview") as! UIViewController
+        //var vc = ChatRoomViewController()
+        let vc = self.storyboard!.instantiateViewControllerWithIdentifier("chatroomview") as! UIViewController
+        //globalCurRoom = curRoom
+        //self.showViewController(vc, sender: vc)
+        self.presentViewController(vc, animated: true, completion: nil)
+    }
+    
 
 }
