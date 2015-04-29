@@ -105,9 +105,11 @@ class RoomManager {
                 // Only need to change the current room member number and the memberlist of this room
                 room.currentNumber = newRoom.currentNumber
                 //room.memberList = newRoom.memberList
-                room.memberList = []
+                //room.memberList = []
                 for member in newRoom.memberList {
-                    room.memberList += [member]
+                    if (!contains(room.memberList, member)) {
+                        room.memberList += [member]
+                    }
                 }
                 println("newRoom.memberList = \(newRoom.memberList)")
                 println("room.memberList = \(room.memberList)")
@@ -146,16 +148,21 @@ class RoomManager {
         var index = 0;
         for room in groupList {
             if (index == roomNumber) {
-                if (room.currentNumber < room.maximumNumber) {
-                    room.currentNumber += 1
-                    room.memberList.append(Config.address.description)
-                    Logger.log("enter room, room.memberList = \(room.memberList)")
-                    currentRoomInfo = room
-                    break
+                if (!contains(room.memberList, Config.address.description)) {
+                    if (room.currentNumber < room.maximumNumber) {
+                        room.currentNumber += 1
+                        room.memberList.append(Config.address.description)
+                        Logger.log("enter room, room.memberList = \(room.memberList)")
+                        currentRoomInfo = room
+                        break
+                    } else {
+                        // TODO: permit or not
+                    }
+                    index += 1
                 } else {
-                    // TODO: permit or not
+                    Logger.error("already in the room!")
                 }
-                index += 1
+                
             }
         }
         return currentRoomInfo;
