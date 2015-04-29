@@ -127,8 +127,7 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
     // reveive
     func session(session: MCSession!, didReceiveData data: NSData!,
         fromPeer peerID: MCPeerID!)  {
-            Logger.log("Got data from \(peerID)")
-            Logger.log("Got data from \(peerID.description)")
+            Logger.log("Got data from \(peerID.displayName)")
 
             // This needs to run on the main queue
             dispatch_async(dispatch_get_main_queue()) {
@@ -152,7 +151,7 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
                         Logger.log("put jmsg into buffer")
                         self.cb.addToIncomingBuffer(jmsg)
                     } else {
-                        Logger.log("The message is not for me")
+                        Logger.log("The message is not for me (for \(um.destMacAddr))")
                         self.directSend(um.destMacAddr, data: message.serialize())
                     }
                     break
@@ -306,7 +305,7 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
 
     func send(dest: MacAddr, message: NSDictionary) {
         //self.cb.send(dest, data: message.serialize())
-        Logger.log("Unicast JSON Message")
+        Logger.log("Unicast JSON Message to \(dest)")
         Logger.log(message.description)
         dispatch_async(dispatch_get_main_queue()) {
             var msg = UnicastJSONMessage(message: message, destMacAddr: dest)

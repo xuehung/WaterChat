@@ -21,8 +21,8 @@ class UserManager{
         var mdict = currentUserInfo.createJsonDict()      //commented out for testing
         //var u = User(name: "BUJAR", gender: "MALE", birthDate: "72291", moreInfo: "NONE")
         //var mdict = u.createJsonDict()
-        println("announcing")
-        println(mdict)
+        //println("announcing")
+        //println(mdict)
         mp.broadcast(mdict)
     }
 

@@ -50,7 +50,7 @@ class ChatRoomViewController: JSQMessagesViewController {
                     println("trigger listened!!!!!!!!!!!!!!!!!!!!!!!");
                 });
                 if(receiveNewChat){
-                    self.finishSendingMessage()
+                    self.finishReceivingMessage()
                     receiveNewChat = false
                     Logger.log("flag detected true")
                 }
