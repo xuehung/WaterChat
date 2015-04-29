@@ -104,7 +104,12 @@ class RoomManager {
                 exists = true
                 // Only need to change the current room member number and the memberlist of this room
                 room.currentNumber = newRoom.currentNumber
-                room.memberList = newRoom.memberList
+                //room.memberList = newRoom.memberList
+                room.memberList = []
+                for member in newRoom.memberList {
+                    room.memberList += [member]
+                }
+                println("room.memberList = \(room.memberList)")
                 break
             }
         }
