@@ -34,11 +34,13 @@ class User {
         self.gender = gender;
         self.birthDate = birthDate
         self.moreInfo = moreInfo
-//        self.macAddress = Config.address.description
+        self.macAddress = Config.address.description
+        /*
         var udid = UIDevice.currentDevice().identifierForVendor.UUIDString
         var length = count(udid)
         let range = Range(start: (advance(udid.endIndex, -12)), end: udid.endIndex)
         self.macAddress = udid.substringWithRange(range)
+        */
     }
 
     
