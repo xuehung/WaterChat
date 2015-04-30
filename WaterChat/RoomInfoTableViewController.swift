@@ -40,8 +40,13 @@ class RoomInfoTableViewController: UITableViewController {
         }
         
         Logger.log("avatar size \(avatars.count)")
+        var dicIndex = CGFloat()
         for(name, usrImage) in avatars{
-            memberList.addSubview(UIImageView(image:usrImage))
+            let imgRect = CGRectMake(dicIndex*35.0,floor(dicIndex/4.0),35.0,35.0)
+            var myView = (UIImageView(image:usrImage))
+            myView.frame = imgRect
+            memberList.addSubview(myView)
+            dicIndex += 1
         }
         
         self.tableView.backgroundColor = UIColor(red: 1,

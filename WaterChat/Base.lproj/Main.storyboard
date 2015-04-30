@@ -138,7 +138,7 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Chat Room" id="Uct-x7-v3Z">
-                        <barButtonItem key="leftBarButtonItem" title="Leave" id="By1-wc-4Om">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="By1-wc-4Om">
                             <connections>
                                 <segue destination="AHI-30-QSZ" kind="presentation" id="Nbq-cV-PuE"/>
                             </connections>
@@ -854,6 +854,6 @@
         <image name="users.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="PGi-Gl-ZRG"/>
+        <segue reference="Nbq-cV-PuE"/>
     </inferredMetricsTieBreakers>
 </document>
