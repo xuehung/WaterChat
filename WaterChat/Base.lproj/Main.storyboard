@@ -509,15 +509,6 @@
                                     <segue destination="wOv-9u-ZiT" kind="show" id="itH-I7-Axh"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H7E-md-DBo">
-                                <rect key="frame" x="63" y="526" width="37" height="30"/>
-                                <state key="normal" title="TEST">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="test:" destination="BYZ-38-t0r" eventType="touchDown" id="tRb-qY-z95"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
