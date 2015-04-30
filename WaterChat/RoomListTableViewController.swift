@@ -121,7 +121,7 @@ class RoomListTableViewController: UITableViewController {
         //let room = groupList[indexPath.row] as RoomInfo
 
         let row = indexPath.row
-        println(row)
+        Logger.log("select \(row) row!!!!!!!")
         var rm = RoomManager()
         let curRoom = rm.enterOneRoom(row)
         //let vc = self.storyboard!.instantiateViewControllerWithIdentifier("chatroomview") as! UIViewController

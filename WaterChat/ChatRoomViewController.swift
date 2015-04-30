@@ -11,6 +11,7 @@ var chatMessages = [ChatMessage]()
 var isListening = false
 var isChecking = false
 
+var isInRoom = false
 
 class ChatRoomViewController: JSQMessagesViewController {
 
@@ -66,7 +67,9 @@ class ChatRoomViewController: JSQMessagesViewController {
             }
         }
         else{
-            self.roomChatMessages = chatMessages
+            if(groupMsg[curRoom.groupID] != nil){
+                self.roomChatMessages = groupMsg[curRoom.groupID]!
+            }
         }
     }
     /*
@@ -124,6 +127,8 @@ class ChatRoomViewController: JSQMessagesViewController {
             }
 
         }else{
+            Logger.log("Group ID = \(curRoom.groupID)")
+            One2OneCommunication.addGroupMessage(curRoom.groupID, message: message)
             chatMessages.append(message)
         }
 
@@ -148,6 +153,7 @@ class ChatRoomViewController: JSQMessagesViewController {
                 }
             }
         } else {
+            mdict.setObject(curRoom.groupID, forKey: "gid")
             for mem in curRoom.memberList {
                 if (mem != Config.address.description) {
                     var dest: MacAddr = Util.convertDisplayNameToMacAddr(mem)
@@ -215,7 +221,7 @@ class ChatRoomViewController: JSQMessagesViewController {
         setupAvatarColor(sender, incoming: false)
         senderImageUrl = ""
 
-        chatMessages = [ChatMessage]()
+        //chatMessages = [ChatMessage]()
         //Util.roomvc = self
         curRoom = currentRoomInfo
         Logger.log("current room name is \(curRoom.name)")
@@ -224,12 +230,13 @@ class ChatRoomViewController: JSQMessagesViewController {
             setUpEventsListener()
             isListening = true
         }*/
-
+        isInRoom = true
+        
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) {
-            while(true) {
+            while(isInRoom) {
                 self.updateDataSource()
                 self.finishReceivingMessage()
-                sleep(5)
+                sleep(1)
             }
         }
         /*if(!isChecking){
@@ -376,6 +383,11 @@ class ChatRoomViewController: JSQMessagesViewController {
             Logger.log("avatar size in chat view \(avatars.count)")
             vc.avatars = avatars
             
+        }
+        else{
+            Logger.log("stop thread")
+            isInRoom = false
+            currentRoomInfo = RoomInfo()
         }
         
     }
