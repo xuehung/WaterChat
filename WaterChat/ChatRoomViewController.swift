@@ -124,6 +124,8 @@ class ChatRoomViewController: JSQMessagesViewController {
             }
 
         }else{
+            Logger.log("Group ID = \(curRoom.groupID)")
+            One2OneCommunication.addGroupMessage(curRoom.groupID, message: message)
             chatMessages.append(message)
         }
 
@@ -148,6 +150,7 @@ class ChatRoomViewController: JSQMessagesViewController {
                 }
             }
         } else {
+            mdict.setObject(curRoom.groupID, forKey: "gid")
             for mem in curRoom.memberList {
                 if (mem != Config.address.description) {
                     var dest: MacAddr = Util.convertDisplayNameToMacAddr(mem)

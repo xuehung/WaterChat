@@ -120,6 +120,11 @@ class UserGroupViewController: UITabBarController {
                             
                         //var cr = ChatRoomViewController()
                         //cr.receiveMessage(msg)
+                            var gid = xx.dict["groupID"] as! Int
+                            One2OneCommunication.addGroupMessage(gid, message: msg)
+                            
+                            
+                            /*
                             chatMessages.append(msg)
                             chatMessages = sorted(chatMessages) {
                                 (o1, o2) in
@@ -130,14 +135,10 @@ class UserGroupViewController: UITabBarController {
                                 }
                                 return false
                             }
+                            */
                             
-                        //var cr = ChatRoomViewController()
-                        //cr.finishReceivingMessage()
                             Logger.log(xx.dict.description)
-                        //Util.roomvc.finishReceivingMessage()
-                            Logger.log("triggerssssssssssssssssss")
-                            //events.trigger("receive", information: "receives new chat msg")
-                        //receiveNewChat = true
+                        
                         } else {
                             // it is 1-1 talk
                             Logger.log("Got personal message")

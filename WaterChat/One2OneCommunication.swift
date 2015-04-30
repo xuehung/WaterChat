@@ -8,6 +8,7 @@
 
 import Foundation
 var one2oneMsg = Dictionary<MacAddr, [ChatMessage]>()
+var groupMsg = Dictionary<Int, [ChatMessage]>()
 
 class One2OneCommunication {
     class func addMessage(dest: MacAddr, message: ChatMessage) {
@@ -31,5 +32,25 @@ class One2OneCommunication {
         }
         
         
+    }
+    
+    class func addGroupMessage(gid: Int, message: ChatMessage) {
+        if(groupMsg[gid] == nil) {
+            groupMsg[gid] = []
+        }
+        groupMsg[gid]?.append(message)
+        
+        var list = groupMsg[gid]!
+        
+        groupMsg[gid] = sorted(list) {
+            (o1, o2) in
+            let m1 = o1 as ChatMessage
+            let m2 = o2 as ChatMessage
+            if (m1.date_.compare(m2.date_) == NSComparisonResult.OrderedSame || m1.date_.compare(m2.date_) == NSComparisonResult.OrderedAscending) {
+                return true
+            }
+            return false
+        }
+
     }
 }
