@@ -711,13 +711,13 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="plJ-ev-hh3" id="x0r-m6-pN2">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="JkC-W5-CZ5">
-                                                    <rect key="frame" x="8" y="7" width="123" height="29"/>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7z8-ki-f52">
+                                                    <rect key="frame" x="8" y="8" width="123" height="29"/>
                                                     <segments>
                                                         <segment title="Male"/>
                                                         <segment title="Female"/>
                                                     </segments>
-                                                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </segmentedControl>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -782,7 +782,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="isFemale" destination="JkC-W5-CZ5" id="SOY-gi-zpf"/>
+                        <outlet property="isMale" destination="7z8-ki-f52" id="WbD-p2-Tg2"/>
                         <outlet property="moreInfo" destination="jOz-OJ-KKF" id="shA-10-yas"/>
                         <outlet property="userBirthday" destination="fCl-NG-Cac" id="pLl-mP-rVj"/>
                         <outlet property="userName" destination="aGl-wP-8ME" id="SvA-jI-xcW"/>
@@ -854,6 +854,6 @@
         <image name="users.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rGG-Du-Ko1"/>
+        <segue reference="PGi-Gl-ZRG"/>
     </inferredMetricsTieBreakers>
 </document>

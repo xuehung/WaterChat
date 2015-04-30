@@ -12,9 +12,7 @@ class CreateMyProfileTableViewController: UITableViewController {
     
     @IBOutlet weak var userName: UITextField!
     
-    
-    @IBOutlet weak var isFemale: UISegmentedControl!
-    
+    @IBOutlet weak var isMale: UISegmentedControl!
     
     @IBOutlet weak var userBirthday: UILabel!
     
@@ -122,23 +120,24 @@ class CreateMyProfileTableViewController: UITableViewController {
     func readData(){
         
         var stringGender: NSString
-        if (self.isFemale.isEnabledForSegmentAtIndex(0)){
+        if(self.isMale.selectedSegmentIndex==0){
             stringGender = "male"
             Logger.log("male")
         }
-        else {
+        else{
             stringGender = "female"
             Logger.log("female")
         }
+        
         var user = User(name: self.userName.text, gender: stringGender, birthDate: self.userBirthday.text!, moreInfo: self.moreInfo.text)
         UserManager.setCurrentUser(user)
         
         //user object ready for broadcast
-        
+        /*
         self.profile.userName = self.userName.text
-        self.profile.isFemale = self.isFemale.isEnabledForSegmentAtIndex(0)
+        self.profile
         self.profile.birthDate = self.userBirthday.text!
-        self.profile.moreInfo = self.moreInfo.text
+        self.profile.moreInfo = self.moreInfo.text*/
     }
     
     
