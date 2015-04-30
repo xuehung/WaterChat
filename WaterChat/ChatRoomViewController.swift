@@ -11,6 +11,7 @@ var chatMessages = [ChatMessage]()
 var isListening = false
 var isChecking = false
 
+var isInRoom = false
 
 class ChatRoomViewController: JSQMessagesViewController {
 
@@ -66,8 +67,9 @@ class ChatRoomViewController: JSQMessagesViewController {
             }
         }
         else{
-            
-            self.roomChatMessages = groupMsg[curRoom.groupID]!
+            if(groupMsg[curRoom.groupID] != nil){
+                self.roomChatMessages = groupMsg[curRoom.groupID]!
+            }
         }
     }
     /*
@@ -228,12 +230,13 @@ class ChatRoomViewController: JSQMessagesViewController {
             setUpEventsListener()
             isListening = true
         }*/
-
+        isInRoom = true
+        
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) {
-            while(true) {
+            while(isInRoom) {
                 self.updateDataSource()
                 self.finishReceivingMessage()
-                sleep(5)
+                sleep(1)
             }
         }
         /*if(!isChecking){
@@ -380,6 +383,11 @@ class ChatRoomViewController: JSQMessagesViewController {
             Logger.log("avatar size in chat view \(avatars.count)")
             vc.avatars = avatars
             
+        }
+        else{
+            Logger.log("stop thread")
+            isInRoom = false
+            currentRoomInfo = RoomInfo()
         }
         
     }

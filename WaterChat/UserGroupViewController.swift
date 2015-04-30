@@ -120,7 +120,7 @@ class UserGroupViewController: UITabBarController {
                             
                         //var cr = ChatRoomViewController()
                         //cr.receiveMessage(msg)
-                            var gid = xx.dict["groupID"] as! Int
+                            var gid = xx.dict["gid"] as! Int
                             One2OneCommunication.addGroupMessage(gid, message: msg)
                             
                             

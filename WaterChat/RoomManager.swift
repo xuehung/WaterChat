@@ -147,6 +147,24 @@ class RoomManager {
             }
         }*/
         var index = 0;
+        var room = groupList[roomNumber]
+        if (!contains(room.memberList, Config.address.description)) {
+            if (room.currentNumber < room.maximumNumber) {
+                room.currentNumber += 1
+                room.memberList.append(Config.address.description)
+                Logger.log("enter room, room.memberList = \(room.memberList)")
+                currentRoomInfo = room
+            } else {
+                Logger.log("Full room!")
+                return nil
+            }
+        } else {
+            currentRoomInfo = room
+            Logger.error("already in the room!")
+        }
+        return room
+        
+        /*
         for room in groupList {
             if (index == roomNumber) {
                 if (!contains(room.memberList, Config.address.description)) {
@@ -168,6 +186,7 @@ class RoomManager {
             }
         }
         return currentRoomInfo;
+        */
     }
 
     func leaveOneRoom(roomName: String) {
