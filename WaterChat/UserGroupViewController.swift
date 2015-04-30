@@ -121,6 +121,16 @@ class UserGroupViewController: UITabBarController {
                         //var cr = ChatRoomViewController()
                         //cr.receiveMessage(msg)
                             chatMessages.append(msg)
+                            chatMessages = sorted(chatMessages) {
+                                (o1, o2) in
+                                let m1 = o1 as ChatMessage
+                                let m2 = o2 as ChatMessage
+                                if (m1.date_.compare(m2.date_) == NSComparisonResult.OrderedSame || m1.date_.compare(m2.date_) == NSComparisonResult.OrderedAscending) {
+                                    return true
+                                }
+                                return false
+                            }
+                            
                         //var cr = ChatRoomViewController()
                         //cr.finishReceivingMessage()
                             Logger.log(xx.dict.description)

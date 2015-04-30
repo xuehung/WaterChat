@@ -17,5 +17,19 @@ class One2OneCommunication {
             one2oneMsg[dest] = []
         }
         one2oneMsg[dest]?.append(message)
+        
+        var list = one2oneMsg[dest]!
+        
+        one2oneMsg[dest] = sorted(list) {
+            (o1, o2) in
+            let m1 = o1 as ChatMessage
+            let m2 = o2 as ChatMessage
+            if (m1.date_.compare(m2.date_) == NSComparisonResult.OrderedSame || m1.date_.compare(m2.date_) == NSComparisonResult.OrderedAscending) {
+                return true
+            }
+            return false
+        }
+        
+        
     }
 }
