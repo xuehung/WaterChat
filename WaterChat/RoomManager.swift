@@ -103,7 +103,7 @@ class RoomManager {
                 // It exists in the gorupList and need to be updated
                 exists = true
                 // Only need to change the current room member number and the memberlist of this room
-                room.currentNumber = newRoom.currentNumber
+                //room.currentNumber = newRoom.currentNumber
                 //room.memberList = newRoom.memberList
                 //room.memberList = []
                 for member in newRoom.memberList {
@@ -111,6 +111,7 @@ class RoomManager {
                         room.memberList += [member]
                     }
                 }
+                room.currentNumber = room.memberList.count
                 println("newRoom.memberList = \(newRoom.memberList)")
                 println("room.memberList = \(room.memberList)")
                 break
