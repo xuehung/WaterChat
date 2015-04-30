@@ -66,7 +66,8 @@ class ChatRoomViewController: JSQMessagesViewController {
             }
         }
         else{
-            self.roomChatMessages = chatMessages
+            
+            self.roomChatMessages = groupMsg[curRoom.groupID]!
         }
     }
     /*
@@ -218,7 +219,7 @@ class ChatRoomViewController: JSQMessagesViewController {
         setupAvatarColor(sender, incoming: false)
         senderImageUrl = ""
 
-        chatMessages = [ChatMessage]()
+        //chatMessages = [ChatMessage]()
         //Util.roomvc = self
         curRoom = currentRoomInfo
         Logger.log("current room name is \(curRoom.name)")
