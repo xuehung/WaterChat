@@ -10,10 +10,16 @@ import Foundation
 
 class Util {
     class func convertDisplayNameToMacAddr(addr: String) -> MacAddr {
+        
+        var x = NSString(string: addr)
+        var y = x.doubleValue
+        
         if let num = addr.toInt() {
             return MacAddr(num)
+        } else if (y > 0) {
+            return MacAddr(y)
         } else {
-            Logger.error("Invalid display name \(addr)")
+            Logger.error("Invalid display name [\(addr)]")
             return MacAddr(0)
         }
     }
