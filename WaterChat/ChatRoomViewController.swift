@@ -198,6 +198,7 @@ class ChatRoomViewController: JSQMessagesViewController {
         //self.navigationController?.setNavigationBarHidden(false, animated: true)
         inputToolbar.contentView.leftBarButtonItem = nil
         automaticallyScrollsToMostRecentMessage = true
+        self.title = currentRoomInfo.name
         //navigationController?.navigationBar.topItem?.title = "Leave"
         //navigationController?.popToRootViewControllerAnimated(true)
 
@@ -214,7 +215,7 @@ class ChatRoomViewController: JSQMessagesViewController {
         setupAvatarColor(sender, incoming: false)
         senderImageUrl = ""
 
-
+        chatMessages = [ChatMessage]()
         //Util.roomvc = self
         curRoom = currentRoomInfo
         Logger.log("current room name is \(curRoom.name)")

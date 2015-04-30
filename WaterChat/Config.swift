@@ -17,7 +17,7 @@ struct Config {
         let range = Range(start: (advance(udid.endIndex, -12)), end: udid.endIndex)
         let macAddress = udid.substringWithRange(range)
         println("####### Mac Addr \(UInt64(strtoul((String(macAddress)), nil, 16)))")
-        return UInt64(strtoul((String(macAddress)), nil, 16))
+        return UInt64(strtoul((String(macAddress)), nil, 16)) + 38
     }()
     static let maxNeighbor = 3
 }
