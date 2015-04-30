@@ -65,7 +65,8 @@ class CommunicationBuffer {
         for peerID in self.mp.session.connectedPeers {
             if (peerID.displayName == dest.description) {
                 self.mp.directSend(dest, data: data)
-                break
+                dispatch_semaphore_signal(self.outgoingMutex)
+                return
             }
         }
         
