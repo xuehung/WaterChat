@@ -13,10 +13,9 @@ import Foundation
 
 
 class BroadcastJSONMessage: Message {
-    
+    var dictionary: NSDictionary = NSMutableDictionary()
     var broadcastSeqNum: UInt32 = 0
     var srcMacAddr: UInt64 = 0
-    var dictionary: NSDictionary!
     
     
     override init() {
@@ -48,7 +47,6 @@ class BroadcastJSONMessage: Message {
         // Parse Json
         var error: NSError?
         let maybeObj: AnyObject? = NSJSONSerialization.JSONObjectWithData(messageBody, options: nil, error: &error)
-        
         if let obj: AnyObject = maybeObj {
             Logger.log("maybeObj is anyobject")
             if let dict: NSDictionary = obj as? NSDictionary {
