@@ -62,6 +62,14 @@ class CommunicationBuffer {
         
         dispatch_semaphore_wait(self.outgoingMutex, DISPATCH_TIME_FOREVER)
         
+        for peerID in self.mp.session.connectedPeers {
+            if (peerID.displayName == dest.description) {
+                self.mp.directSend(dest, data: data)
+                break
+            }
+        }
+        
+        
         if let next = self.mp.rm.getNextHop(dest) {
             self.mp.directSend(next, data: data)
         } else {
