@@ -77,6 +77,8 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
             Logger.log("found a new peer \(foundPeer.displayName)")
             
             if (session.connectedPeers.count >= Config.maxNeighbor) {
+                Logger.log("reach max connected numbers")
+                Logger.log("\(session.connectedPeers.count)")
                 return
             }
             // send the invitation
@@ -113,8 +115,10 @@ class MessagePasser: NSObject, MCNearbyServiceBrowserDelegate, MCNearbyServiceAd
         MCSession!) -> Void)!) {
 
             Logger.log("Received an invitation from \(peerID.displayName)")
-            
-            if (session.connectedPeers.count >= Config.maxNeighbor) {
+            if ( session.connectedPeers.count >= Config.maxNeighbor) {
+                Logger.log("reach max connected numbers")
+                Logger.log("\(session.connectedPeers.count)")
+                //invitationHandler(false, self.session)
                 return
             }
             
