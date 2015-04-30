@@ -11,11 +11,12 @@ var chatMessages = [ChatMessage]()
 var isListening = false
 var isChecking = false
 
+
 class ChatRoomViewController: JSQMessagesViewController {
 
     var roomChatMessages = [ChatMessage]()
-    var curRoom = RoomInfo()
     var avatars = Dictionary<String, UIImage>()
+    var curRoom = RoomInfo()
     var outgoingBubbleImageView = JSQMessagesBubbleImageFactory.outgoingMessageBubbleImageViewWithColor(UIColor.jsq_messageBubbleLightGrayColor())
     var incomingBubbleImageView = JSQMessagesBubbleImageFactory.incomingMessageBubbleImageViewWithColor(UIColor.jsq_messageBubbleGreenColor())
     var senderImageUrl: String!
@@ -363,14 +364,18 @@ class ChatRoomViewController: JSQMessagesViewController {
         return kJSQMessagesCollectionViewCellLabelHeightDefault
     }
 
-    /*
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         Logger.log("clear array in segue")
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        //if (sender != self.joinBtn) return
-        chatMessages = []
-        //roomChatMessages = []
-        updateDataSource()
-    }*/
+        if(segue.identifier == "seeDetails"){
+            Logger.log("check details")
+            let vc = segue.destinationViewController as! RoomInfoTableViewController
+            Logger.log("avatar size in chat view \(avatars.count)")
+            vc.avatars = avatars
+            
+        }
+        
+    }
 }

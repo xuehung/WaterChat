@@ -24,6 +24,10 @@ class CreateRoomTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.tableView.backgroundColor = UIColor(red: 1,
+            green: 1,
+            blue: 1,
+            alpha: 1)
     }
 
     override func didReceiveMemoryWarning() {
@@ -144,13 +148,19 @@ class CreateRoomTableViewController: UITableViewController {
             println("pick size")
         }
         else if (segue.identifier == "SaveRoomDetail") {
-            readData()
-            //room.name = self.roomName.text
-            //room.maximumNumber = self.
-            //player = Player(name: self.nameTextField.text, game: "Chess", rating: 1)
-            println("create new room")
-            println("name: \(self.roomName.text)")
-            println("size: \(self.size)")
+            
+            if(self.roomName.text.isEmpty){
+                var alert = UIAlertController(title: "Could Not Create", message: "Room name should not be empty", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+            else{
+                readData()
+                println("create new room")
+                println("name: \(self.roomName.text)")
+                println("size: \(self.size)")
+            }
+            
         }
         else{
             println("just cancel")

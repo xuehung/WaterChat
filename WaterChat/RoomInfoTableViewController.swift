@@ -1,30 +1,28 @@
 //
-//  CreateMyProfileTableViewController.swift
+//  RoomInfoTableViewController.swift
 //  WaterChat
 //
-//  Created by Ding ZHAO on 4/28/15.
+//  Created by Ding ZHAO on 4/29/15.
 //  Copyright (c) 2015 Hsueh-Hung Cheng. All rights reserved.
 //
 
 import UIKit
 
-class CreateMyProfileTableViewController: UITableViewController {
+class RoomInfoTableViewController: UITableViewController {
+
+    @IBOutlet weak var memberList: UITableViewCell!
     
-    @IBOutlet weak var userName: UITextField!
-    
-    
-    @IBOutlet weak var isFemale: UISegmentedControl!
-    
-    
-    @IBOutlet weak var userBirthday: UILabel!
-    
-    @IBOutlet weak var moreInfo: UITextField!
+    @IBOutlet weak var groupCapacity: UILabel!
+    @IBOutlet weak var groupName: UILabel!
     
     
-    var profile = UserProfile()
+    
+    @IBOutlet weak var isPrivate: UISwitch!
+    
+    
+    var avatars = Dictionary<String, UIImage>()
     
     override func viewDidLoad() {
-        Logger.log("view start load");
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
@@ -32,15 +30,24 @@ class CreateMyProfileTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        // Do any additional setup after loading the view.
-        //println("create profile view controller")
-        self.profile = UserProfile()
-        //readData()
+        groupCapacity.text = "\(currentRoomInfo.currentNumber)/\(currentRoomInfo.maximumNumber)"
+        groupName.text = currentRoomInfo.name
+        if(currentRoomInfo.isPrivate){
+            isPrivate.setOn(true, animated: true)
+        }
+        else{
+            isPrivate.setOn(false, animated: true)
+        }
+        
+        Logger.log("avatar size \(avatars.count)")
+        for(name, usrImage) in avatars{
+            memberList.addSubview(UIImageView(image:usrImage))
+        }
+        
         self.tableView.backgroundColor = UIColor(red: 1,
             green: 1,
             blue: 1,
             alpha: 1)
-        Logger.log("view stop load");
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,6 +55,19 @@ class CreateMyProfileTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    
+    
+    override func tableView(tableView:UITableView, heightForRowAtIndexPath indexPath:NSIndexPath)->CGFloat {
+        if (indexPath.section == 0) {
+            return 35.0*ceil(CGFloat(currentRoomInfo.currentNumber)/CGFloat(4))
+        }
+        else {
+            return 43.0
+        }
+    }
+    
+    
+    
     // MARK: - Table view data source
     /*
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -62,16 +82,6 @@ class CreateMyProfileTableViewController: UITableViewController {
         return 0
     }*/
 
-    @IBAction func selectedDate(segue:UIStoryboardSegue) {
-        Logger.log("inside selected Date")
-        let datePickerViewController = segue.sourceViewController as! BirthdayPickerViewController
-        if let selectedBirthday = datePickerViewController.selectedBirthday {
-                let dateFormatter = NSDateFormatter()
-                var theDateFormat = NSDateFormatterStyle.ShortStyle
-                dateFormatter.dateStyle = theDateFormat
-                userBirthday.text = dateFormatter.stringFromDate(selectedBirthday)
-        }
-    }
     /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
@@ -116,63 +126,15 @@ class CreateMyProfileTableViewController: UITableViewController {
         return true
     }
     */
-    
-    
-    
-    func readData(){
-        
-        var stringGender: NSString
-        if (self.isFemale.isEnabledForSegmentAtIndex(0)){
-            stringGender = "male"
-            Logger.log("male")
-        }
-        else {
-            stringGender = "female"
-            Logger.log("female")
-        }
-        var user = User(name: self.userName.text, gender: stringGender, birthDate: self.userBirthday.text!, moreInfo: self.moreInfo.text)
-        UserManager.setCurrentUser(user)
-        
-        //user object ready for broadcast
-        
-        self.profile.userName = self.userName.text
-        self.profile.isFemale = self.isFemale.isEnabledForSegmentAtIndex(0)
-        self.profile.birthDate = self.userBirthday.text!
-        self.profile.moreInfo = self.moreInfo.text
-    }
-    
-    
-    
-    
-    
+
+    /*
     // MARK: - Navigation
-    
+
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        Logger.log("in segue")
-        // Get the new view controller using segue.destinationViewController.
+        // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
-        //if (sender != self.joinBtn) return
-        if(segue.identifier == "joinWaterChat"){
-            if(self.userName.text.isEmpty){
-                var alert = UIAlertController(title: "Could Not Join", message: "Username should not be empty", preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-                self.presentViewController(alert, animated: true, completion: nil)
-            }
-            else{
-                readData()
-            }
-        }
-        else if(segue.identifier == "selectBirthday"){
-            Logger.log("selectBirthday")
-        }
-        //self.profile.userName = "Ding"
-        //println("hello segue")
-        //var svc = segue.destinationViewController as UserGroupViewController;
-        //svc.profile = self.profile
-        //var svc = segue.destinationViewController as UserListTableViewController;
-        //svc.profile = self.profile
     }
-    
+    */
 
 }

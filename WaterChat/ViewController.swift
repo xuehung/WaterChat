@@ -17,6 +17,11 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let image = UIImage(named: "signinbtn.png") as UIImage!
+        let playButton  = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+        playButton.setImage(image, forState: .Normal)
+        
     }
 
     @IBAction func test(sender: UIButton) {
